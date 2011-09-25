@@ -35,7 +35,7 @@ public class ConnectorTest {
 	}
 
 	@Test
-	public void testCreateSession() throws Exception {
+	public void testSessionCreated() throws Exception {
 		Connector connector = new Connector(user, password, key, secret); 
 		Assert.assertNotNull(connector.getSession());
 	}
