@@ -80,4 +80,10 @@ public class Connector {
 	public Collection<Artist> similarArtists(String artist) {
 		return Artist.getSimilar(artist, this.key);
 	}
+
+
+
+	public Artist artistInfo(String artistName) {
+		return Artist.getInfo(artistName, key);
+	}
 }

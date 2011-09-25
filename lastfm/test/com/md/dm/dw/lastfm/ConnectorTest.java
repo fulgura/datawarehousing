@@ -30,6 +30,7 @@ public class ConnectorTest {
 	private String user = "a_e_r_e_a";     // user name
 	private String password = "42067062"; // user's password
 	private Connector connector = null;
+	private final String artistName = "Metallica";
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -52,7 +53,14 @@ public class ConnectorTest {
 	
 	@Test
 	public void testFindRelatedArtistsByName() throws Exception {
-		Collection<Artist> similarArtistCollection = connector.similarArtists("Metallica");
+		Collection<Artist> similarArtistCollection = connector.similarArtists(artistName);
 		Assert.assertFalse(similarArtistCollection.isEmpty());
+	}
+	
+	@Test
+	public void testGetArtistInfo() throws Exception {
+		Artist metallica = connector.artistInfo(artistName);
+		Assert.assertNotNull(metallica);
+		Assert.assertEquals("65f4f0c5-ef9e-490c-aee3-909e7ae6b2ab", metallica.getMbid());
 	}
 }
