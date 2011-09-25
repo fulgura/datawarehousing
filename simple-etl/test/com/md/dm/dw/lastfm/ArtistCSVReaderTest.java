@@ -4,6 +4,7 @@
 package com.md.dm.dw.lastfm;
 
 import static org.junit.Assert.*;
+import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,6 +16,8 @@ import org.junit.Test;
  */
 public class ArtistCSVReaderTest {
 
+	private final String filename = "lastfm/artists.dat";
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -34,7 +37,8 @@ public class ArtistCSVReaderTest {
 	 */
 	@Test
 	public final void testGetFilename() {
-		fail("Not yet implemented"); // TODO
+		ArtistCSVReader reader = new ArtistCSVReader(filename);
+		Assert.assertEquals(filename, reader.getFilename());
 	}
 
 	/**
