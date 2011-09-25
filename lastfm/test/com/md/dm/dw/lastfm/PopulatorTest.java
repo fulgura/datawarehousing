@@ -4,6 +4,7 @@
 package com.md.dm.dw.lastfm;
 
 import static org.junit.Assert.*;
+import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,6 +16,10 @@ import org.junit.Test;
  */
 public class PopulatorTest {
 
+	private String key = "3cd3f363864345e489dc98b3c2eb64b0";      // api key
+	private String secret = "0c32723a33b58a523da492312a03b311";   // api secret
+	private String user = "a_e_r_e_a";     // user name
+	private String password = "42067062"; // user's password
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -29,12 +34,9 @@ public class PopulatorTest {
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * Test method for {@link java.lang.Object#toString()}.
-	 */
 	@Test
-	public final void testToString() {
-		fail("Not yet implemented"); // TODO
+	public void testCreateSession() throws Exception {
+		Populator populator = new Populator(user, password, key, secret); 
+		Assert.assertNotNull(populator.getSession());
 	}
-
 }
