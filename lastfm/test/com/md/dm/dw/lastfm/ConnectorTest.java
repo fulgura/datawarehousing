@@ -14,7 +14,7 @@ import org.junit.Test;
  * @author diego
  *
  */
-public class PopulatorTest {
+public class ConnectorTest {
 
 	private String key = "3cd3f363864345e489dc98b3c2eb64b0";      // api key
 	private String secret = "0c32723a33b58a523da492312a03b311";   // api secret
@@ -36,7 +36,7 @@ public class PopulatorTest {
 
 	@Test
 	public void testCreateSession() throws Exception {
-		Populator populator = new Populator(user, password, key, secret); 
-		Assert.assertNotNull(populator.getSession());
+		Connector connector = new Connector(user, password, key, secret); 
+		Assert.assertNotNull(connector.getSession());
 	}
 }

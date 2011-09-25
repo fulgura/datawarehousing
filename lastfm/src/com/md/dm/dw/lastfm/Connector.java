@@ -10,7 +10,7 @@ import de.umass.lastfm.Session;
  * @author diego
  * 
  */
-public class Populator {
+public class Connector {
 
 	private String key; // api key
 	private String secret; // api secret
@@ -18,7 +18,7 @@ public class Populator {
 	private String password; // user's password
 	private Session session;
 
-	public Populator(String user, String password, String key, String secret) {
+	public Connector(String user, String password, String key, String secret) {
 		super();
 		this.key = key;
 		this.secret = secret;
