@@ -2,4 +2,14 @@ This project uses an API from http://www.u-mass.de/lastfm/doc to manage lastfm A
 
 You can follow this tutorial http://www.u-mass.de/lastfm/doc
 
+
+Calls that require authentication require a Session parameter. Sessions can be obtained via the Authenticator class. See here for different authentication methods.
+An example for a authenticated method call looks like that:
+
+	String key = "...";      // api key
+	String secret = "...";   // api secret
+	String user = "...";     // user name
+	String password = "..."; // user's password
+	Session session = Authenticator.getMobileSession(user, password, key, secret);
+
 DMC - Diego Martín Correa
