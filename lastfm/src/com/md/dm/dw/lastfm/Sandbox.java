@@ -16,5 +16,9 @@ public class Sandbox {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public String name() {
+		return this.getClass().getCanonicalName();
+	}
 
 }
