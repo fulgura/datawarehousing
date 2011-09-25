@@ -86,4 +86,10 @@ public class Connector {
 	public Artist artistInfo(String artistName) {
 		return Artist.getInfo(artistName, key);
 	}
+
+
+
+	public Artist artistInfo(Artist metallica) {
+		return Artist.getInfo(metallica.getMbid(), key);
+	}
 }
