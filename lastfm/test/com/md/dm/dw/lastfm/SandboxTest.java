@@ -30,10 +30,50 @@ public class SandboxTest {
 	}
 
 	/**
-	 * Test method for {@link com.md.dm.dw.lastfm.Sandbox#name()}.
+	 * Test method for {@link com.md.dm.dw.lastfm.Sandbox#hashCode()}.
 	 */
 	@Test
-	public final void testName() {
+	public final void testHashCode() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	/**
+	 * Test method for {@link com.md.dm.dw.lastfm.Sandbox#Sandbox(java.lang.String)}.
+	 */
+	@Test
+	public final void testSandbox() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	/**
+	 * Test method for {@link com.md.dm.dw.lastfm.Sandbox#toString()}.
+	 */
+	@Test
+	public final void testToString() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	/**
+	 * Test method for {@link com.md.dm.dw.lastfm.Sandbox#equals(java.lang.Object)}.
+	 */
+	@Test
+	public final void testEqualsObject() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	/**
+	 * Test method for {@link com.md.dm.dw.lastfm.Sandbox#getName()}.
+	 */
+	@Test
+	public final void testGetName() {
+		fail("Not yet implemented"); // TODO
+	}
+
+	/**
+	 * Test method for {@link com.md.dm.dw.lastfm.Sandbox#setName(java.lang.String)}.
+	 */
+	@Test
+	public final void testSetName() {
 		fail("Not yet implemented"); // TODO
 	}
 
