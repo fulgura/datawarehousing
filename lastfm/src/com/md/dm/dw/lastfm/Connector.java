@@ -3,6 +3,9 @@
  */
 package com.md.dm.dw.lastfm;
 
+import java.util.Collection;
+
+import de.umass.lastfm.Artist;
 import de.umass.lastfm.Authenticator;
 import de.umass.lastfm.Session;
 
@@ -27,6 +30,8 @@ public class Connector {
 		session = Authenticator.getMobileSession(user, password, key, secret);
 	}
 
+	
+	
 	/**
 	 * @return the key
 	 */
@@ -68,5 +73,11 @@ public class Connector {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+	}
+
+
+
+	public Collection<Artist> similarArtists(String artist) {
+		return Artist.getSimilar(artist, this.key);
 	}
 }
