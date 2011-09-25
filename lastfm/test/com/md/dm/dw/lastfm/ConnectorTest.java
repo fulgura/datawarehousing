@@ -11,6 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * This is a test case to show how to manage last fm API connections.
+ *
+ *
+ *
  * @author diego
  *
  */
