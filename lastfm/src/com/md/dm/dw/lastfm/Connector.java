@@ -8,6 +8,7 @@ import java.util.Collection;
 import de.umass.lastfm.Artist;
 import de.umass.lastfm.Authenticator;
 import de.umass.lastfm.Session;
+import de.umass.lastfm.Tag;
 
 /**
  * @author diego
@@ -75,21 +76,23 @@ public class Connector {
 
 	}
 
-
-
 	public Collection<Artist> similarArtists(String artist) {
 		return Artist.getSimilar(artist, this.key);
 	}
-
-
 
 	public Artist artistInfo(String artistName) {
 		return Artist.getInfo(artistName, key);
 	}
 
-
-
 	public Artist artistInfo(Artist metallica) {
 		return Artist.getInfo(metallica.getMbid(), key);
+	}
+
+	public Collection<String> tagsNameForArtist(String artistName) {
+		return this.artistInfo(artistName).getTags();
+	}
+
+	public Collection<Tag> topTagsForArtist(String artistName) {
+		return Artist.getTopTags(artistName, key);
 	}
 }

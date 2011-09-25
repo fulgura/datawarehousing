@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.umass.lastfm.Artist;
+import de.umass.lastfm.Tag;
 
 /**
  * This is a test case to show how to manage last fm API connections.
@@ -69,5 +70,17 @@ public class ConnectorTest {
 		Artist metallica = connector.artistInfo(artistName);
 		Artist metallicaAgain = connector.artistInfo(metallica);
 		Assert.assertEquals(metallicaAgain.getMbid(), metallica.getMbid());
+	}
+
+	@Test
+	public void testGetTagsForArtist() throws Exception {
+		Collection<String> tags = connector.tagsNameForArtist(artistName);
+		Assert.assertFalse(tags.isEmpty());
+	}
+
+	@Test
+	public void testGetTopTagsForArtist() throws Exception {
+		Collection<Tag> tags = connector.topTagsForArtist(artistName);
+		Assert.assertFalse(tags.isEmpty());
 	}
 }
