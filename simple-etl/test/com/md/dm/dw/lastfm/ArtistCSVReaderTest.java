@@ -58,6 +58,16 @@ public class ArtistCSVReaderTest {
 	}
 
 	@Test
+	public final void testReadAllArtist() throws Exception {
+		ArtistCSVReader reader = new ArtistCSVReader(filename);
+		while (reader.hasMoreArtist()) {
+			Artist artist = reader.nextArtist();
+			Assert.assertNotNull(artist);
+			System.out.println(artist);
+		}
+	}
+
+	@Test
 	public final void testHasMoreArtists() throws Exception {
 		ArtistCSVReader reader = new ArtistCSVReader(filename);
 		Assert.assertTrue(reader.hasMoreArtist());

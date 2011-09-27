@@ -42,17 +42,33 @@ public class ArtistCSVReader {
 		Artist artist = null;
 		if (scanner.hasNextLine()) {
 			String aLine = scanner.nextLine();
-			Scanner lineScanner = new Scanner(aLine);
-			artist = new Artist(lineScanner.nextLong(), lineScanner.next(),
-					lineScanner.next(), lineScanner.next());
+			artist = this.buildArtist(aLine);
 		}
 
 		return artist;
 	}
+
+	private Artist buildArtist(String aLine) {
+		Scanner lineScanner = new Scanner(aLine);
+		Long lastfmId = lineScanner.nextLong();
+		String name = lineScanner.next();
+		String url = "";
+		String imageURL = "";
+		if (lineScanner.hasNext()) {
+			url = lineScanner.next();
+		}
+		if (lineScanner.hasNext()) {
+			url = lineScanner.next();
+		}
+		return new Artist(lastfmId, name, url, imageURL);
+	}
+
 	/**
-	 * Returns true if exists another line with an artist information in the file.
+	 * Returns true if exists another line with an artist information in the
+	 * file.
 	 * 
-	 * @return a boolean valu which will determine if exists or not more artis to process
+	 * @return a boolean valu which will determine if exists or not more artis
+	 *         to process
 	 */
 	public boolean hasMoreArtist() {
 		return scanner.hasNextLine();
