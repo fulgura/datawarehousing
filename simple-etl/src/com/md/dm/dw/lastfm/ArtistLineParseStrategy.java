@@ -8,7 +8,7 @@ import java.util.Scanner;
 import com.md.dm.dw.lastfm.model.Artist;
 
 /**
- * Crates an instance of {@link Artist} implementing a Startegy pattern. For
+ * Crates an instance of {@link Artist} implementing a Strategy pattern. For
  * more details see {@link LineParseStrategy}
  * 
  * @author diego

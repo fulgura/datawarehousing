@@ -45,7 +45,7 @@ public class ArtistLineParseStrategyTest {
 	public final void testCreateWithCompleteLine() throws Exception {
 		Artist artist = artistCreatorStrategy.create(completeArtistLine);
 		Assert.assertNotNull(artist);
-		Assert.assertEquals(new Long(120), artist.getLastfmId());
+		Assert.assertEquals(new Long(120), artist.getArtistID());
 		Assert.assertEquals("Deru", artist.getName());
 		Assert.assertEquals("http://www.last.fm/music/Deru", artist.getUrl());
 		Assert.assertEquals(
@@ -61,7 +61,7 @@ public class ArtistLineParseStrategyTest {
 	public final void testCreateWithIncompleteLine() throws Exception {
 		Artist artist = artistCreatorStrategy.create(incompleteArtistLine);
 		Assert.assertNotNull(artist);
-		Assert.assertEquals(new Long(133), artist.getLastfmId());
+		Assert.assertEquals(new Long(133), artist.getArtistID());
 		Assert.assertEquals("Lauki", artist.getName());
 		Assert.assertNull(artist.getUrl());
 		Assert.assertNull(artist.getPictureURL());
@@ -75,7 +75,7 @@ public class ArtistLineParseStrategyTest {
 	public final void testCanNotCreateWithInvalidLine() throws Exception {
 		Artist artist = artistCreatorStrategy.create(invalidArtistLine);
 		Assert.assertNotNull(artist);
-		Assert.assertEquals(new Long(133), artist.getLastfmId());
+		Assert.assertEquals(new Long(133), artist.getArtistID());
 		Assert.assertEquals("Lauki", artist.getName());
 		Assert.assertNull(artist.getUrl());
 		Assert.assertNull(artist.getPictureURL());
