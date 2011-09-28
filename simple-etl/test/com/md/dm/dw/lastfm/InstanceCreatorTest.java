@@ -17,15 +17,18 @@ import com.md.dm.dw.lastfm.model.Artist;
  * @author diego
  * 
  */
-public class ArtistCSVReaderTest {
+public class InstanceCreatorTest {
 
-	private final String filename = "lastfm/artists.dat";
+	private String filename;
+	private ArtistLineParseStrategy artistLineParseStrategy;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		filename = "lastfm/artists.dat";
+		artistLineParseStrategy = new ArtistLineParseStrategy();
 	}
 
 	/**
@@ -36,30 +39,34 @@ public class ArtistCSVReaderTest {
 	}
 
 	/**
-	 * Test method for {@link com.md.dm.dw.lastfm.ArtistCSVReader#getFilename()}
+	 * Test method for {@link com.md.dm.dw.lastfm.InstanceCreator#getFilename()}
 	 * .
 	 */
 	@Test
 	public final void testGetFilename() throws Exception {
-		ArtistCSVReader reader = new ArtistCSVReader(filename);
+		InstanceCreator<Artist> reader = new InstanceCreator<Artist>(filename,
+				artistLineParseStrategy);
 		Assert.assertEquals(filename, reader.getFilename());
 	}
 
 	@Test(expected = FileNotFoundException.class)
 	public final void testCreateWithNonExixtingFilename() throws Exception {
-		new ArtistCSVReader("-----");
+		InstanceCreator<Artist> reader = new InstanceCreator<Artist>("-----",
+				artistLineParseStrategy);
 	}
 
 	@Test
 	public final void testReadArtist() throws Exception {
-		ArtistCSVReader reader = new ArtistCSVReader(filename);
+		InstanceCreator<Artist> reader = new InstanceCreator<Artist>(filename,
+				artistLineParseStrategy);
 		Artist artist = reader.nextArtist();
 		Assert.assertNotNull(artist);
 	}
 
 	@Test
 	public final void testReadAllArtist() throws Exception {
-		ArtistCSVReader reader = new ArtistCSVReader(filename);
+		InstanceCreator<Artist> reader = new InstanceCreator<Artist>(filename,
+				artistLineParseStrategy);
 		while (reader.hasMoreArtist()) {
 			Artist artist = reader.nextArtist();
 			Assert.assertNotNull(artist);
@@ -69,7 +76,8 @@ public class ArtistCSVReaderTest {
 
 	@Test
 	public final void testHasMoreArtists() throws Exception {
-		ArtistCSVReader reader = new ArtistCSVReader(filename);
+		InstanceCreator<Artist> reader = new InstanceCreator<Artist>(filename,
+				artistLineParseStrategy);
 		Assert.assertTrue(reader.hasMoreArtist());
 	}
 
