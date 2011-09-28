@@ -64,7 +64,7 @@ public class InstanceCreatorTest {
 	public final void testReadArtist() throws Exception {
 		InstanceCreator<Artist> reader = new InstanceCreator<Artist>(
 				artistFilename, artistLineParseStrategy);
-		Artist artist = reader.nextArtist();
+		Artist artist = reader.nextInstance();
 		Assert.assertNotNull(artist);
 	}
 
@@ -73,7 +73,7 @@ public class InstanceCreatorTest {
 		InstanceCreator<Artist> reader = new InstanceCreator<Artist>(
 				artistFilename, artistLineParseStrategy);
 		while (reader.hasMoreArtist()) {
-			Artist artist = reader.nextArtist();
+			Artist artist = reader.nextInstance();
 			Assert.assertNotNull(artist);
 			System.out.println(artist);
 		}
@@ -90,7 +90,7 @@ public class InstanceCreatorTest {
 	public final void testReadTag() throws Exception {
 		InstanceCreator<Tag> reader = new InstanceCreator<Tag>(tagFilename,
 				tagLineParseStrategy);
-		Tag tag = reader.nextArtist();
+		Tag tag = reader.nextInstance();
 		Assert.assertNotNull(tag);
 	}
 
@@ -99,7 +99,7 @@ public class InstanceCreatorTest {
 		InstanceCreator<Tag> reader = new InstanceCreator<Tag>(tagFilename,
 				tagLineParseStrategy);
 		while (reader.hasMoreArtist()) {
-			Tag tag = reader.nextArtist();
+			Tag tag = reader.nextInstance();
 			Assert.assertNotNull(tag);
 			System.out.println(tag);
 		}

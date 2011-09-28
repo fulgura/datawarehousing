@@ -43,7 +43,7 @@ public class InstanceCreator<E> {
 	 * 
 	 * @return a new instance or null if doesn't exist more
 	 */
-	public E nextArtist() throws Exception {
+	public E nextInstance() throws Exception {
 		if (scanner.hasNextLine()) {
 			return lineParseStrategy.create(scanner.nextLine());
 		}
