@@ -39,9 +39,7 @@ public class ArtistRemoteService implements ArtistService {
 	 */
 	@Override
 	public Artist read(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-
+		return entityManager.find(Artist.class, id);
 	}
 
 	/*
@@ -51,8 +49,8 @@ public class ArtistRemoteService implements ArtistService {
 	 */
 	@Override
 	public Artist update(Artist object) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		entityManager.merge(object);
+		return object;
 	}
 
 	/*

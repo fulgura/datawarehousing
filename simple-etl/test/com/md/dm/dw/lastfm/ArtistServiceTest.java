@@ -64,4 +64,15 @@ public class ArtistServiceTest {
 		Assert.assertNotNull(artist.getId());
 	}
 
+	@Test
+	public final void testReadArtist() throws Exception {
+		Artist artist = instanceCreator.nextInstance();
+		Assert.assertNull(artist.getId());
+		artist = artistService.create(artist);
+		Assert.assertNotNull(artist.getId());
+		Artist sameArtist = artistService.read(artist.getId());
+		Assert.assertNotNull(sameArtist.getId());
+		
+	}
+
 }
