@@ -9,12 +9,12 @@ package com.md.dm.dw.lastfm.service;
  */
 public interface CRUDService<E> {
 
-	public abstract void create(E object) throws Exception;
+	public abstract E create(E object) throws Exception;
 
-	public abstract void read(Long id) throws Exception;
+	public abstract E read(Long id) throws Exception;
 
-	public abstract void update(E object) throws Exception;
+	public abstract E update(E object) throws Exception;
 
-	public abstract void delete(E object) throws Exception;
+	public abstract E delete(E object) throws Exception;
 
 }

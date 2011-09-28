@@ -3,13 +3,13 @@
  */
 package com.md.dm.dw.lastfm;
 
-import static org.junit.Assert.fail;
-
 import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+
+import junit.framework.Assert;
 
 import org.apache.openejb.api.LocalClient;
 import org.junit.After;
@@ -40,12 +40,13 @@ public class ArtistServiceTest {
 				"org.apache.openejb.client.LocalInitialContextFactory");
 		p.put("movieDatabase", "new://Resource?type=DataSource");
 		p.put("movieDatabase.JdbcDriver", "org.hsqldb.jdbcDriver");
-		p.put("movieDatabase.JdbcUrl", "jdbc:hsqldb:mem:moviedb");
-
+		p.put("movieDatabase.JdbcUrl", "jdbc:hsqldb:mem:lastfm");
 
 		InitialContext initialContext = new InitialContext(p);
-		instanceCreator = new InstanceCreator<Artist>(
-				"lastfm/artists.dat", new ArtistLineParseStrategy());;
+		instanceCreator = new InstanceCreator<Artist>("lastfm/artists.dat",
+				new ArtistLineParseStrategy());
+		initialContext.bind("inject", this);
+
 	}
 
 	/**
@@ -58,7 +59,9 @@ public class ArtistServiceTest {
 	@Test
 	public final void testCreateArtist() throws Exception {
 		Artist artist = instanceCreator.nextInstance();
-		artistService.create(artist);
+		Assert.assertNull(artist.getId());
+		artist = artistService.create(artist);
+		Assert.assertNotNull(artist.getId());
 	}
 
 }
