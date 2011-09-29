@@ -38,9 +38,11 @@ public class ArtistServiceTest {
 		Properties p = new Properties();
 		p.put(Context.INITIAL_CONTEXT_FACTORY,
 				"org.apache.openejb.client.LocalInitialContextFactory");
-		p.put("movieDatabase", "new://Resource?type=DataSource");
-		p.put("movieDatabase.JdbcDriver", "org.hsqldb.jdbcDriver");
-		p.put("movieDatabase.JdbcUrl", "jdbc:hsqldb:mem:lastfm");
+		p.put("lastfmDatabase", "new://Resource?type=DataSource");
+		p.put("lastfmDatabase.JdbcDriver", "org.postgresql.Driver");
+		p.put("lastfmDatabase.JdbcUrl", "jdbc:postgresql://localhost/lastfm");
+		p.put("lastfmDatabase.UserName", "dw");
+		p.put("lastfmDatabase.Password", "dw");
 
 		InitialContext initialContext = new InitialContext(p);
 		instanceCreator = new InstanceCreator<Artist>("lastfm/artists.dat",

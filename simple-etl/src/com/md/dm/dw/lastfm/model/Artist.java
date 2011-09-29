@@ -3,10 +3,15 @@
  */
 package com.md.dm.dw.lastfm.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+
 
 /**
  * @author diego
@@ -15,13 +20,15 @@ import javax.persistence.Id;
 @Entity
 public class Artist {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Long artistID;
 	private String name;
 	private String url;
 	private String pictureURL;
+	
+	private Set<Tag> tags;
 
 	Artist() {
 		// Just for ORM!!!
@@ -33,6 +40,7 @@ public class Artist {
 		this.name = name;
 		this.url = url;
 		this.pictureURL = pictureURL;
+		tags = new HashSet<Tag>();
 	}
 
 	public Long getId() {
