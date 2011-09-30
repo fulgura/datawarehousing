@@ -3,6 +3,7 @@
  */
 package com.md.dm.dw.lastfm;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.ejb.EJB;
@@ -56,7 +57,10 @@ public class ArtistServiceTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		//TODO: delete all instances
+		List<Artist> artistList = artistService.all();
+		for (Artist artist : artistList) {
+			artistService.delete(artist);
+		}
 	}
 
 	@Test
@@ -64,6 +68,15 @@ public class ArtistServiceTest {
 		Artist artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
 		Assert.assertNotNull(artist.getArtistID());
+	}
+
+	@Test
+	public final void testFindArtist() throws Exception {
+		Artist artist = instanceCreator.nextInstance();
+		artist = artistService.create(artist);
+		Assert.assertNotNull(artist.getArtistID());
+		Artist artistFounded = artistService.read(artist.getArtistID());
+		Assert.assertEquals(artist, artistFounded);
 	}
 
 	@Test

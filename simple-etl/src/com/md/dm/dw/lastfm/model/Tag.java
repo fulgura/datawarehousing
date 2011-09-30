@@ -3,8 +3,10 @@ package com.md.dm.dw.lastfm.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "Tag.all", query = "SELECT T FROM Tag T")
 public class Tag {
 	@Id
 	@Column(name = "tag_id")
