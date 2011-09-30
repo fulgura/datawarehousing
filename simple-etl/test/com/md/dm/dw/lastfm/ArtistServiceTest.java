@@ -96,6 +96,16 @@ public class ArtistServiceTest {
 		Assert.assertNotNull(artist.getArtistID());
 		Artist sameArtist = artistService.read(artist.getArtistID());
 		Assert.assertNotNull(sameArtist.getArtistID());
+	}
+
+	@Test
+	public final void testReadAllArtist() throws Exception {
+		Artist artist = instanceCreator.nextInstance();
+		artist = artistService.create(artist);
+		Assert.assertNotNull(artist.getArtistID());
+		List<Artist> artistList = artistService.all();
+		Assert.assertFalse(artistList.isEmpty());
+		Assert.assertEquals(artist, artistList.get(0));
 
 	}
 
