@@ -6,5 +6,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenEJB"/>
 	<classpathentry kind="lib" path="lib/postgresql-9.1-901.jdbc3.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/lastfm"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

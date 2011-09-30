@@ -11,7 +11,7 @@ import javax.naming.InitialContext;
 
 import org.apache.openejb.api.LocalClient;
 
-import com.md.dm.dw.lastfm.model.Artist;
+import com.md.dm.dw.lastfm.model.ArtistBean;
 import com.md.dm.dw.lastfm.service.ArtistService;
 
 /**
@@ -23,7 +23,7 @@ public class Bootstrap {
 
 	@EJB
 	private ArtistService artistService;
-	private InstanceCreator<Artist> instanceCreator;
+	private InstanceCreator<ArtistBean> instanceCreator;
 
 	/**
 	 * @param args
@@ -45,15 +45,15 @@ public class Bootstrap {
 		p.put("lastfmDatabase.Password", "dw");
 
 		InitialContext initialContext = new InitialContext(p);
-		instanceCreator = new InstanceCreator<Artist>("lastfm/artists.dat",
+		instanceCreator = new InstanceCreator<ArtistBean>("lastfm/artists.dat",
 				new ArtistLineParseStrategy());
 		initialContext.bind("inject", this);
 		
 //		while(instanceCreator.hasMoreArtist()){
-//			Artist artist = artistService.create(instanceCreator.nextInstance());
+//			ArtistBean artist = artistService.create(instanceCreator.nextInstance());
 //			System.out.println(artist);
 //		}
-		Artist artist = instanceCreator.nextInstance();
+		ArtistBean artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
 
 		

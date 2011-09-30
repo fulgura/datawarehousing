@@ -3,12 +3,12 @@
  */
 package com.md.dm.dw.lastfm.service;
 
-import com.md.dm.dw.lastfm.model.Tag;
+import com.md.dm.dw.lastfm.model.TagBean;
 
 /**
  * @author diego
  * 
  */
-public interface TagService extends CRUDService<Tag> {
+public interface TagService extends CRUDService<TagBean> {
 
 }

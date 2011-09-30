@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,8 +22,9 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@NamedQuery(name = "Artist.all", query = "SELECT A FROM Artist A")
-public class Artist {
+@Table(name = "D_ARTIST")
+@NamedQuery(name = "ArtistBean.all", query = "SELECT A FROM ArtistBean A")
+public class ArtistBean {
 
 	@Id
 	@Column(name = "artist_id")
@@ -34,29 +36,29 @@ public class Artist {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 
-	@OneToMany(targetEntity = Artist.class, cascade = CascadeType.ALL)
-	private List<Artist> similarArtistList;
-	@OneToMany(targetEntity = Tag.class, cascade = CascadeType.ALL)
-	private List<Tag> tagList;
+	@OneToMany(targetEntity = ArtistBean.class, cascade = CascadeType.ALL)
+	private List<ArtistBean> similarArtistList;
+	@OneToMany(targetEntity = TagBean.class, cascade = CascadeType.ALL)
+	private List<TagBean> tagList;
 
-	Artist() {
+	ArtistBean() {
 		// Just for ORM!!!
 	}
 
-	public Artist(Long artistID, String name, String url, String pictureURL) {
+	public ArtistBean(Long artistID, String name, String url, String pictureURL) {
 		super();
 		this.artistID = artistID;
 		this.name = name;
 		this.url = url;
 		this.pictureURL = pictureURL;
 		this.creationDate = new Date();
-		this.similarArtistList = new ArrayList<Artist>();
-		this.tagList = new ArrayList<Tag>();
+		this.similarArtistList = new ArrayList<ArtistBean>();
+		this.tagList = new ArrayList<TagBean>();
 	}
 
 	@Override
 	public String toString() {
-		return "Artist [artistID=" + artistID + ", name=" + name + ", url="
+		return "ArtistBean [artistID=" + artistID + ", name=" + name + ", url="
 				+ url + ", pictureURL=" + pictureURL + ", creationDate="
 				+ creationDate + ", similarArtistList=" + similarArtistList
 				+ ", tagList=" + tagList + "]";
@@ -83,11 +85,11 @@ public class Artist {
 		return creationDate;
 	}
 
-	public List<Artist> getSimilarArtistList() {
+	public List<ArtistBean> getSimilarArtistList() {
 		return similarArtistList;
 	}
 
-	public List<Tag> getTagList() {
+	public List<TagBean> getTagList() {
 		return tagList;
 	}
 
@@ -108,7 +110,7 @@ public class Artist {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Artist other = (Artist) obj;
+		ArtistBean other = (ArtistBean) obj;
 		if (artistID == null) {
 			if (other.artistID != null)
 				return false;

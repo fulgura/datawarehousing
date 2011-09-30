@@ -3,19 +3,22 @@
  */
 package com.md.dm.dw.lastfm.model;
 
+import javax.persistence.Table;
+
 /**
  * @author diego
  * 
  */
-public class User {
+@Table(name = "D_USER")
+public class UserBean {
 
 	private Long id;
 	private Long userID;
 
-	User() {
+	UserBean() {
 	}
 
-	public User(Long userID) {
+	public UserBean(Long userID) {
 		super();
 		this.userID = userID;
 	}
@@ -30,7 +33,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userID=" + userID + "]";
+		return "UserBean [id=" + id + ", userID=" + userID + "]";
 	}
 
 }

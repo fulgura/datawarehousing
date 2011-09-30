@@ -17,7 +17,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.md.dm.dw.lastfm.model.Artist;
+import com.md.dm.dw.lastfm.model.ArtistBean;
 import com.md.dm.dw.lastfm.service.ArtistService;
 
 /**
@@ -29,7 +29,7 @@ public class ArtistServiceTest {
 
 	@EJB
 	private ArtistService artistService;
-	private InstanceCreator<Artist> instanceCreator;
+	private InstanceCreator<ArtistBean> instanceCreator;
 
 	/**
 	 * @throws java.lang.Exception
@@ -46,7 +46,7 @@ public class ArtistServiceTest {
 		p.put("lastfmDatabase.Password", "dw");
 
 		InitialContext initialContext = new InitialContext(p);
-		instanceCreator = new InstanceCreator<Artist>("lastfm/artists.dat",
+		instanceCreator = new InstanceCreator<ArtistBean>("lastfm/artists.dat",
 				new ArtistLineParseStrategy());
 		initialContext.bind("inject", this);
 
@@ -57,53 +57,53 @@ public class ArtistServiceTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		List<Artist> artistList = artistService.all();
-		for (Artist artist : artistList) {
+		List<ArtistBean> artistList = artistService.all();
+		for (ArtistBean artist : artistList) {
 			artistService.delete(artist);
 		}
 	}
 
 	@Test
 	public final void testCreateArtist() throws Exception {
-		Artist artist = instanceCreator.nextInstance();
+		ArtistBean artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
 		Assert.assertNotNull(artist.getArtistID());
 	}
 
 	@Test
 	public final void testFindArtist() throws Exception {
-		Artist artist = instanceCreator.nextInstance();
+		ArtistBean artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
 		Assert.assertNotNull(artist.getArtistID());
-		Artist artistFounded = artistService.read(artist.getArtistID());
+		ArtistBean artistFounded = artistService.read(artist.getArtistID());
 		Assert.assertEquals(artist, artistFounded);
 	}
 
 	@Test
 	public final void testDeleteArtist() throws Exception {
-		Artist artist = instanceCreator.nextInstance();
+		ArtistBean artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
 		Assert.assertNotNull(artist.getArtistID());
 		artistService.delete(artist);
-		Artist artistFounded = artistService.read(artist.getArtistID());
+		ArtistBean artistFounded = artistService.read(artist.getArtistID());
 		Assert.assertEquals(null, artistFounded);
 	}
 
 	@Test
 	public final void testReadArtist() throws Exception {
-		Artist artist = instanceCreator.nextInstance();
+		ArtistBean artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
 		Assert.assertNotNull(artist.getArtistID());
-		Artist sameArtist = artistService.read(artist.getArtistID());
+		ArtistBean sameArtist = artistService.read(artist.getArtistID());
 		Assert.assertNotNull(sameArtist.getArtistID());
 	}
 
 	@Test
 	public final void testReadAllArtist() throws Exception {
-		Artist artist = instanceCreator.nextInstance();
+		ArtistBean artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
 		Assert.assertNotNull(artist.getArtistID());
-		List<Artist> artistList = artistService.all();
+		List<ArtistBean> artistList = artistService.all();
 		Assert.assertFalse(artistList.isEmpty());
 		Assert.assertEquals(1, artistList.size());
 		Assert.assertEquals(artist, artistList.get(0));

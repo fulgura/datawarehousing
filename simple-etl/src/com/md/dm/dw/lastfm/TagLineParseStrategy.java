@@ -5,16 +5,16 @@ package com.md.dm.dw.lastfm;
 
 import java.util.Scanner;
 
-import com.md.dm.dw.lastfm.model.Tag;
+import com.md.dm.dw.lastfm.model.TagBean;
 
 /**
- * Crates an instance of {@link Tag} implementing a Strategy pattern. For more
+ * Crates an instance of {@link TagBean} implementing a Strategy pattern. For more
  * details see {@link LineParseStrategy}
  * 
  * @author diego
  * 
  */
-public class TagLineParseStrategy implements LineParseStrategy<Tag> {
+public class TagLineParseStrategy implements LineParseStrategy<TagBean> {
 
 	/*
 	 * (non-Javadoc)
@@ -22,12 +22,12 @@ public class TagLineParseStrategy implements LineParseStrategy<Tag> {
 	 * @see com.md.dm.dw.lastfm.IntanceCreatorStrategy#create(java.lang.String)
 	 */
 	@Override
-	public Tag create(String line) throws Exception {
+	public TagBean create(String line) throws Exception {
 		try {
 			Scanner lineScanner = new Scanner(line);
-			return new Tag(lineScanner.nextLong(), lineScanner.next());
+			return new TagBean(lineScanner.nextLong(), lineScanner.next());
 		} catch (Exception e) {
-			throw new Exception("Can not create an Artist with this line: "
+			throw new Exception("Can not create an ArtistBean with this line: "
 					+ line + ". Why? because " + e.getMessage());
 		}
 	}

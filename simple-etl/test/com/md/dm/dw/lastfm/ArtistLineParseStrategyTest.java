@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.md.dm.dw.lastfm.model.Artist;
+import com.md.dm.dw.lastfm.model.ArtistBean;
 
 /**
  * @author diego
@@ -43,7 +43,7 @@ public class ArtistLineParseStrategyTest {
 	 */
 	@Test
 	public final void testCreateWithCompleteLine() throws Exception {
-		Artist artist = artistCreatorStrategy.create(completeArtistLine);
+		ArtistBean artist = artistCreatorStrategy.create(completeArtistLine);
 		Assert.assertNotNull(artist);
 		Assert.assertEquals(new Long(120), artist.getArtistID());
 		Assert.assertEquals("Deru", artist.getName());
@@ -59,7 +59,7 @@ public class ArtistLineParseStrategyTest {
 	 */
 	@Test
 	public final void testCreateWithIncompleteLine() throws Exception {
-		Artist artist = artistCreatorStrategy.create(incompleteArtistLine);
+		ArtistBean artist = artistCreatorStrategy.create(incompleteArtistLine);
 		Assert.assertNotNull(artist);
 		Assert.assertEquals(new Long(133), artist.getArtistID());
 		Assert.assertEquals("Lauki", artist.getName());
@@ -73,7 +73,7 @@ public class ArtistLineParseStrategyTest {
 	 */
 	@Test(expected = Exception.class)
 	public final void testCanNotCreateWithInvalidLine() throws Exception {
-		Artist artist = artistCreatorStrategy.create(invalidArtistLine);
+		ArtistBean artist = artistCreatorStrategy.create(invalidArtistLine);
 		Assert.assertNotNull(artist);
 		Assert.assertEquals(new Long(133), artist.getArtistID());
 		Assert.assertEquals("Lauki", artist.getName());

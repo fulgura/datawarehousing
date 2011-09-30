@@ -5,16 +5,16 @@ package com.md.dm.dw.lastfm;
 
 import java.util.Scanner;
 
-import com.md.dm.dw.lastfm.model.Artist;
+import com.md.dm.dw.lastfm.model.ArtistBean;
 
 /**
- * Crates an instance of {@link Artist} implementing a Strategy pattern. For
+ * Crates an instance of {@link ArtistBean} implementing a Strategy pattern. For
  * more details see {@link LineParseStrategy}
  * 
  * @author diego
  * 
  */
-public class ArtistLineParseStrategy implements LineParseStrategy<Artist> {
+public class ArtistLineParseStrategy implements LineParseStrategy<ArtistBean> {
 
 	/*
 	 * (non-Javadoc)
@@ -22,7 +22,7 @@ public class ArtistLineParseStrategy implements LineParseStrategy<Artist> {
 	 * @see com.md.dm.dw.lastfm.IntanceCreatorStrategy#create(java.lang.String)
 	 */
 	@Override
-	public Artist create(String line) throws Exception {
+	public ArtistBean create(String line) throws Exception {
 		Long lastfmId;
 		String name;
 		String url;
@@ -40,10 +40,10 @@ public class ArtistLineParseStrategy implements LineParseStrategy<Artist> {
 				imageURL = lineScanner.next();
 			}
 		} catch (Exception e) {
-			throw new Exception("Can not create an Artist with this line: "
+			throw new Exception("Can not create an ArtistBean with this line: "
 					+ line + ". Why? because " + e.getMessage());
 		}
-		return new Artist(lastfmId, name, url, imageURL);
+		return new ArtistBean(lastfmId, name, url, imageURL);
 	}
 
 }

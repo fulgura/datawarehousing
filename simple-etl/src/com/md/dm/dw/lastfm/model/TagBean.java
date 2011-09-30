@@ -4,20 +4,22 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 @Entity
-@NamedQuery(name = "Tag.all", query = "SELECT T FROM Tag T")
-public class Tag {
+@Table(name = "D_TAG")
+@NamedQuery(name = "TagBean.all", query = "SELECT T FROM TagBean T")
+public class TagBean {
 	@Id
 	@Column(name = "tag_id")
 	private Long tagID;
 	private String tagValue;
 
-	Tag() {
+	TagBean() {
 		// For use only with ORMs
 	}
 
-	public Tag(Long tagID, String tagValue) {
+	public TagBean(Long tagID, String tagValue) {
 		super();
 		this.tagID = tagID;
 		this.tagValue = tagValue;
@@ -33,6 +35,6 @@ public class Tag {
 
 	@Override
 	public String toString() {
-		return "Tag [tagID=" + tagID + ", tagValue=" + tagValue + "]";
+		return "TagBean [tagID=" + tagID + ", tagValue=" + tagValue + "]";
 	}
 }

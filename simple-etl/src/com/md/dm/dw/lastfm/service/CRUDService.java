@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface CRUDService<E> {
 
-	public abstract E create(E object) throws Exception;
+	public abstract E create(E bean) throws Exception;
 
 	public abstract E read(Long id) throws Exception;
 
-	public abstract E update(E object) throws Exception;
+	public abstract E update(E bean) throws Exception;
 
-	public abstract void delete(E object) throws Exception;
+	public abstract void delete(E bean) throws Exception;
 
 	public List<E> all() throws Exception;
 

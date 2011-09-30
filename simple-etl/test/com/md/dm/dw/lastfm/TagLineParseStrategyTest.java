@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.md.dm.dw.lastfm.model.Tag;
+import com.md.dm.dw.lastfm.model.TagBean;
 
 /**
  * @author diego
@@ -38,7 +38,7 @@ public class TagLineParseStrategyTest {
 
 	@Test
 	public final void testCreateOne() throws Exception {
-		Tag tag = creatorStrategy.create(tagLine);
+		TagBean tag = creatorStrategy.create(tagLine);
 		Assert.assertNotNull(tag);
 		Assert.assertEquals(new Long(1), tag.getTagID());
 		Assert.assertEquals("metal", tag.getTagValue());

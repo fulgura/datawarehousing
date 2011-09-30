@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
-import com.md.dm.dw.lastfm.model.Artist;
+import com.md.dm.dw.lastfm.model.ArtistBean;
 
 /**
  * @author diego
@@ -28,7 +28,7 @@ public class ArtistRemoteService implements ArtistService {
 	 * @see com.md.dm.dw.lastfm.service.CRUDService#create(java.lang.Object)
 	 */
 	@Override
-	public Artist create(Artist object) throws Exception {
+	public ArtistBean create(ArtistBean object) throws Exception {
 		entityManager.persist(object);
 		return object;
 
@@ -40,8 +40,8 @@ public class ArtistRemoteService implements ArtistService {
 	 * @see com.md.dm.dw.lastfm.service.CRUDService#read(java.lang.Long)
 	 */
 	@Override
-	public Artist read(Long id) throws Exception {
-		return entityManager.find(Artist.class, id);
+	public ArtistBean read(Long id) throws Exception {
+		return entityManager.find(ArtistBean.class, id);
 	}
 
 	/*
@@ -50,7 +50,7 @@ public class ArtistRemoteService implements ArtistService {
 	 * @see com.md.dm.dw.lastfm.service.CRUDService#update(java.lang.Object)
 	 */
 	@Override
-	public Artist update(Artist object) throws Exception {
+	public ArtistBean update(ArtistBean object) throws Exception {
 		entityManager.merge(object);
 		return object;
 	}
@@ -61,15 +61,15 @@ public class ArtistRemoteService implements ArtistService {
 	 * @see com.md.dm.dw.lastfm.service.CRUDService#delete(java.lang.Object)
 	 */
 	@Override
-	public void delete(Artist object) throws Exception {
-		Artist atachedObject = entityManager.find(Artist.class, object.getArtistID());
+	public void delete(ArtistBean object) throws Exception {
+		ArtistBean atachedObject = entityManager.find(ArtistBean.class, object.getArtistID());
 		entityManager.remove(atachedObject);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Artist> all() throws Exception {
-		return entityManager.createNamedQuery("Artist.all").getResultList();
+	public List<ArtistBean> all() throws Exception {
+		return entityManager.createNamedQuery("ArtistBean.all").getResultList();
 	}
 
 }
