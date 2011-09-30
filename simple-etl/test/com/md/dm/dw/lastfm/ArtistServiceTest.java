@@ -105,6 +105,7 @@ public class ArtistServiceTest {
 		Assert.assertNotNull(artist.getArtistID());
 		List<Artist> artistList = artistService.all();
 		Assert.assertFalse(artistList.isEmpty());
+		Assert.assertEquals(1, artistList.size());
 		Assert.assertEquals(artist, artistList.get(0));
 
 	}
