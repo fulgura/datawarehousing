@@ -3,15 +3,16 @@
  */
 package com.md.dm.dw.lastfm.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author diego
@@ -21,14 +22,19 @@ import javax.persistence.Id;
 public class Artist {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@Column(name = "artist_id")
 	private Long artistID;
 	private String name;
 	private String url;
 	private String pictureURL;
-	
-	private Set<Tag> tags;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
+
+	@OneToMany(targetEntity = Artist.class, cascade = CascadeType.ALL)
+	private List<Artist> similarArtistList;
+	@OneToMany(targetEntity = Tag.class, cascade = CascadeType.ALL)
+	private List<Tag> tagList;
 
 	Artist() {
 		// Just for ORM!!!
@@ -40,11 +46,15 @@ public class Artist {
 		this.name = name;
 		this.url = url;
 		this.pictureURL = pictureURL;
-		tags = new HashSet<Tag>();
+		this.creationDate = new Date();
 	}
 
-	public Long getId() {
-		return id;
+	@Override
+	public String toString() {
+		return "Artist [artistID=" + artistID + ", name=" + name + ", url="
+				+ url + ", pictureURL=" + pictureURL + ", creationDate="
+				+ creationDate + ", similarArtistList=" + similarArtistList
+				+ ", tagList=" + tagList + "]";
 	}
 
 	public Long getArtistID() {
@@ -63,10 +73,16 @@ public class Artist {
 		return pictureURL;
 	}
 
-	@Override
-	public String toString() {
-		return "Artist [id=" + id + ", artistID=" + artistID + ", name=" + name
-				+ ", url=" + url + ", pictureURL=" + pictureURL + "]";
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public List<Artist> getSimilarArtistList() {
+		return similarArtistList;
+	}
+
+	public List<Tag> getTagList() {
+		return tagList;
 	}
 
 }

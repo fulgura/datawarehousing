@@ -1,7 +1,13 @@
 package com.md.dm.dw.lastfm.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Tag {
-	private Long id;
+	@Id
+	@Column(name = "tag_id")
 	private Long tagID;
 	private String tagValue;
 
@@ -15,10 +21,6 @@ public class Tag {
 		this.tagValue = tagValue;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
 	public Long getTagID() {
 		return tagID;
 	}
@@ -29,8 +31,6 @@ public class Tag {
 
 	@Override
 	public String toString() {
-		return "Tag [id=" + id + ", tagID=" + tagID + ", tagValue=" + tagValue
-				+ "]";
+		return "Tag [tagID=" + tagID + ", tagValue=" + tagValue + "]";
 	}
-
 }

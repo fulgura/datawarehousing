@@ -9,32 +9,32 @@ import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
-import junit.framework.Assert;
-
 import org.apache.openejb.api.LocalClient;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import com.md.dm.dw.lastfm.model.Artist;
 import com.md.dm.dw.lastfm.service.ArtistService;
 
 /**
  * @author diego
- * 
+ *
  */
 @LocalClient
-public class ArtistServiceTest {
+public class Bootstrap {
 
 	@EJB
 	private ArtistService artistService;
 	private InstanceCreator<Artist> instanceCreator;
 
 	/**
-	 * @throws java.lang.Exception
+	 * @param args
+	 * @throws Exception 
 	 */
-	@Before
-	public void setUp() throws Exception {
+	public static void main(String[] args) throws Exception {
+		new Bootstrap().run();
+
+	}
+
+	private void run() throws Exception {
 		Properties p = new Properties();
 		p.put(Context.INITIAL_CONTEXT_FACTORY,
 				"org.apache.openejb.client.LocalInitialContextFactory");
@@ -48,32 +48,15 @@ public class ArtistServiceTest {
 		instanceCreator = new InstanceCreator<Artist>("lastfm/artists.dat",
 				new ArtistLineParseStrategy());
 		initialContext.bind("inject", this);
-
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-		//TODO: delete all instances
-	}
-
-	@Test
-	public final void testCreateArtist() throws Exception {
+		
+//		while(instanceCreator.hasMoreArtist()){
+//			Artist artist = artistService.create(instanceCreator.nextInstance());
+//			System.out.println(artist);
+//		}
 		Artist artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
-		Assert.assertNotNull(artist.getArtistID());
-	}
 
-	@Test
-	public final void testReadArtist() throws Exception {
-		Artist artist = instanceCreator.nextInstance();
-		artist = artistService.create(artist);
-		Assert.assertNotNull(artist.getArtistID());
-		Artist sameArtist = artistService.read(artist.getArtistID());
-		Assert.assertNotNull(sameArtist.getArtistID());
-
+		
 	}
 
 }
