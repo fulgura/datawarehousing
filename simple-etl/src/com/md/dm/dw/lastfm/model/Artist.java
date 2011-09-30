@@ -3,6 +3,7 @@
  */
 package com.md.dm.dw.lastfm.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,8 @@ public class Artist {
 		this.url = url;
 		this.pictureURL = pictureURL;
 		this.creationDate = new Date();
+		this.similarArtistList = new ArrayList<Artist>();
+		this.tagList = new ArrayList<Tag>();
 	}
 
 	@Override
@@ -59,6 +62,7 @@ public class Artist {
 				+ ", tagList=" + tagList + "]";
 	}
 
+	
 	public Long getArtistID() {
 		return artistID;
 	}
@@ -87,4 +91,31 @@ public class Artist {
 		return tagList;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((artistID == null) ? 0 : artistID.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Artist other = (Artist) obj;
+		if (artistID == null) {
+			if (other.artistID != null)
+				return false;
+		} else if (!artistID.equals(other.artistID))
+			return false;
+		return true;
+	}
+
+	
 }

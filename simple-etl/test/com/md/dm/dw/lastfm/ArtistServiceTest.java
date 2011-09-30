@@ -80,6 +80,16 @@ public class ArtistServiceTest {
 	}
 
 	@Test
+	public final void testDeleteArtist() throws Exception {
+		Artist artist = instanceCreator.nextInstance();
+		artist = artistService.create(artist);
+		Assert.assertNotNull(artist.getArtistID());
+		artistService.delete(artist);
+		Artist artistFounded = artistService.read(artist.getArtistID());
+		Assert.assertEquals(null, artistFounded);
+	}
+
+	@Test
 	public final void testReadArtist() throws Exception {
 		Artist artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
