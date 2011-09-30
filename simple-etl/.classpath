@@ -7,5 +7,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenEJB"/>
 	<classpathentry kind="lib" path="lib/postgresql-9.1-901.jdbc3.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/lastfm"/>
+	<classpathentry kind="lib" path="/lastfm/lib/last.fm-bindings-0.1.0.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

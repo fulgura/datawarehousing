@@ -17,7 +17,7 @@ import com.md.dm.dw.lastfm.model.ArtistBean;
  * 
  */
 @Stateless
-public class ArtistRemoteService implements ArtistService {
+public class ArtistBeanRemoteService implements ArtistBeanService {
 
 	@PersistenceContext(unitName = "lastfm-unit", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;

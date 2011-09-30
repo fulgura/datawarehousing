@@ -15,7 +15,7 @@ import com.md.dm.dw.lastfm.model.TagBean;
  * @author diego
  * 
  */
-public class TagRemoteService implements TagService {
+public class TagBeanRemoteService implements TagBeanService {
 
 	@PersistenceContext(unitName = "lastfm-unit", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;

@@ -32,9 +32,13 @@ public class ArtistBean {
 	private String name;
 	private String url;
 	private String pictureURL;
-
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
+	private String mbid;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date wikiLastChanged;
+	private String wikiSummary;
+	private String wikiText;
 
 	@OneToMany(targetEntity = ArtistBean.class, cascade = CascadeType.ALL)
 	private List<ArtistBean> similarArtistList;
@@ -54,6 +58,11 @@ public class ArtistBean {
 		this.creationDate = new Date();
 		this.similarArtistList = new ArrayList<ArtistBean>();
 		this.tagList = new ArrayList<TagBean>();
+		this.mbid = null;
+		this.wikiLastChanged = null;
+		this.wikiSummary = null;
+		this.wikiText = null;
+
 	}
 
 	@Override
@@ -64,7 +73,6 @@ public class ArtistBean {
 				+ ", tagList=" + tagList + "]";
 	}
 
-	
 	public Long getArtistID() {
 		return artistID;
 	}
@@ -119,5 +127,36 @@ public class ArtistBean {
 		return true;
 	}
 
-	
+	public String getMbid() {
+		return mbid;
+	}
+
+	public void setMbid(String mbid) {
+		this.mbid = mbid;
+	}
+
+	public Date getWikiLastChanged() {
+		return wikiLastChanged;
+	}
+
+	public void setWikiLastChanged(Date wikiLastChanged) {
+		this.wikiLastChanged = wikiLastChanged;
+	}
+
+	public String getWikiSummary() {
+		return wikiSummary;
+	}
+
+	public void setWikiSummary(String wikiSummary) {
+		this.wikiSummary = wikiSummary;
+	}
+
+	public String getWikiText() {
+		return wikiText;
+	}
+
+	public void setWikiText(String wikiText) {
+		this.wikiText = wikiText;
+	}
+
 }

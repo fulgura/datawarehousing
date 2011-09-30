@@ -18,17 +18,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.md.dm.dw.lastfm.model.ArtistBean;
-import com.md.dm.dw.lastfm.service.ArtistService;
+import com.md.dm.dw.lastfm.service.ArtistBeanService;
 
 /**
  * @author diego
  * 
  */
 @LocalClient
-public class ArtistServiceTest {
+public class ArtistBeanServiceTest {
 
 	@EJB
-	private ArtistService artistService;
+	private ArtistBeanService artistService;
 	private InstanceCreator<ArtistBean> instanceCreator;
 
 	/**
