@@ -24,6 +24,8 @@ import com.md.dm.dw.lastfm.InstanceCreator;
 import com.md.dm.dw.lastfm.TagLineParseStrategy;
 import com.md.dm.dw.lastfm.model.TagBean;
 
+import de.umass.lastfm.Tag;
+
 /**
  * @author diego
  * 
@@ -124,5 +126,15 @@ public class TagBeanRemoteServiceTest {
 	public final void testAll() {
 		fail("Not yet implemented"); // TODO
 	}
+	
+	@Test
+	public final void testCreateWithLastfmTagInfo() throws Exception {
+		TagBean tagBean = instanceCreator.nextInstance();
+		Tag tagInfo = connector.tagInfo(tagBean.getTagValue());
+		tagBean.addTagInfo(tagInfo);
+		TagBean createdTagBean = tagBeanService.create(tagBean);
+		Assert.assertNotNull(createdTagBean);
+	}
+
 
 }
