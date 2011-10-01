@@ -1,6 +1,10 @@
 package com.md.dm.dw.lastfm.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -10,6 +14,11 @@ import javax.persistence.Table;
 @Table(name = "D_LISTENING")
 @NamedQuery(name = "ListeningBean.all", query = "SELECT A FROM ListeningBean A")
 public class ListeningBean {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "LISTENING_ID")
+	private Long listeningId;
 
 	@OneToOne
 	@JoinColumn(name = "USER_ID")
@@ -78,6 +87,10 @@ public class ListeningBean {
 	public String toString() {
 		return "ListeningBean [userBean=" + userBean + ", artistBean="
 				+ artistBean + ", weight=" + weight + "]";
+	}
+
+	public Long getListeningId() {
+		return listeningId;
 	}
 
 }

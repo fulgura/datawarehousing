@@ -5,7 +5,10 @@ package com.md.dm.dw.lastfm.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
@@ -22,6 +25,11 @@ import javax.persistence.TemporalType;
 @Table(name = "F_TAGGING")
 @NamedQuery(name = "TaggingBean.all", query = "SELECT A FROM TaggingBean A")
 public class TaggingBean {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "TAGGING_ID")
+	private Long taggingId;
 
 	@OneToOne
 	@JoinColumn(name = "ARTIST_ID")
@@ -57,6 +65,7 @@ public class TaggingBean {
 	TaggingBean() {
 		// ORM :)
 	}
+
 	public TaggingBean(ArtistBean artistBean, TagBean tagBean,
 			UserBean userBean, Date taggingDate) {
 		super();
@@ -112,6 +121,8 @@ public class TaggingBean {
 		return true;
 	}
 
-	
-	
+	public Long getTaggingId() {
+		return taggingId;
+	}
+
 }

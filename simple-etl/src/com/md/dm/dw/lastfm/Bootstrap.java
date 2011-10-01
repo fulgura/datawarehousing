@@ -3,6 +3,7 @@
  */
 package com.md.dm.dw.lastfm;
 
+import java.util.Date;
 import java.util.Properties;
 
 import javax.ejb.EJB;
@@ -13,9 +14,11 @@ import org.apache.openejb.api.LocalClient;
 
 import com.md.dm.dw.lastfm.model.ArtistBean;
 import com.md.dm.dw.lastfm.model.TagBean;
+import com.md.dm.dw.lastfm.model.TaggingBean;
 import com.md.dm.dw.lastfm.model.UserBean;
 import com.md.dm.dw.lastfm.service.ArtistBeanService;
 import com.md.dm.dw.lastfm.service.TagBeanService;
+import com.md.dm.dw.lastfm.service.TaggingBeanService;
 import com.md.dm.dw.lastfm.service.UserBeanService;
 
 import de.umass.lastfm.Artist;
@@ -40,6 +43,8 @@ public class Bootstrap {
 	private TagBeanService tagBeanService;
 	@EJB
 	private UserBeanService userBeanService;
+	@EJB
+	private TaggingBeanService taggingBeanService;
 
 	private InstanceCreator<ArtistBean> artistBeanCreator;
 	private InstanceCreator<TagBean> tagBeanCreator;
@@ -90,10 +95,11 @@ public class Bootstrap {
 				.nextInstance());
 		UserBean userBean = userBeanService.create(userBeanCreator
 				.nextInstance());
-		
-		// TaggingBean taggingBean = new TaggingBean(artistBean, tagBean,
-		// userBean, new Date());
 
+		TaggingBean taggingBean = taggingBeanService.create(new TaggingBean(
+				artistBean, tagBean, userBean, new Date()));
+
+		System.out.println(taggingBean);
 	}
 
 	private void createAllUsers() {
