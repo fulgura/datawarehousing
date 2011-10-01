@@ -30,7 +30,7 @@ public class TagBean {
 	private Date wikiLastChanged;
 	@Column(length = 2048)
 	private String wikiSummary;
-	@Column(length = 4096)
+	@Column(length = 8000)
 	private String wikiText;
 
 	@OneToMany(targetEntity = TagBean.class, cascade = CascadeType.ALL)
