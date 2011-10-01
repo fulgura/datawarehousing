@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.md.dm.dw.lastfm.model.ArtistBean;
 import com.md.dm.dw.lastfm.model.TagBean;
+import com.md.dm.dw.lastfm.model.UserBean;
 
 /**
  * @author diego
@@ -22,8 +23,10 @@ public class InstanceCreatorTest {
 
 	private String artistFilename;
 	private String tagFilename;
+	private String userFilename;
 	private ArtistLineParseStrategy artistLineParseStrategy;
 	private TagLineParseStrategy tagLineParseStrategy;
+	private UserLineParseStrategy userLineParseStrategy;
 
 	/**
 	 * @throws java.lang.Exception
@@ -32,8 +35,10 @@ public class InstanceCreatorTest {
 	public void setUp() throws Exception {
 		artistFilename = "lastfm/artists.dat";
 		artistFilename = "lastfm/tags.dat";
+		userFilename = "lastfm/user_artists.dat";
 		artistLineParseStrategy = new ArtistLineParseStrategy();
 		tagLineParseStrategy = new TagLineParseStrategy();
+		userLineParseStrategy = new UserLineParseStrategy();
 	}
 
 	/**
@@ -56,8 +61,8 @@ public class InstanceCreatorTest {
 
 	@Test(expected = FileNotFoundException.class)
 	public final void testCreateWithNonExixtingFilename() throws Exception {
-		InstanceCreator<ArtistBean> reader = new InstanceCreator<ArtistBean>("-----",
-				artistLineParseStrategy);
+		InstanceCreator<ArtistBean> reader = new InstanceCreator<ArtistBean>(
+				"-----", artistLineParseStrategy);
 	}
 
 	@Test
@@ -88,16 +93,16 @@ public class InstanceCreatorTest {
 
 	@Test
 	public final void testReadTag() throws Exception {
-		InstanceCreator<TagBean> reader = new InstanceCreator<TagBean>(tagFilename,
-				tagLineParseStrategy);
+		InstanceCreator<TagBean> reader = new InstanceCreator<TagBean>(
+				tagFilename, tagLineParseStrategy);
 		TagBean tag = reader.nextInstance();
 		Assert.assertNotNull(tag);
 	}
 
 	@Test
 	public final void testReadAllTags() throws Exception {
-		InstanceCreator<TagBean> reader = new InstanceCreator<TagBean>(tagFilename,
-				tagLineParseStrategy);
+		InstanceCreator<TagBean> reader = new InstanceCreator<TagBean>(
+				tagFilename, tagLineParseStrategy);
 		while (reader.hasMoreArtist()) {
 			TagBean tag = reader.nextInstance();
 			Assert.assertNotNull(tag);
@@ -105,4 +110,15 @@ public class InstanceCreatorTest {
 		}
 	}
 
+	@Test
+	public final void testReadAllUsers() throws Exception {
+		InstanceCreator<UserBean> reader = new InstanceCreator<UserBean>(
+				userFilename, userLineParseStrategy);
+
+		while (reader.hasMoreArtist()) {
+			UserBean userBean = reader.nextInstance();
+			Assert.assertNotNull(userBean);
+			System.out.println(userBean);
+		}
+	}
 }

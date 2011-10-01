@@ -13,6 +13,7 @@ import org.apache.openejb.api.LocalClient;
 
 import com.md.dm.dw.lastfm.model.ArtistBean;
 import com.md.dm.dw.lastfm.model.TagBean;
+import com.md.dm.dw.lastfm.model.TaggingBean;
 import com.md.dm.dw.lastfm.service.ArtistBeanService;
 import com.md.dm.dw.lastfm.service.TagBeanService;
 
@@ -69,10 +70,28 @@ public class Bootstrap {
 		InitialContext initialContext = new InitialContext(p);
 		initialContext.bind("inject", this);
 
+		//this.test();
 		//this.createAllArtist();
-		this.createAllTags();
+		//this.createAllTags();
+		this.createAllUsers();
 	}
 
+
+	private void test() throws Exception {
+		
+		TagBean tagBean = tagBeanCreator.nextInstance();
+		ArtistBean artistBean = artistBeanCreator.nextInstance();
+		
+		//new TaggingBean(artistBean, tagBean, userBean, taggingDate)
+		
+	}
+
+	
+	private void createAllUsers() {
+		
+	}
+
+	
 	private void createAllTags() throws Exception {
 		while (tagBeanCreator.hasMoreArtist()) {
 			TagBean tagBean = tagBeanCreator.nextInstance();

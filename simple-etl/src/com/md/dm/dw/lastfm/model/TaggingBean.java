@@ -24,15 +24,15 @@ import javax.persistence.TemporalType;
 public class TaggingBean {
 
 	@OneToOne
-	@JoinColumn(name = "ARTIST_BEAN")
+	@JoinColumn(name = "ARTIST_ID")
 	private ArtistBean artistBean;
 
 	@OneToOne
-	@JoinColumn(name = "TAG_BEAN")
+	@JoinColumn(name = "TAG_ID")
 	private TagBean tagBean;
 
 	@OneToOne
-	@JoinColumn(name = "USER_BEAN")
+	@JoinColumn(name = "USER_ID")
 	private UserBean userBean;
 
 	@Temporal(TemporalType.TIMESTAMP)
