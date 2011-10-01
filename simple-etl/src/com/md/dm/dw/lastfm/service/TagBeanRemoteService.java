@@ -5,6 +5,7 @@ package com.md.dm.dw.lastfm.service;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -15,6 +16,7 @@ import com.md.dm.dw.lastfm.model.TagBean;
  * @author diego
  * 
  */
+@Stateless
 public class TagBeanRemoteService implements TagBeanService {
 
 	@PersistenceContext(unitName = "lastfm-unit", type = PersistenceContextType.TRANSACTION)
@@ -59,7 +61,9 @@ public class TagBeanRemoteService implements TagBeanService {
 	 */
 	@Override
 	public void delete(TagBean object) throws Exception {
-		entityManager.remove(object);
+		TagBean atachedObject = entityManager.find(TagBean.class,
+				object.getTagID());
+		entityManager.remove(atachedObject);
 	}
 
 	@Override
