@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import de.umass.lastfm.Artist;
+
 /**
  * @author diego
  * 
@@ -37,7 +39,9 @@ public class ArtistBean {
 	private String mbid;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date wikiLastChanged;
+	@Column(length=1024) 
 	private String wikiSummary;
+	@Column(length=2048) 
 	private String wikiText;
 
 	@OneToMany(targetEntity = ArtistBean.class, cascade = CascadeType.ALL)
@@ -62,7 +66,22 @@ public class ArtistBean {
 		this.wikiLastChanged = null;
 		this.wikiSummary = null;
 		this.wikiText = null;
+	}
 
+	public ArtistBean(Long artistID, String name, String url,
+			String pictureURL, Artist artist) {
+		super();
+		this.artistID = artistID;
+		this.name = name;
+		this.url = url;
+		this.pictureURL = pictureURL;
+		this.creationDate = new Date();
+		this.similarArtistList = new ArrayList<ArtistBean>();
+		this.tagList = new ArrayList<TagBean>();
+		this.mbid = artist.getMbid();
+		this.wikiLastChanged = artist.getWikiLastChanged();
+		this.wikiSummary = artist.getWikiSummary();
+		this.wikiText = artist.getWikiText();
 	}
 
 	@Override
@@ -157,6 +176,22 @@ public class ArtistBean {
 
 	public void setWikiText(String wikiText) {
 		this.wikiText = wikiText;
+	}
+
+	/**
+	 * Add {@link Artist} information to this {@link ArtistBean}. It includes
+	 * Wiki informations, mbid.
+	 * 
+	 * @param artist an instance of {@link Artist} 
+	 */
+	public void addArtistInfo(Artist artist) {
+		if (artist != null) {
+			this.setMbid(artist.getMbid());
+			this.setWikiLastChanged(artist.getWikiLastChanged());
+			this.setWikiSummary(artist.getWikiSummary());
+			this.setWikiText(artist.getWikiText());
+		}
+
 	}
 
 }

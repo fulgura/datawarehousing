@@ -20,6 +20,8 @@ import org.junit.Test;
 import com.md.dm.dw.lastfm.model.ArtistBean;
 import com.md.dm.dw.lastfm.service.ArtistBeanService;
 
+import de.umass.lastfm.Artist;
+
 /**
  * @author diego
  * 
@@ -29,6 +31,11 @@ public class ArtistBeanServiceTest {
 
 	@EJB
 	private ArtistBeanService artistService;
+	private String key = "3cd3f363864345e489dc98b3c2eb64b0";      // api key
+	private String secret = "0c32723a33b58a523da492312a03b311";   // api secret
+	private String user = "a_e_r_e_a";     // user name
+	private String password = "42067062"; // user's password
+	private Connector connector = null;
 	private InstanceCreator<ArtistBean> instanceCreator;
 
 	/**
@@ -48,6 +55,7 @@ public class ArtistBeanServiceTest {
 		InitialContext initialContext = new InitialContext(p);
 		instanceCreator = new InstanceCreator<ArtistBean>("lastfm/artists.dat",
 				new ArtistLineParseStrategy());
+		connector  = new Connector(user, password, key, secret); 
 		initialContext.bind("inject", this);
 
 	}
@@ -64,10 +72,19 @@ public class ArtistBeanServiceTest {
 	}
 
 	@Test
-	public final void testCreateArtist() throws Exception {
+	public final void testCreateArtistBean() throws Exception {
 		ArtistBean artist = instanceCreator.nextInstance();
 		artist = artistService.create(artist);
 		Assert.assertNotNull(artist.getArtistID());
+	}
+
+	@Test
+	public final void testCreateArtistBeanWithLastfmArtistInfo() throws Exception {
+		ArtistBean artistBean = instanceCreator.nextInstance();
+		Artist artistInfo = connector.artistInfo(artistBean.getName());
+		artistBean.addArtistInfo(artistInfo);
+		artistBean = artistService.create(artistBean);
+		Assert.assertNotNull(artistBean.getArtistID());
 	}
 
 	@Test
