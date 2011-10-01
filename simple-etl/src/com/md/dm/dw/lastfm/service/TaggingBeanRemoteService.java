@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
-import com.md.dm.dw.lastfm.model.TagBean;
 import com.md.dm.dw.lastfm.model.TaggingBean;
 
 /**
@@ -62,9 +61,9 @@ public class TaggingBeanRemoteService implements TaggingBeanService {
 	 */
 	@Override
 	public void delete(TaggingBean bean) throws Exception {
-//		TaggingBean atachedObject = entityManager.find(TaggingBean.class,
-//				bean.get);
-//		entityManager.remove(atachedObject);
+		TaggingBean atachedObject = entityManager.find(TaggingBean.class,
+				bean.getTaggingId());
+		entityManager.remove(atachedObject);
 	}
 
 	/*
@@ -74,7 +73,8 @@ public class TaggingBeanRemoteService implements TaggingBeanService {
 	 */
 	@Override
 	public List<TaggingBean> all() throws Exception {
-		return entityManager.createNamedQuery("TaggingBean.all").getResultList();
+		return entityManager.createNamedQuery("TaggingBean.all")
+				.getResultList();
 	}
 
 }

@@ -29,7 +29,7 @@ import com.md.dm.dw.lastfm.model.UserBean;
  * 
  */
 @LocalClient
-public class UserBeanRemoteServiceTest {
+public class UserBeanServiceTest {
 
 	@EJB
 	private UserBeanService userBeanService;
