@@ -1,4 +1,4 @@
-package com.md.dm.dw.lastfm.model;
+package com.md.dm.dw.lastfm.entity;
 
 import java.util.ArrayList;
 import java.util.Date;

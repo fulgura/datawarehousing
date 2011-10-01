@@ -12,10 +12,10 @@ import javax.naming.InitialContext;
 
 import org.apache.openejb.api.LocalClient;
 
-import com.md.dm.dw.lastfm.model.ArtistBean;
-import com.md.dm.dw.lastfm.model.TagBean;
-import com.md.dm.dw.lastfm.model.TaggingBean;
-import com.md.dm.dw.lastfm.model.UserBean;
+import com.md.dm.dw.lastfm.entity.ArtistBean;
+import com.md.dm.dw.lastfm.entity.TagBean;
+import com.md.dm.dw.lastfm.entity.TaggingBean;
+import com.md.dm.dw.lastfm.entity.UserBean;
 import com.md.dm.dw.lastfm.service.ArtistBeanService;
 import com.md.dm.dw.lastfm.service.TagBeanService;
 import com.md.dm.dw.lastfm.service.TaggingBeanService;

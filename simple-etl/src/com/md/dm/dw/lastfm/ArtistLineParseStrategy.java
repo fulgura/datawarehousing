@@ -5,7 +5,7 @@ package com.md.dm.dw.lastfm;
 
 import java.util.Scanner;
 
-import com.md.dm.dw.lastfm.model.ArtistBean;
+import com.md.dm.dw.lastfm.entity.ArtistBean;
 
 /**
  * Crates an instance of {@link ArtistBean} implementing a Strategy pattern. For

@@ -5,8 +5,8 @@ package com.md.dm.dw.lastfm;
 
 import java.util.Scanner;
 
-import com.md.dm.dw.lastfm.model.TagBean;
-import com.md.dm.dw.lastfm.model.UserBean;
+import com.md.dm.dw.lastfm.entity.TagBean;
+import com.md.dm.dw.lastfm.entity.UserBean;
 
 /**
  * Crates an instance of {@link UserBean} implementing a Strategy pattern. For more

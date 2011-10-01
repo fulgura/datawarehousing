@@ -5,7 +5,7 @@ package com.md.dm.dw.lastfm;
 
 import java.util.Scanner;
 
-import com.md.dm.dw.lastfm.model.TagBean;
+import com.md.dm.dw.lastfm.entity.TagBean;
 
 /**
  * Crates an instance of {@link TagBean} implementing a Strategy pattern. For more

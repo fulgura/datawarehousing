@@ -1,4 +1,4 @@
-package com.md.dm.dw.lastfm.model;
+package com.md.dm.dw.lastfm.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

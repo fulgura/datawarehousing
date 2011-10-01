@@ -3,7 +3,7 @@
  */
 package com.md.dm.dw.lastfm.service;
 
-import com.md.dm.dw.lastfm.model.TagBean;
+import com.md.dm.dw.lastfm.entity.TagBean;
 
 /**
  * @author diego

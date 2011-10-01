@@ -21,8 +21,8 @@ import org.junit.Test;
 
 import com.md.dm.dw.lastfm.InstanceCreator;
 import com.md.dm.dw.lastfm.UserLineParseStrategy;
-import com.md.dm.dw.lastfm.model.ArtistBean;
-import com.md.dm.dw.lastfm.model.UserBean;
+import com.md.dm.dw.lastfm.entity.ArtistBean;
+import com.md.dm.dw.lastfm.entity.UserBean;
 
 /**
  * @author diego
@@ -70,7 +70,7 @@ public class UserBeanServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.md.dm.dw.lastfm.service.UserBeanRemoteService#create(com.md.dm.dw.lastfm.model.UserBean)}
+	 * {@link com.md.dm.dw.lastfm.service.UserBeanRemoteService#create(com.md.dm.dw.lastfm.entity.UserBean)}
 	 * .
 	 * 
 	 * @throws Exception
@@ -100,7 +100,7 @@ public class UserBeanServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.md.dm.dw.lastfm.service.UserBeanRemoteService#update(com.md.dm.dw.lastfm.model.UserBean)}
+	 * {@link com.md.dm.dw.lastfm.service.UserBeanRemoteService#update(com.md.dm.dw.lastfm.entity.UserBean)}
 	 * .
 	 */
 	@Test
@@ -110,7 +110,7 @@ public class UserBeanServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.md.dm.dw.lastfm.service.UserBeanRemoteService#delete(com.md.dm.dw.lastfm.model.UserBean)}
+	 * {@link com.md.dm.dw.lastfm.service.UserBeanRemoteService#delete(com.md.dm.dw.lastfm.entity.UserBean)}
 	 * .
 	 */
 	@Test

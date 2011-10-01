@@ -20,7 +20,7 @@ import org.junit.Test;
 import com.md.dm.dw.lastfm.ArtistLineParseStrategy;
 import com.md.dm.dw.lastfm.Connector;
 import com.md.dm.dw.lastfm.InstanceCreator;
-import com.md.dm.dw.lastfm.model.ArtistBean;
+import com.md.dm.dw.lastfm.entity.ArtistBean;
 import com.md.dm.dw.lastfm.service.ArtistBeanService;
 
 import de.umass.lastfm.Artist;

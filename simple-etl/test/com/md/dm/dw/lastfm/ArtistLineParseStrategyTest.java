@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.md.dm.dw.lastfm.model.ArtistBean;
+import com.md.dm.dw.lastfm.entity.ArtistBean;
 
 /**
  * @author diego

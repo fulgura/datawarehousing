@@ -22,7 +22,7 @@ import org.junit.Test;
 import com.md.dm.dw.lastfm.Connector;
 import com.md.dm.dw.lastfm.InstanceCreator;
 import com.md.dm.dw.lastfm.TagLineParseStrategy;
-import com.md.dm.dw.lastfm.model.TagBean;
+import com.md.dm.dw.lastfm.entity.TagBean;
 
 import de.umass.lastfm.Tag;
 
@@ -78,7 +78,7 @@ public class TagBeanRemoteServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.md.dm.dw.lastfm.service.TagBeanRemoteService#create(com.md.dm.dw.lastfm.model.TagBean)}
+	 * {@link com.md.dm.dw.lastfm.service.TagBeanRemoteService#create(com.md.dm.dw.lastfm.entity.TagBean)}
 	 * .
 	 */
 	@Test
@@ -100,7 +100,7 @@ public class TagBeanRemoteServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.md.dm.dw.lastfm.service.TagBeanRemoteService#update(com.md.dm.dw.lastfm.model.TagBean)}
+	 * {@link com.md.dm.dw.lastfm.service.TagBeanRemoteService#update(com.md.dm.dw.lastfm.entity.TagBean)}
 	 * .
 	 */
 	@Test
@@ -110,7 +110,7 @@ public class TagBeanRemoteServiceTest {
 
 	/**
 	 * Test method for
-	 * {@link com.md.dm.dw.lastfm.service.TagBeanRemoteService#delete(com.md.dm.dw.lastfm.model.TagBean)}
+	 * {@link com.md.dm.dw.lastfm.service.TagBeanRemoteService#delete(com.md.dm.dw.lastfm.entity.TagBean)}
 	 * .
 	 */
 	@Test

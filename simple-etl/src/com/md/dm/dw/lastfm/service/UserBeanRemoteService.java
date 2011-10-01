@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
-import com.md.dm.dw.lastfm.model.UserBean;
+import com.md.dm.dw.lastfm.entity.UserBean;
 
 /**
  * @author diego

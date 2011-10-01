@@ -11,9 +11,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.md.dm.dw.lastfm.model.ArtistBean;
-import com.md.dm.dw.lastfm.model.TagBean;
-import com.md.dm.dw.lastfm.model.UserBean;
+import com.md.dm.dw.lastfm.entity.ArtistBean;
+import com.md.dm.dw.lastfm.entity.TagBean;
+import com.md.dm.dw.lastfm.entity.UserBean;
 
 /**
  * @author diego

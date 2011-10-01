@@ -3,7 +3,7 @@
  */
 package com.md.dm.dw.lastfm.service;
 
-import com.md.dm.dw.lastfm.model.ArtistBean;
+import com.md.dm.dw.lastfm.entity.ArtistBean;
 
 /**
  * @author diego

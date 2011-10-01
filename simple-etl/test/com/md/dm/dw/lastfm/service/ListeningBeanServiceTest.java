@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import com.md.dm.dw.lastfm.InstanceCreator;
 import com.md.dm.dw.lastfm.LineParseStrategy;
-import com.md.dm.dw.lastfm.model.ListeningBean;
+import com.md.dm.dw.lastfm.entity.ListeningBean;
 
 /**
  * @author diego
