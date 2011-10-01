@@ -13,9 +13,10 @@ import org.apache.openejb.api.LocalClient;
 
 import com.md.dm.dw.lastfm.model.ArtistBean;
 import com.md.dm.dw.lastfm.model.TagBean;
-import com.md.dm.dw.lastfm.model.TaggingBean;
+import com.md.dm.dw.lastfm.model.UserBean;
 import com.md.dm.dw.lastfm.service.ArtistBeanService;
 import com.md.dm.dw.lastfm.service.TagBeanService;
+import com.md.dm.dw.lastfm.service.UserBeanService;
 
 import de.umass.lastfm.Artist;
 import de.umass.lastfm.Tag;
@@ -37,14 +38,20 @@ public class Bootstrap {
 	private ArtistBeanService artistBeanService;
 	@EJB
 	private TagBeanService tagBeanService;
+	@EJB
+	private UserBeanService userBeanService;
+
 	private InstanceCreator<ArtistBean> artistBeanCreator;
 	private InstanceCreator<TagBean> tagBeanCreator;
+	private InstanceCreator<UserBean> userBeanCreator;
 
 	public Bootstrap() throws Exception {
-		artistBeanCreator = new InstanceCreator<ArtistBean>("lastfm/artists.dat",
-				new ArtistLineParseStrategy());
+		artistBeanCreator = new InstanceCreator<ArtistBean>(
+				"lastfm/artists.dat", new ArtistLineParseStrategy());
 		tagBeanCreator = new InstanceCreator<TagBean>("lastfm/tags.dat",
 				new TagLineParseStrategy());
+		userBeanCreator = new InstanceCreator<UserBean>(
+				"lastfm/user_artists.dat", new UserLineParseStrategy());
 		connector = new Connector(user, password, key, secret);
 	}
 
@@ -70,37 +77,39 @@ public class Bootstrap {
 		InitialContext initialContext = new InitialContext(p);
 		initialContext.bind("inject", this);
 
-		//this.test();
-		//this.createAllArtist();
-		//this.createAllTags();
+		this.test();
+		// this.createAllArtist();
+		// this.createAllTags();
 		this.createAllUsers();
 	}
 
-
 	private void test() throws Exception {
+
+		TagBean tagBean = tagBeanService.create(tagBeanCreator.nextInstance());
+		ArtistBean artistBean = artistBeanService.create(artistBeanCreator
+				.nextInstance());
+		UserBean userBean = userBeanService.create(userBeanCreator
+				.nextInstance());
 		
-		TagBean tagBean = tagBeanCreator.nextInstance();
-		ArtistBean artistBean = artistBeanCreator.nextInstance();
-		
-		//new TaggingBean(artistBean, tagBean, userBean, taggingDate)
-		
+		// TaggingBean taggingBean = new TaggingBean(artistBean, tagBean,
+		// userBean, new Date());
+
 	}
 
-	
 	private void createAllUsers() {
-		
+
 	}
 
-	
 	private void createAllTags() throws Exception {
 		while (tagBeanCreator.hasMoreArtist()) {
 			TagBean tagBean = tagBeanCreator.nextInstance();
-			
+
 			try {
 				Tag tagInfo = connector.tagInfo(tagBean.getTagValue());
 				tagBean.addTagInfo(tagInfo);
 			} catch (Exception e) {
-				System.err.println("Couldn't add info for tag: " + tagBean.getTagValue());
+				System.err.println("Couldn't add info for tag: "
+						+ tagBean.getTagValue());
 			}
 			tagBean = tagBeanService.create(tagBean);
 		}

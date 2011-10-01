@@ -44,6 +44,7 @@ public class TagBean {
 		super();
 		this.tagID = tagID;
 		this.tagValue = tagValue;
+		this.creationDate = new Date();
 		this.similarTagList = new ArrayList<TagBean>();
 		this.wikiLastChanged = null;
 		this.wikiSummary = null;

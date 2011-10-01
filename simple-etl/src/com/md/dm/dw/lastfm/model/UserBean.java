@@ -40,6 +40,7 @@ public class UserBean {
 	public UserBean(Long userID) {
 		super();
 		this.userID = userID;
+		this.creationDate = new Date();
 		friendUserList = new ArrayList<UserBean>();
 	}
 
