@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.md.dm.dw.lastfm;
+package com.md.dm.dw.lastfm.service;
 
 import java.util.List;
 import java.util.Properties;
@@ -17,6 +17,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.md.dm.dw.lastfm.ArtistLineParseStrategy;
+import com.md.dm.dw.lastfm.Connector;
+import com.md.dm.dw.lastfm.InstanceCreator;
 import com.md.dm.dw.lastfm.model.ArtistBean;
 import com.md.dm.dw.lastfm.service.ArtistBeanService;
 
