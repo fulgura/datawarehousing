@@ -95,4 +95,8 @@ public class Connector {
 	public Collection<Tag> topTagsForArtist(String artistName) {
 		return Artist.getTopTags(artistName, key);
 	}
+
+	public Tag tagInfo(String tagName) {
+		return Tag.getInfo(tagName, key);
+	}
 }

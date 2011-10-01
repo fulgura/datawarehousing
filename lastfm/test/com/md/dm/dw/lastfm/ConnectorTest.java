@@ -32,6 +32,7 @@ public class ConnectorTest {
 	private String password = "42067062"; // user's password
 	private Connector connector = null;
 	private final String artistName = "Metallica";
+	private final String tagName = "metal";
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -83,4 +84,14 @@ public class ConnectorTest {
 		Collection<Tag> tags = connector.topTagsForArtist(artistName);
 		Assert.assertFalse(tags.isEmpty());
 	}
+	
+	@Test
+	public void testGetTagInfoByTagName() throws Exception {
+		Tag tag = connector.tagInfo(tagName);
+		Assert.assertNotNull(tag);
+		Assert.assertEquals("metal", tag.getName());
+		//Assert.assertEquals(metallicaAgain.getMbid(), metallica.getMbid());
+	}
+
+
 }
