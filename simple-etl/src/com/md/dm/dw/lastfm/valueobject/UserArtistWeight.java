@@ -15,9 +15,9 @@ public class UserArtistWeight {
 
 	private long userid;
 	private long artistid;
-	private long weight;
+	private int weight;
 	
-	public UserArtistWeight(long userid, long artistid, long weight) {
+	public UserArtistWeight(long userid, long artistid, int weight) {
 		super();
 		this.userid = userid;
 		this.artistid = artistid;
@@ -32,7 +32,7 @@ public class UserArtistWeight {
 		return artistid;
 	}
 
-	public long getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 

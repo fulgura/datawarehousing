@@ -5,6 +5,7 @@ package com.md.dm.dw.lastfm;
 
 import java.util.Date;
 import java.util.Properties;
+import java.util.Scanner;
 
 import javax.ejb.EJB;
 import javax.naming.Context;
@@ -20,6 +21,10 @@ import com.md.dm.dw.lastfm.service.ArtistBeanService;
 import com.md.dm.dw.lastfm.service.TagBeanService;
 import com.md.dm.dw.lastfm.service.TaggingBeanService;
 import com.md.dm.dw.lastfm.service.UserBeanService;
+import com.md.dm.dw.lastfm.valueobject.UserArtistWeight;
+import com.md.dm.dw.lastfm.valueobject.UserFriend;
+import com.md.dm.dw.lastfm.valueobject.UserTaggedArtist;
+import com.md.dm.dw.lastfm.valueobject.UserTaggedArtistTimestamp;
 
 import de.umass.lastfm.Artist;
 import de.umass.lastfm.Tag;
@@ -82,10 +87,14 @@ public class Bootstrap {
 		InitialContext initialContext = new InitialContext(p);
 		initialContext.bind("inject", this);
 
-		this.test();
+		System.out.println(userArtistWeightCreator.nextInstance());
+		System.out.println(userFriendCreator.nextInstance());
+		System.out.println(userTaggedArtistCreator.nextInstance());
+		System.out.println(userTaggedArtistTimestampCreator.nextInstance());
+		// this.test();
 		// this.createAllArtist();
 		// this.createAllTags();
-		this.createAllUsers();
+		// this.createAllUsers();
 	}
 
 	private void test() throws Exception {
@@ -102,7 +111,7 @@ public class Bootstrap {
 		System.out.println(taggingBean);
 	}
 
-	private void createAllUsers() {
+	private void createAllUsers() throws Exception {
 
 	}
 
@@ -131,4 +140,80 @@ public class Bootstrap {
 		}
 	}
 
+	private final InstanceCreator<UserArtistWeight> userArtistWeightCreator = new InstanceCreator<UserArtistWeight>(
+			"lastfm/user_artists.dat",
+			new LineParseStrategy<UserArtistWeight>() {
+
+				@Override
+				public UserArtistWeight create(String line) throws Exception {
+					try {
+						Scanner lineScanner = new Scanner(line);
+						return new UserArtistWeight(lineScanner.nextLong(),
+								lineScanner.nextLong(), lineScanner.nextInt());
+					} catch (Exception e) {
+						throw new Exception(
+								"Can not create an ArtistBean with this line: "
+										+ line + ". Why? because "
+										+ e.getMessage());
+					}
+				}
+			});
+
+	private final InstanceCreator<UserFriend> userFriendCreator = new InstanceCreator<UserFriend>(
+			"lastfm/user_friends.dat", new LineParseStrategy<UserFriend>() {
+				@Override
+				public UserFriend create(String line) throws Exception {
+					try {
+						Scanner lineScanner = new Scanner(line);
+						return new UserFriend(lineScanner.nextLong(),
+								lineScanner.nextLong());
+					} catch (Exception e) {
+						throw new Exception(
+								"Can not create an UserFriend with this line: "
+										+ line + ". Why? because "
+										+ e.getMessage());
+					}
+				}
+			});
+
+	private final InstanceCreator<UserTaggedArtist> userTaggedArtistCreator = new InstanceCreator<UserTaggedArtist>(
+			"lastfm/user_taggedartists.dat",
+			new LineParseStrategy<UserTaggedArtist>() {
+				@Override
+				public UserTaggedArtist create(String line) throws Exception {
+					try {
+						Scanner lineScanner = new Scanner(line);
+						return new UserTaggedArtist(lineScanner.nextLong(),
+								lineScanner.nextLong(), lineScanner.nextLong(),
+								lineScanner.nextInt(), lineScanner.nextInt(),
+								lineScanner.nextInt());
+					} catch (Exception e) {
+						throw new Exception(
+								"Can not create an UserTaggedArtist with this line: "
+										+ line + ". Why? because "
+										+ e.getMessage());
+					}
+				}
+			});
+
+	private final InstanceCreator<UserTaggedArtistTimestamp> userTaggedArtistTimestampCreator = new InstanceCreator<UserTaggedArtistTimestamp>(
+			"lastfm/user_taggedartists-timestamps.dat",
+			new LineParseStrategy<UserTaggedArtistTimestamp>() {
+				@Override
+				public UserTaggedArtistTimestamp create(String line)
+						throws Exception {
+					try {
+						Scanner lineScanner = new Scanner(line);
+						return new UserTaggedArtistTimestamp(
+								lineScanner.nextLong(), lineScanner.nextLong(),
+								lineScanner.nextLong(), new Date(
+										lineScanner.nextLong()));
+					} catch (Exception e) {
+						throw new Exception(
+								"Can not create an UserTaggedArtistTimestamp with this line: "
+										+ line + ". Why? because "
+										+ e.getMessage());
+					}
+				}
+			});
 }
