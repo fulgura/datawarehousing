@@ -3,6 +3,8 @@
  */
 package com.md.dm.dw.lastfm;
 
+import static org.junit.Assert.*;
+
 import java.io.FileNotFoundException;
 
 import junit.framework.Assert;
@@ -120,5 +122,9 @@ public class InstanceCreatorTest {
 			Assert.assertNotNull(userBean);
 			System.out.println(userBean);
 		}
+	}
+	@Test
+	public void testReloadInstanceCreator() throws Exception {
+		
 	}
 }

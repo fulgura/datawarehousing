@@ -48,42 +48,6 @@ public class ListeningBean {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((artistBean == null) ? 0 : artistBean.hashCode());
-		result = prime * result
-				+ ((userBean == null) ? 0 : userBean.hashCode());
-		result = prime * result + weight;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ListeningBean other = (ListeningBean) obj;
-		if (artistBean == null) {
-			if (other.artistBean != null)
-				return false;
-		} else if (!artistBean.equals(other.artistBean))
-			return false;
-		if (userBean == null) {
-			if (other.userBean != null)
-				return false;
-		} else if (!userBean.equals(other.userBean))
-			return false;
-		if (weight != other.weight)
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return "ListeningBean [userBean=" + userBean + ", artistBean="
 				+ artistBean + ", weight=" + weight + "]";

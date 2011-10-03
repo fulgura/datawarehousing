@@ -18,10 +18,12 @@ import javax.naming.InitialContext;
 import org.apache.openejb.api.LocalClient;
 
 import com.md.dm.dw.lastfm.entity.ArtistBean;
+import com.md.dm.dw.lastfm.entity.ListeningBean;
 import com.md.dm.dw.lastfm.entity.TagBean;
 import com.md.dm.dw.lastfm.entity.TaggingBean;
 import com.md.dm.dw.lastfm.entity.UserBean;
 import com.md.dm.dw.lastfm.service.ArtistBeanService;
+import com.md.dm.dw.lastfm.service.ListeningBeanService;
 import com.md.dm.dw.lastfm.service.TagBeanService;
 import com.md.dm.dw.lastfm.service.TaggingBeanService;
 import com.md.dm.dw.lastfm.service.UserBeanService;
@@ -29,8 +31,6 @@ import com.md.dm.dw.lastfm.valueobject.UserArtistWeight;
 import com.md.dm.dw.lastfm.valueobject.UserFriend;
 import com.md.dm.dw.lastfm.valueobject.UserTaggedArtist;
 import com.md.dm.dw.lastfm.valueobject.UserTaggedArtistTimestamp;
-
-import de.umass.lastfm.Tag;
 
 /**
  * @author diego
@@ -53,6 +53,8 @@ public class Bootstrap {
 	private UserBeanService userBeanService;
 	@EJB
 	private TaggingBeanService taggingBeanService;
+	@EJB
+	private ListeningBeanService listeningBeanService;
 
 	private InstanceCreator<ArtistBean> artistBeanCreator;
 	private InstanceCreator<TagBean> tagBeanCreator;
@@ -95,9 +97,10 @@ public class Bootstrap {
 		// System.out.println(userTaggedArtistCreator.nextInstance());
 		// System.out.println(userTaggedArtistTimestampCreator.nextInstance());
 		// this.test();
-		// this.populateArtist();
+		this.populateArtist();
 		this.populateTags();
-		// this.createAllUsersAndTagging();
+		this.populateTagging();
+		
 	}
 
 	private void test() throws Exception {
@@ -114,12 +117,30 @@ public class Bootstrap {
 		System.out.println(taggingBean);
 	}
 
-	private void createAllUsersAndTagging() throws Exception {
+	private void populateUsers() throws Exception {
 
 		while (userArtistWeightCreator.hasMoreInstances()) {
 			UserArtistWeight userArtistWeight = userArtistWeightCreator
 					.nextInstance();
-			System.out.println(userArtistWeight);
+			UserBean userBean = userBeanService.update(new UserBean(
+					userArtistWeight.getUserid()));
+			System.out.println(userBean);
+		}
+	}
+
+	private void populateTagging() throws Exception {
+
+		while (userArtistWeightCreator.hasMoreInstances()) {
+			UserArtistWeight userArtistWeight = userArtistWeightCreator
+					.nextInstance();
+			UserBean userBean = userBeanService.update(new UserBean(
+					userArtistWeight.getUserid()));
+			ArtistBean artistBean = artistBeanService.read(userArtistWeight
+					.getArtistid());
+			ListeningBean listeningBean = listeningBeanService
+					.create(new ListeningBean(userBean, artistBean,
+							userArtistWeight.getWeight()));
+			System.out.println(listeningBean);
 		}
 	}
 
@@ -136,8 +157,8 @@ public class Bootstrap {
 			TagBean tagBean = new TagBean(lineScanner.nextLong(),
 					lineScanner.next());
 			try {
-				//Tag tagInfo = connector.tagInfo(tagBean.getTagValue());
-				//tagBean.addTagInfo(tagInfo);
+				// Tag tagInfo = connector.tagInfo(tagBean.getTagValue());
+				// tagBean.addTagInfo(tagInfo);
 			} catch (Exception e) {
 				System.err.println("Couldn't add info for tag: "
 						+ tagBean.getTagValue());
@@ -160,7 +181,8 @@ public class Bootstrap {
 			ArtistBean artistBean = artistBeanCreator.nextInstance();
 			// Artist artistInfo = connector.artistInfo(artistBean.getName());
 			// artistBean.addArtistInfo(artistInfo);
-			artistBeanService.create(artistBean);
+			artistBean = artistBeanService.create(artistBean);
+			System.out.println(artistBean);
 		}
 	}
 

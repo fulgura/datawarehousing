@@ -46,9 +46,7 @@ public class InstanceCreator<E> {
 	 */
 	public E nextInstance() throws Exception {
 		if (scanner.hasNextLine()) {
-			
 			String nextLine = scanner.nextLine();
-			System.out.println(nextLine);
 			return lineParseStrategy.create(nextLine);
 		}
 
