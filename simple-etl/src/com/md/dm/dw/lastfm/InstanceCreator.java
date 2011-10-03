@@ -21,6 +21,7 @@ public class InstanceCreator<E> {
 		this.filename = filename;
 		this.lineParseStrategy = lineParseStrategy;
 		scanner = new Scanner(new File(filename), "UTF-8");
+		scanner.useDelimiter("\t");
 	}
 
 	public String getFilename() {
@@ -45,7 +46,10 @@ public class InstanceCreator<E> {
 	 */
 	public E nextInstance() throws Exception {
 		if (scanner.hasNextLine()) {
-			return lineParseStrategy.create(scanner.nextLine());
+			
+			String nextLine = scanner.nextLine();
+			System.out.println(nextLine);
+			return lineParseStrategy.create(nextLine);
 		}
 
 		return null;
@@ -58,7 +62,7 @@ public class InstanceCreator<E> {
 	 * @return a boolean valu which will determine if exists or not more artis
 	 *         to process
 	 */
-	public boolean hasMoreArtist() {
+	public boolean hasMoreInstances() {
 		return scanner.hasNextLine();
 	}
 

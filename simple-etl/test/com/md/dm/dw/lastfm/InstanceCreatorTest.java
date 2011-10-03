@@ -34,7 +34,7 @@ public class InstanceCreatorTest {
 	@Before
 	public void setUp() throws Exception {
 		artistFilename = "lastfm/artists.dat";
-		artistFilename = "lastfm/tags.dat";
+		tagFilename = "lastfm/tags.dat";
 		userFilename = "lastfm/user_artists.dat";
 		artistLineParseStrategy = new ArtistLineParseStrategy();
 		tagLineParseStrategy = new TagLineParseStrategy();
@@ -77,7 +77,7 @@ public class InstanceCreatorTest {
 	public final void testReadAllArtist() throws Exception {
 		InstanceCreator<ArtistBean> reader = new InstanceCreator<ArtistBean>(
 				artistFilename, artistLineParseStrategy);
-		while (reader.hasMoreArtist()) {
+		while (reader.hasMoreInstances()) {
 			ArtistBean artist = reader.nextInstance();
 			Assert.assertNotNull(artist);
 			System.out.println(artist);
@@ -88,7 +88,7 @@ public class InstanceCreatorTest {
 	public final void testHasMoreArtists() throws Exception {
 		InstanceCreator<ArtistBean> reader = new InstanceCreator<ArtistBean>(
 				artistFilename, artistLineParseStrategy);
-		Assert.assertTrue(reader.hasMoreArtist());
+		Assert.assertTrue(reader.hasMoreInstances());
 	}
 
 	@Test
@@ -103,7 +103,7 @@ public class InstanceCreatorTest {
 	public final void testReadAllTags() throws Exception {
 		InstanceCreator<TagBean> reader = new InstanceCreator<TagBean>(
 				tagFilename, tagLineParseStrategy);
-		while (reader.hasMoreArtist()) {
+		while (reader.hasMoreInstances()) {
 			TagBean tag = reader.nextInstance();
 			Assert.assertNotNull(tag);
 			System.out.println(tag);
@@ -115,7 +115,7 @@ public class InstanceCreatorTest {
 		InstanceCreator<UserBean> reader = new InstanceCreator<UserBean>(
 				userFilename, userLineParseStrategy);
 
-		while (reader.hasMoreArtist()) {
+		while (reader.hasMoreInstances()) {
 			UserBean userBean = reader.nextInstance();
 			Assert.assertNotNull(userBean);
 			System.out.println(userBean);

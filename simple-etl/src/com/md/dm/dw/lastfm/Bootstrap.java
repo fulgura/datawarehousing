@@ -3,6 +3,10 @@
  */
 package com.md.dm.dw.lastfm;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Scanner;
@@ -25,6 +29,8 @@ import com.md.dm.dw.lastfm.valueobject.UserArtistWeight;
 import com.md.dm.dw.lastfm.valueobject.UserFriend;
 import com.md.dm.dw.lastfm.valueobject.UserTaggedArtist;
 import com.md.dm.dw.lastfm.valueobject.UserTaggedArtistTimestamp;
+
+import de.umass.lastfm.Tag;
 
 /**
  * @author diego
@@ -89,9 +95,9 @@ public class Bootstrap {
 		// System.out.println(userTaggedArtistCreator.nextInstance());
 		// System.out.println(userTaggedArtistTimestampCreator.nextInstance());
 		// this.test();
-		this.populateArtist();
-		//this.createAllTags();
-		//this.createAllUsersAndTagging();
+		// this.populateArtist();
+		this.populateTags();
+		// this.createAllUsersAndTagging();
 	}
 
 	private void test() throws Exception {
@@ -110,27 +116,38 @@ public class Bootstrap {
 
 	private void createAllUsersAndTagging() throws Exception {
 
-		while (userArtistWeightCreator.hasMoreArtist()) {
+		while (userArtistWeightCreator.hasMoreInstances()) {
 			UserArtistWeight userArtistWeight = userArtistWeightCreator
 					.nextInstance();
 			System.out.println(userArtistWeight);
 		}
 	}
 
-	private void createAllTags() throws Exception {
-		while (tagBeanCreator.hasMoreArtist()) {
-			TagBean tagBean = tagBeanCreator.nextInstance();
+	private void populateTags() throws Exception {
+		FileInputStream fstream = new FileInputStream("lastfm/tags.dat");
+		// Get the object of DataInputStream
+		DataInputStream in = new DataInputStream(fstream);
+		BufferedReader br = new BufferedReader(new InputStreamReader(in));
+		String strLine;
+		// Read File Line By Line
+		while ((strLine = br.readLine()) != null) {
+			// Print the content on the console
+			Scanner lineScanner = new Scanner(strLine);
+			TagBean tagBean = new TagBean(lineScanner.nextLong(),
+					lineScanner.next());
+			try {
+				//Tag tagInfo = connector.tagInfo(tagBean.getTagValue());
+				//tagBean.addTagInfo(tagInfo);
+			} catch (Exception e) {
+				System.err.println("Couldn't add info for tag: "
+						+ tagBean.getTagValue());
+			}
+			tagBean = tagBeanService.create(tagBean);
 			System.out.println(tagBean);
-			// try {
-			// Tag tagInfo = connector.tagInfo(tagBean.getTagValue());
-			// tagBean.addTagInfo(tagInfo);
-			// } catch (Exception e) {
-			// System.err.println("Couldn't add info for tag: "
-			// + tagBean.getTagValue());
-			// }
-			// tagBean = tagBeanService.create(tagBean);
-		}
 
+		}
+		// Close the input stream
+		in.close();
 	}
 
 	/**
@@ -139,7 +156,7 @@ public class Bootstrap {
 	 * @throws Exception
 	 */
 	private void populateArtist() throws Exception {
-		while (artistBeanCreator.hasMoreArtist()) {
+		while (artistBeanCreator.hasMoreInstances()) {
 			ArtistBean artistBean = artistBeanCreator.nextInstance();
 			// Artist artistInfo = connector.artistInfo(artistBean.getName());
 			// artistBean.addArtistInfo(artistInfo);
