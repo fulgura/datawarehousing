@@ -3,6 +3,7 @@
  */
 package com.md.dm.dw.lastfm.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "F_TAGGING")
 @NamedQuery(name = "TaggingBean.all", query = "SELECT A FROM TaggingBean A")
-public class TaggingBean {
+public class TaggingBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

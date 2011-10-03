@@ -3,6 +3,7 @@
  */
 package com.md.dm.dw.lastfm.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,7 @@ import de.umass.lastfm.Artist;
 @Entity
 @Table(name = "D_ARTIST")
 @NamedQuery(name = "ArtistBean.all", query = "SELECT A FROM ArtistBean A")
-public class ArtistBean {
+public class ArtistBean implements Serializable {
 
 	@Id
 	@Column(name = "artist_id")
@@ -39,9 +40,9 @@ public class ArtistBean {
 	private String mbid;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date wikiLastChanged;
-	@Column(length=1024) 
+	@Column(length = 1024)
 	private String wikiSummary;
-	@Column(length=2048) 
+	@Column(length = 2048)
 	private String wikiText;
 
 	@OneToMany(targetEntity = ArtistBean.class, cascade = CascadeType.ALL)
@@ -182,7 +183,8 @@ public class ArtistBean {
 	 * Add {@link Artist} information to this {@link ArtistBean}. It includes
 	 * Wiki informations, mbid.
 	 * 
-	 * @param artist an instance of {@link Artist} 
+	 * @param artist
+	 *            an instance of {@link Artist}
 	 */
 	public void addArtistInfo(Artist artist) {
 		if (artist != null) {

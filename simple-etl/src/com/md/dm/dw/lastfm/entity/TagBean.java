@@ -1,5 +1,6 @@
 package com.md.dm.dw.lastfm.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,7 @@ import de.umass.lastfm.Tag;
 @Entity
 @Table(name = "D_TAG")
 @NamedQuery(name = "TagBean.all", query = "SELECT T FROM TagBean T")
-public class TagBean {
+public class TagBean implements Serializable {
 	@Id
 	@Column(name = "tag_id")
 	private Long tagID;
@@ -137,6 +138,5 @@ public class TagBean {
 			return false;
 		return true;
 	}
-	
-	
+
 }

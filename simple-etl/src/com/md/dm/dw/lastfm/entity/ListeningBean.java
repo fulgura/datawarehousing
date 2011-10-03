@@ -1,5 +1,7 @@
 package com.md.dm.dw.lastfm.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "D_LISTENING")
 @NamedQuery(name = "ListeningBean.all", query = "SELECT A FROM ListeningBean A")
-public class ListeningBean {
+public class ListeningBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

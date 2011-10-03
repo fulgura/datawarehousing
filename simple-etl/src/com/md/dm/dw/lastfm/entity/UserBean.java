@@ -3,6 +3,7 @@
  */
 package com.md.dm.dw.lastfm.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "D_USER")
 @NamedQuery(name = "UserBean.all", query = "SELECT A FROM UserBean A")
-public class UserBean {
+public class UserBean implements Serializable {
 
 	@Id
 	@Column(name = "user_id")
