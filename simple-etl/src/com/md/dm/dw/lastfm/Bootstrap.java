@@ -26,9 +26,6 @@ import com.md.dm.dw.lastfm.valueobject.UserFriend;
 import com.md.dm.dw.lastfm.valueobject.UserTaggedArtist;
 import com.md.dm.dw.lastfm.valueobject.UserTaggedArtistTimestamp;
 
-import de.umass.lastfm.Artist;
-import de.umass.lastfm.Tag;
-
 /**
  * @author diego
  * 
@@ -87,14 +84,14 @@ public class Bootstrap {
 		InitialContext initialContext = new InitialContext(p);
 		initialContext.bind("inject", this);
 
-		System.out.println(userArtistWeightCreator.nextInstance());
-		System.out.println(userFriendCreator.nextInstance());
-		System.out.println(userTaggedArtistCreator.nextInstance());
-		System.out.println(userTaggedArtistTimestampCreator.nextInstance());
+		// System.out.println(userArtistWeightCreator.nextInstance());
+		// System.out.println(userFriendCreator.nextInstance());
+		// System.out.println(userTaggedArtistCreator.nextInstance());
+		// System.out.println(userTaggedArtistTimestampCreator.nextInstance());
 		// this.test();
-		// this.createAllArtist();
-		// this.createAllTags();
-		// this.createAllUsers();
+		this.populateArtist();
+		//this.createAllTags();
+		//this.createAllUsersAndTagging();
 	}
 
 	private void test() throws Exception {
@@ -111,31 +108,41 @@ public class Bootstrap {
 		System.out.println(taggingBean);
 	}
 
-	private void createAllUsers() throws Exception {
+	private void createAllUsersAndTagging() throws Exception {
 
+		while (userArtistWeightCreator.hasMoreArtist()) {
+			UserArtistWeight userArtistWeight = userArtistWeightCreator
+					.nextInstance();
+			System.out.println(userArtistWeight);
+		}
 	}
 
 	private void createAllTags() throws Exception {
 		while (tagBeanCreator.hasMoreArtist()) {
 			TagBean tagBean = tagBeanCreator.nextInstance();
-
-			try {
-				Tag tagInfo = connector.tagInfo(tagBean.getTagValue());
-				tagBean.addTagInfo(tagInfo);
-			} catch (Exception e) {
-				System.err.println("Couldn't add info for tag: "
-						+ tagBean.getTagValue());
-			}
-			tagBean = tagBeanService.create(tagBean);
+			System.out.println(tagBean);
+			// try {
+			// Tag tagInfo = connector.tagInfo(tagBean.getTagValue());
+			// tagBean.addTagInfo(tagInfo);
+			// } catch (Exception e) {
+			// System.err.println("Couldn't add info for tag: "
+			// + tagBean.getTagValue());
+			// }
+			// tagBean = tagBeanService.create(tagBean);
 		}
 
 	}
 
-	private void createAllArtist() throws Exception {
+	/**
+	 * Populate all artis taked from lastfm data files.
+	 * 
+	 * @throws Exception
+	 */
+	private void populateArtist() throws Exception {
 		while (artistBeanCreator.hasMoreArtist()) {
 			ArtistBean artistBean = artistBeanCreator.nextInstance();
-			Artist artistInfo = connector.artistInfo(artistBean.getName());
-			artistBean.addArtistInfo(artistInfo);
+			// Artist artistInfo = connector.artistInfo(artistBean.getName());
+			// artistBean.addArtistInfo(artistInfo);
 			artistBeanService.create(artistBean);
 		}
 	}
