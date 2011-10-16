@@ -96,11 +96,11 @@ public class Bootstrap {
 		// System.out.println(userFriendCreator.nextInstance());
 		// System.out.println(userTaggedArtistCreator.nextInstance());
 		// System.out.println(userTaggedArtistTimestampCreator.nextInstance());
-		// this.test();
-		this.populateArtist();
-		this.populateTags();
-		this.populateTagging();
-		
+		this.test();
+		// this.populateArtist();
+		// this.populateTags();
+		// this.populateTagging();
+
 	}
 
 	private void test() throws Exception {
@@ -112,7 +112,8 @@ public class Bootstrap {
 				.nextInstance());
 
 		TaggingBean taggingBean = taggingBeanService.create(new TaggingBean(
-				artistBean, tagBean, userBean, new Date()));
+				artistBean.getArtistID(), tagBean.getTagID(), userBean
+						.getUserID(), new Date()));
 
 		System.out.println(taggingBean);
 	}

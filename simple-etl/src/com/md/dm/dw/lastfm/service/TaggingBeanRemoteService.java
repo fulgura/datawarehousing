@@ -61,9 +61,9 @@ public class TaggingBeanRemoteService implements TaggingBeanService {
 	 */
 	@Override
 	public void delete(TaggingBean bean) throws Exception {
-		TaggingBean atachedObject = entityManager.find(TaggingBean.class,
-				bean.getTaggingId());
-		entityManager.remove(atachedObject);
+//		TaggingBean atachedObject = entityManager.find(TaggingBean.class,
+//				bean.getTaggingId());
+//		entityManager.remove(atachedObject);
 	}
 
 	/*
