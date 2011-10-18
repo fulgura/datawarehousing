@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Schema name="IssueSchema">
+    <Cube name="Issue">
+        <Table name="fact_issue"/>
+        <Dimension name="Type">
+            <Hierarchy hasAll="true" allMemberName="All Types">
+                <Level name="Type" column="issue_type" uniqueMembers="true"/>
+            </Hierarchy>
+        </Dimension>
+        <Dimension name="Assignee">
+            <Hierarchy hasAll="true" allMemberName="All Assignees">
+                <Level name="Assignee" column="assignee" uniqueMembers="true"/>
+            </Hierarchy>
+        </Dimension>
+        <Dimension name="Priority">
+            <Hierarchy hasAll="true" allMemberName="All Priorities">
+                <Level name="Priority" column="priority" uniqueMembers="true"/>
+            </Hierarchy>
+        </Dimension>
+        <Dimension name="Status">
+            <Hierarchy hasAll="true" allMemberName="All Status">
+                <Level name="Status" column="status" uniqueMembers="true"/>
+            </Hierarchy>
+        </Dimension>
+        <Dimension name="Resolution">
+            <Hierarchy hasAll="true" allMemberName="All Resolution">
+                <Level name="Resolution" column="resolution" uniqueMembers="true"/>
+            </Hierarchy>
+        </Dimension>
+        <Measure name="Issue Count" column="id" aggregator="count" formatString="Standard"/>
+    </Cube>
+</Schema>

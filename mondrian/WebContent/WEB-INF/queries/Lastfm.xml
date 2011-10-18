@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Schema name="Lastfm">
+    <Cube name="Tagging">
+        <Table name="f_tagging"/>
+        <Dimension name="Artist" foreignKey="artistbeanid">
+            <Hierarchy hasAll="true" allMemberName="All Artists" primaryKey="artist_id">
+            	<Table name="d_artist"/>
+                <Level name="Artist" column="name" uniqueMembers="true"/>
+            </Hierarchy>
+        </Dimension>
+        <Dimension name="Tag" foreignKey="tagbeanid">
+            <Hierarchy hasAll="true" allMemberName="All Tags" primaryKey="tag_id">
+                <Table name="d_tag"/>
+                <Level name="Tag" column="tagvalue" uniqueMembers="true"/>
+            </Hierarchy>
+        </Dimension>
+        <Dimension name="User" foreignKey="userbeanid">
+            <Hierarchy hasAll="true" allMemberName="All Users" primaryKey="user_id">
+                <Table name="d_user"/>
+                <Level name="UserBean" column="user_id" type="Numeric" uniqueMembers="true"/>
+            </Hierarchy>
+        </Dimension>
+        <Measure name="Tagging Count" column="id" aggregator="count" formatString="Standard"/>
+    </Cube>
+</Schema>
