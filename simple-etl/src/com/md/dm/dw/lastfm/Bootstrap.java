@@ -18,7 +18,6 @@ import javax.naming.InitialContext;
 import org.apache.openejb.api.LocalClient;
 
 import com.md.dm.dw.lastfm.entity.ArtistBean;
-import com.md.dm.dw.lastfm.entity.ListeningBean;
 import com.md.dm.dw.lastfm.entity.TagBean;
 import com.md.dm.dw.lastfm.entity.TaggingBean;
 import com.md.dm.dw.lastfm.entity.UserBean;
@@ -117,7 +116,8 @@ public class Bootstrap {
 
 		int instances = 0;
 
-		while (userTaggedArtistTimestampCreator.hasMoreInstances() && instances < 3000) {
+		while (userTaggedArtistTimestampCreator.hasMoreInstances()
+				/*&& instances < 3000*/) {
 			instances++;
 			UserTaggedArtistTimestamp userTaggedArtistTimestamp = userTaggedArtistTimestampCreator
 					.nextInstance();
@@ -144,13 +144,30 @@ public class Bootstrap {
 	private void populateUsers() throws Exception {
 		int instances = 0;
 
-		while (userFriendCreator.hasMoreInstances() && instances < 1000) {
+		while (userCreator.hasMoreInstances() /*&& instances < 1000*/) {
 			instances++;
-			UserFriend userFriend = userFriendCreator.nextInstance();
+			UserFriend userFriend = userCreator.nextInstance();
 			UserBean userBean = userBeanService.update(new UserBean(userFriend
 					.getUserid()));
 
 			System.out.println(userBean);
+		}
+
+		instances = 0;
+
+		while (friendCreator.hasMoreInstances() /*&& instances < 1000*/) {
+			instances++;
+			UserFriend userFriend = friendCreator.nextInstance();
+			UserBean user = userBeanService.read(userFriend.getUserid());
+			UserBean friend = userBeanService.read(userFriend.getFiendid());
+
+			if (user != null && friend != null) {
+				user.getFriendUserList().add(friend);
+				userBeanService.update(user);
+				System.out.println(user);
+			} else {
+				System.err.println("Couldn't add friend: " + userFriend);
+			}
 		}
 	}
 
@@ -164,7 +181,7 @@ public class Bootstrap {
 		int instances = 0;
 
 		// Read File Line By Line
-		while ((strLine = br.readLine()) != null && (instances < 1000)) {
+		while ((strLine = br.readLine()) != null /*&& (instances < 1000)*/) {
 			instances++;
 			// Print the content on the console
 			Scanner lineScanner = new Scanner(strLine);
@@ -193,7 +210,7 @@ public class Bootstrap {
 	private void populateArtist() throws Exception {
 		int instances = 0;
 
-		while (artistBeanCreator.hasMoreInstances() && instances < 1000) {
+		while (artistBeanCreator.hasMoreInstances() /*&& instances < 1000*/) {
 			instances++;
 			ArtistBean artistBean = artistBeanCreator.nextInstance();
 			// Artist artistInfo = connector.artistInfo(artistBean.getName());
@@ -222,7 +239,24 @@ public class Bootstrap {
 				}
 			});
 
-	private final InstanceCreator<UserFriend> userFriendCreator = new InstanceCreator<UserFriend>(
+	private final InstanceCreator<UserFriend> userCreator = new InstanceCreator<UserFriend>(
+			"lastfm/user_friends.dat", new LineParseStrategy<UserFriend>() {
+				@Override
+				public UserFriend create(String line) throws Exception {
+					try {
+						Scanner lineScanner = new Scanner(line);
+						return new UserFriend(lineScanner.nextLong(),
+								lineScanner.nextLong());
+					} catch (Exception e) {
+						throw new Exception(
+								"Can not create an UserFriend with this line: "
+										+ line + ". Why? because "
+										+ e.getMessage());
+					}
+				}
+			});
+
+	private final InstanceCreator<UserFriend> friendCreator = new InstanceCreator<UserFriend>(
 			"lastfm/user_friends.dat", new LineParseStrategy<UserFriend>() {
 				@Override
 				public UserFriend create(String line) throws Exception {

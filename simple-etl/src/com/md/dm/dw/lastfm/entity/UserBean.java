@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,10 +33,11 @@ public class UserBean implements Serializable {
 	private Long userID;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
-	@OneToMany(targetEntity = UserBean.class, cascade = CascadeType.ALL)
-	private List<UserBean> friendUserList;
+	@OneToMany(targetEntity = UserBean.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<UserBean> friendUserList = new ArrayList<UserBean>();
 
 	UserBean() {
+		friendUserList = new ArrayList<UserBean>();
 	}
 
 	public UserBean(Long userID) {
