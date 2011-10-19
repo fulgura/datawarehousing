@@ -92,14 +92,9 @@ public class Bootstrap {
 		InitialContext initialContext = new InitialContext(p);
 		initialContext.bind("inject", this);
 
-		// System.out.println(userArtistWeightCreator.nextInstance());
-		// System.out.println(userFriendCreator.nextInstance());
-		// System.out.println(userTaggedArtistCreator.nextInstance());
-		// System.out.println(userTaggedArtistTimestampCreator.nextInstance());
-		 this.test();
-		 this.populateArtist();
-		 this.populateUsers();
-		// this.populateTags();
+		this.populateArtist();
+		this.populateUsers();
+		this.populateTags();
 		// this.populateTagging();
 
 	}
@@ -118,17 +113,6 @@ public class Bootstrap {
 		System.out.println(taggingBean);
 	}
 
-	private void populateUsers() throws Exception {
-
-		while (userArtistWeightCreator.hasMoreInstances()) {
-			UserArtistWeight userArtistWeight = userArtistWeightCreator
-					.nextInstance();
-			UserBean userBean = userBeanService.update(new UserBean(
-					userArtistWeight.getUserid()));
-			System.out.println(userBean);
-		}
-	}
-
 	private void populateTagging() throws Exception {
 
 		while (userArtistWeightCreator.hasMoreInstances()) {
@@ -145,14 +129,31 @@ public class Bootstrap {
 		}
 	}
 
+	private void populateUsers() throws Exception {
+		int instances = 0;
+
+		while (userFriendCreator.hasMoreInstances() && instances < 1000) {
+			instances++;
+			UserFriend userFriend = userFriendCreator.nextInstance();
+			UserBean userBean = userBeanService.update(new UserBean(userFriend
+					.getUserid()));
+
+			System.out.println(userBean);
+		}
+	}
+
 	private void populateTags() throws Exception {
 		FileInputStream fstream = new FileInputStream("lastfm/tags.dat");
 		// Get the object of DataInputStream
 		DataInputStream in = new DataInputStream(fstream);
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
 		String strLine;
+
+		int instances = 0;
+
 		// Read File Line By Line
-		while ((strLine = br.readLine()) != null) {
+		while ((strLine = br.readLine()) != null && (instances < 1000)) {
+			instances++;
 			// Print the content on the console
 			Scanner lineScanner = new Scanner(strLine);
 			TagBean tagBean = new TagBean(lineScanner.nextLong(),
@@ -178,7 +179,10 @@ public class Bootstrap {
 	 * @throws Exception
 	 */
 	private void populateArtist() throws Exception {
-		while (artistBeanCreator.hasMoreInstances()) {
+		int instances = 0;
+
+		while (artistBeanCreator.hasMoreInstances() && instances < 1000) {
+			instances++;
 			ArtistBean artistBean = artistBeanCreator.nextInstance();
 			// Artist artistInfo = connector.artistInfo(artistBean.getName());
 			// artistBean.addArtistInfo(artistInfo);
