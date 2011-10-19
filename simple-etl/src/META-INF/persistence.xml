@@ -25,7 +25,7 @@
 
     <properties>
       <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(foreignKeys=true,schemaAction='dropDB,add')"/>
-      <property name="openjpa.Log" value="DefaultLevel=TRACE,SQL=TRACE" />
+<!--       <property name="openjpa.Log" value="DefaultLevel=TRACE,SQL=TRACE" /> -->
     </properties>
   </persistence-unit>
 </persistence>

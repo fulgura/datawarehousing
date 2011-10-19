@@ -95,7 +95,7 @@ public class Bootstrap {
 		this.populateArtist();
 		this.populateUsers();
 		this.populateTags();
-		// this.populateTagging();
+		this.populateTagging();
 
 	}
 
@@ -115,17 +115,29 @@ public class Bootstrap {
 
 	private void populateTagging() throws Exception {
 
-		while (userArtistWeightCreator.hasMoreInstances()) {
-			UserArtistWeight userArtistWeight = userArtistWeightCreator
+		int instances = 0;
+
+		while (userTaggedArtistTimestampCreator.hasMoreInstances() && instances < 3000) {
+			instances++;
+			UserTaggedArtistTimestamp userTaggedArtistTimestamp = userTaggedArtistTimestampCreator
 					.nextInstance();
-			UserBean userBean = userBeanService.update(new UserBean(
-					userArtistWeight.getUserid()));
-			ArtistBean artistBean = artistBeanService.read(userArtistWeight
-					.getArtistid());
-			ListeningBean listeningBean = listeningBeanService
-					.create(new ListeningBean(userBean, artistBean,
-							userArtistWeight.getWeight()));
-			System.out.println(listeningBean);
+
+			UserBean userBean = userBeanService.read(userTaggedArtistTimestamp
+					.getUserID());
+			ArtistBean artistBean = artistBeanService
+					.read(userTaggedArtistTimestamp.getArtistID());
+			TagBean tagBean = tagBeanService.read(userTaggedArtistTimestamp
+					.getTagID());
+			if (userBean != null && artistBean != null && tagBean != null) {
+				TaggingBean taggingBean = taggingBeanService
+						.create(new TaggingBean(artistBean, tagBean, userBean,
+								userTaggedArtistTimestamp.getTimestamp()));
+				System.out.println(taggingBean);
+			} else {
+				System.err.println("Couldn't persist: "
+						+ userTaggedArtistTimestamp);
+			}
+
 		}
 	}
 
