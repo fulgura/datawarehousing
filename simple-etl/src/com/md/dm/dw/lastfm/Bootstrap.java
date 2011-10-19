@@ -96,8 +96,9 @@ public class Bootstrap {
 		// System.out.println(userFriendCreator.nextInstance());
 		// System.out.println(userTaggedArtistCreator.nextInstance());
 		// System.out.println(userTaggedArtistTimestampCreator.nextInstance());
-		this.test();
-		// this.populateArtist();
+		 this.test();
+		 this.populateArtist();
+		 this.populateUsers();
 		// this.populateTags();
 		// this.populateTagging();
 
@@ -112,8 +113,7 @@ public class Bootstrap {
 				.nextInstance());
 
 		TaggingBean taggingBean = taggingBeanService.create(new TaggingBean(
-				artistBean.getArtistID(), tagBean.getTagID(), userBean
-						.getUserID(), new Date()));
+				artistBean, tagBean, userBean, new Date()));
 
 		System.out.println(taggingBean);
 	}
