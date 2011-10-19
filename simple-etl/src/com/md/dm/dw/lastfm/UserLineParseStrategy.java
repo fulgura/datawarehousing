@@ -26,7 +26,7 @@ public class UserLineParseStrategy implements LineParseStrategy<UserBean> {
 	public UserBean create(String line) throws Exception {
 		try {
 			Scanner lineScanner = new Scanner(line);
-			return new UserBean(lineScanner.nextLong());
+			return new UserBean(lineScanner.nextLong(), "N/S");
 		} catch (Exception e) {
 			throw new Exception("Can not create an UserBean with this line: "
 					+ line + ". Why? because " + e.getMessage());

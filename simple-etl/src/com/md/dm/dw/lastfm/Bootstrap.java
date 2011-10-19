@@ -124,7 +124,7 @@ public class Bootstrap {
 			UserArtistWeight userArtistWeight = userArtistWeightCreator
 					.nextInstance();
 			UserBean userBean = userBeanService.update(new UserBean(
-					userArtistWeight.getUserid()));
+					userArtistWeight.getUserid(), "M"));
 			System.out.println(userBean);
 		}
 	}
@@ -135,7 +135,7 @@ public class Bootstrap {
 			UserArtistWeight userArtistWeight = userArtistWeightCreator
 					.nextInstance();
 			UserBean userBean = userBeanService.update(new UserBean(
-					userArtistWeight.getUserid()));
+					userArtistWeight.getUserid(), "F"));
 			ArtistBean artistBean = artistBeanService.read(userArtistWeight
 					.getArtistid());
 			ListeningBean listeningBean = listeningBeanService
