@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class DateHierarchyBeanTest {
 
-	DateHierarchyBean dateHierarchyBean;
+	private DateHierarchyBean dateHierarchyBean;
 
 	@Before
 	public void setUp() throws Exception {

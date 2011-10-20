@@ -10,6 +10,8 @@ import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -39,6 +41,7 @@ public class DateHierarchyBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	@Temporal(TemporalType.DATE)
@@ -117,7 +120,5 @@ public class DateHierarchyBean implements Serializable {
 	public int getDayOfMonth() {
 		return dayOfMonth;
 	}
-	
-	
 
 }
