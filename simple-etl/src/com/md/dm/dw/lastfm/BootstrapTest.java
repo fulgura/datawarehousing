@@ -4,7 +4,6 @@
 package com.md.dm.dw.lastfm;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -16,6 +15,7 @@ import javax.naming.InitialContext;
 import org.apache.openejb.api.LocalClient;
 
 import com.md.dm.dw.lastfm.entity.ArtistBean;
+import com.md.dm.dw.lastfm.entity.DateHierarchyBean;
 import com.md.dm.dw.lastfm.entity.TagBean;
 import com.md.dm.dw.lastfm.entity.TaggingBean;
 import com.md.dm.dw.lastfm.entity.UserBean;
@@ -88,9 +88,9 @@ public class BootstrapTest {
 			tagList.add(tagBeanService.create(tag));
 
 		}
-		
+		long currentTimeMillis = System.currentTimeMillis();
 		for (int i = 0; i < 10; i++) {
-			TaggingBean taggingBean = new TaggingBean(artistList.get(randomGenerator.nextInt(10)), tagList.get(randomGenerator.nextInt(10)), userList.get(randomGenerator.nextInt(10)), new Date());
+			TaggingBean taggingBean = new TaggingBean(artistList.get(randomGenerator.nextInt(10)), tagList.get(randomGenerator.nextInt(10)), userList.get(randomGenerator.nextInt(10)), new DateHierarchyBean(currentTimeMillis));
 			taggingBeanService.create(taggingBean);
 		}
 	}

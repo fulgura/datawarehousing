@@ -18,6 +18,7 @@ import javax.naming.InitialContext;
 import org.apache.openejb.api.LocalClient;
 
 import com.md.dm.dw.lastfm.entity.ArtistBean;
+import com.md.dm.dw.lastfm.entity.DateHierarchyBean;
 import com.md.dm.dw.lastfm.entity.TagBean;
 import com.md.dm.dw.lastfm.entity.TaggingBean;
 import com.md.dm.dw.lastfm.entity.UserBean;
@@ -107,7 +108,7 @@ public class Bootstrap {
 				.nextInstance());
 
 		TaggingBean taggingBean = taggingBeanService.create(new TaggingBean(
-				artistBean, tagBean, userBean, new Date()));
+				artistBean, tagBean, userBean, new DateHierarchyBean(System.currentTimeMillis())));
 
 		System.out.println(taggingBean);
 	}
@@ -117,7 +118,7 @@ public class Bootstrap {
 		int instances = 0;
 
 		while (userTaggedArtistTimestampCreator.hasMoreInstances()
-				&& instances < 30) {
+				/*&& instances < 30*/) {
 			instances++;
 			UserTaggedArtistTimestamp userTaggedArtistTimestamp = userTaggedArtistTimestampCreator
 					.nextInstance();
@@ -130,7 +131,8 @@ public class Bootstrap {
 			if (userBean != null && artistBean != null && tagBean != null) {
 				TaggingBean taggingBean = taggingBeanService
 						.create(new TaggingBean(artistBean, tagBean, userBean,
-								userTaggedArtistTimestamp.getTimestamp()));
+								new DateHierarchyBean(userTaggedArtistTimestamp
+										.getTimestamp().getTime())));
 				System.out.println(taggingBean);
 			} else {
 				System.err.println("Couldn't persist: "
@@ -143,7 +145,7 @@ public class Bootstrap {
 	private void populateUsers() throws Exception {
 		int instances = 0;
 
-		while (userCreator.hasMoreInstances() /*&& instances < 1000*/) {
+		while (userCreator.hasMoreInstances() /* && instances < 1000 */) {
 			instances++;
 			UserFriend userFriend = userCreator.nextInstance();
 			UserBean userBean = userBeanService.update(new UserBean(userFriend
@@ -154,7 +156,7 @@ public class Bootstrap {
 
 		instances = 0;
 
-		while (friendCreator.hasMoreInstances() /*&& instances < 1000*/) {
+		while (friendCreator.hasMoreInstances() /* && instances < 1000 */) {
 			instances++;
 			UserFriend userFriend = friendCreator.nextInstance();
 			UserBean user = userBeanService.read(userFriend.getUserid());
@@ -180,7 +182,7 @@ public class Bootstrap {
 		int instances = 0;
 
 		// Read File Line By Line
-		while ((strLine = br.readLine()) != null /*&& (instances < 1000)*/) {
+		while ((strLine = br.readLine()) != null /* && (instances < 1000) */) {
 			instances++;
 			// Print the content on the console
 			Scanner lineScanner = new Scanner(strLine);
@@ -209,7 +211,7 @@ public class Bootstrap {
 	private void populateArtist() throws Exception {
 		int instances = 0;
 
-		while (artistBeanCreator.hasMoreInstances() /*&& instances < 1000*/) {
+		while (artistBeanCreator.hasMoreInstances() /* && instances < 1000 */) {
 			instances++;
 			ArtistBean artistBean = artistBeanCreator.nextInstance();
 			// Artist artistInfo = connector.artistInfo(artistBean.getName());

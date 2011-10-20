@@ -4,8 +4,8 @@
 package com.md.dm.dw.lastfm.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * @author diego
@@ -44,8 +42,9 @@ public class TaggingBean implements Serializable {
 	@JoinColumn(name = "USER_ID")
 	private UserBean userBean;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date taggingDate;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "DATE_HIERARCHY_ID")
+	private DateHierarchyBean dateHierarchyBean;
 
 	public ArtistBean getArtistBean() {
 		return artistBean;
@@ -59,21 +58,25 @@ public class TaggingBean implements Serializable {
 		return userBean;
 	}
 
-	public Date getTaggingDate() {
-		return taggingDate;
-	}
-
 	TaggingBean() {
 		// ORM :)
 	}
 
 	public TaggingBean(ArtistBean artistBean, TagBean tagBean,
-			UserBean userBean, Date taggingDate) {
+			UserBean userBean, DateHierarchyBean taggingDate) {
 		super();
 		this.artistBean = artistBean;
 		this.tagBean = tagBean;
 		this.userBean = userBean;
-		this.taggingDate = taggingDate;
+		this.dateHierarchyBean = taggingDate;
+	}
+
+	public Long getTaggingId() {
+		return taggingId;
+	}
+
+	public DateHierarchyBean getDateHierarchyBean() {
+		return dateHierarchyBean;
 	}
 
 	@Override
@@ -81,12 +84,7 @@ public class TaggingBean implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((artistBean == null) ? 0 : artistBean.hashCode());
-		result = prime * result + ((tagBean == null) ? 0 : tagBean.hashCode());
-		result = prime * result
-				+ ((taggingDate == null) ? 0 : taggingDate.hashCode());
-		result = prime * result
-				+ ((userBean == null) ? 0 : userBean.hashCode());
+				+ ((taggingId == null) ? 0 : taggingId.hashCode());
 		return result;
 	}
 
@@ -99,31 +97,13 @@ public class TaggingBean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TaggingBean other = (TaggingBean) obj;
-		if (artistBean == null) {
-			if (other.artistBean != null)
+		if (taggingId == null) {
+			if (other.taggingId != null)
 				return false;
-		} else if (!artistBean.equals(other.artistBean))
-			return false;
-		if (tagBean == null) {
-			if (other.tagBean != null)
-				return false;
-		} else if (!tagBean.equals(other.tagBean))
-			return false;
-		if (taggingDate == null) {
-			if (other.taggingDate != null)
-				return false;
-		} else if (!taggingDate.equals(other.taggingDate))
-			return false;
-		if (userBean == null) {
-			if (other.userBean != null)
-				return false;
-		} else if (!userBean.equals(other.userBean))
+		} else if (!taggingId.equals(other.taggingId))
 			return false;
 		return true;
 	}
 
-	public Long getTaggingId() {
-		return taggingId;
-	}
-
+	
 }
