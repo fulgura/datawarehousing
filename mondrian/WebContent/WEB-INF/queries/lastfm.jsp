@@ -8,7 +8,8 @@ SELECT
     {[Measures].[Tagging Count]} ON COLUMNS,
     {([User].[All Users],
     [Artist].[All Artists], 
-    [Tag].[All Tags])} ON ROWS
+    [Tag].[All Tags],
+    [Time].[All Periods])} ON ROWS
 FROM Tagging
 </jp:mondrianQuery>
 

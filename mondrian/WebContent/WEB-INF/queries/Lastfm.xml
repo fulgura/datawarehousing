@@ -1,29 +1,52 @@
 <?xml version="1.0"?>
 <Schema name="Lastfm">
-    <Cube name="Tagging">
-        <Table name="f_tagging"/>
-        <Dimension name="Artist" foreignKey="artist_id">
-            <Hierarchy hasAll="true" allMemberName="All Artists" primaryKey="artist_id">
-            	<Table name="d_artist"/>
-                <Level name="Artist" column="name" uniqueMembers="true"/>
-                	<Property name="Picture" column="pictureurl" dependsOnLevelValue="true"/>
-                	<Property name="Url" column="url" dependsOnLevelValue="true"/>
-            </Hierarchy>
-        </Dimension>
-        <Dimension name="Tag" foreignKey="tag_id">
-            <Hierarchy hasAll="true" allMemberName="All Tags" primaryKey="tag_id">
-                <Table name="d_tag"/>
-                <Level name="Tag" column="tagvalue" uniqueMembers="true"/>
-            </Hierarchy>
-        </Dimension>
-        <Dimension name="User" foreignKey="user_id">
-            <Hierarchy hasAll="true" allMemberName="All Users" primaryKey="user_id">
-                <Table name="d_user"/>
-                <Level name="Gender" column="gender" uniqueMembers="true"/>
-                <Level name="Name" column="name" uniqueMembers="true"/>
-                	<Property name="Age" column="age" type="Numeric" dependsOnLevelValue="true"/>
-            </Hierarchy>
-        </Dimension>
-        <Measure name="Tagging Count" column="tagging_id" aggregator="count" formatString="Standard"/>
-    </Cube>
+	<Cube name="Tagging">
+		<Table name="f_tagging" />
+		<Dimension name="Artist" foreignKey="artist_id">
+			<Hierarchy hasAll="true" allMemberName="All Artists"
+				primaryKey="artist_id">
+				<Table name="d_artist" />
+				<Level name="Artist" column="name" uniqueMembers="true" />
+				<Property name="Picture" column="pictureurl"
+					dependsOnLevelValue="true" />
+				<Property name="Url" column="url" dependsOnLevelValue="true" />
+			</Hierarchy>
+		</Dimension>
+		<Dimension name="Tag" foreignKey="tag_id">
+			<Hierarchy hasAll="true" allMemberName="All Tags"
+				primaryKey="tag_id">
+				<Table name="d_tag" />
+				<Level name="Tag" column="tagvalue" uniqueMembers="true" />
+			</Hierarchy>
+		</Dimension>
+		<Dimension name="User" foreignKey="user_id">
+			<Hierarchy hasAll="true" allMemberName="All Users"
+				primaryKey="user_id">
+				<Table name="d_user" />
+				<Level name="Gender" column="gender" uniqueMembers="true" />
+				<Level name="Name" column="name" uniqueMembers="true" />
+				<Property name="Age" column="age" type="Numeric"
+					dependsOnLevelValue="true" />
+			</Hierarchy>
+		</Dimension>
+		<Dimension name="Time" foreignKey="date_hierarchy_id" type="TimeDimension">
+			<Hierarchy hasAll="true" allMemberName="All Periods"
+				primaryKey="id">
+				<Table name="d_date_hierarchy" />
+				<Level name="Year" column="year" uniqueMembers="true"
+					levelType="TimeYears" type="Numeric" />
+				<Level name="Quarter" column="quarter" uniqueMembers="false"
+					levelType="TimeQuarters" />
+				<Level name="Month" column="month" uniqueMembers="false"
+					levelType="TimeMonths"
+					type="Numeric" />
+				<Level name="Week" column="weekofmonth" uniqueMembers="false"
+					levelType="TimeWeeks" />
+				<Level name="Day" column="dayofmonth" uniqueMembers="false"
+					levelType="TimeDays" type="Numeric" />
+			</Hierarchy>
+		</Dimension>
+		<Measure name="Tagging Count" column="tagging_id" aggregator="count"
+			formatString="Standard" />
+	</Cube>
 </Schema>
