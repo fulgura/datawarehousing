@@ -32,6 +32,8 @@ public class UserBean implements Serializable {
 	@Column(name = "user_id")
 	private Long userID;
 	private String gender;
+	private String name;
+	private int age;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 	@OneToMany(targetEntity = UserBean.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -41,12 +43,22 @@ public class UserBean implements Serializable {
 		friendUserList = new ArrayList<UserBean>();
 	}
 
-	public UserBean(Long userID, String gender) {
+	public UserBean(Long userID, String gender, String name, int age) {
 		super();
 		this.userID = userID;
 		this.gender = gender;
+		this.name = name;
+		this.age = age;
 		this.creationDate = new Date();
 		friendUserList = new ArrayList<UserBean>();
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public Long getUserID() {
@@ -70,9 +82,11 @@ public class UserBean implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + age;
 		result = prime * result
 				+ ((creationDate == null) ? 0 : creationDate.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((userID == null) ? 0 : userID.hashCode());
 		return result;
 	}
@@ -86,6 +100,8 @@ public class UserBean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		UserBean other = (UserBean) obj;
+		if (age != other.age)
+			return false;
 		if (creationDate == null) {
 			if (other.creationDate != null)
 				return false;
@@ -95,6 +111,11 @@ public class UserBean implements Serializable {
 			if (other.gender != null)
 				return false;
 		} else if (!gender.equals(other.gender))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		if (userID == null) {
 			if (other.userID != null)

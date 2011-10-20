@@ -13,5 +13,48 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/activation.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/avalon-framework-cvs-20020806.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/batik.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-beanutils-1.6.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-dbcp-1.2.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-digester-1.5.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-fileupload-1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-math-1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-pool-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-vfs-1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/commons-vfs.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/derby.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/dom4j.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/eigenbase-properties.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/eigenbase-resgen.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/eigenbase-xom.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/fop.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/groovy-all-1.0-jsr-03.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/jai_codec.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/jai_core.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/jakarta-regexp-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/javacup.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/jaxen-full.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/jcommon-1.0.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/jfreechart-1.0.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/jpivot.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/jsf-api.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/junit.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/log4j-1.2.8.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/mondrian.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/olap4j.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/saaj-api.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/saaj-ri.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/saxpath.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/tbutils-wcf.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/wcf.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/xalan.jar"/>
+	<classpathentry kind="lib" path="/Users/Melisa/Documents/Datawarehouse/mondrian-lib/WEB-INF/lib/xmlunit.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

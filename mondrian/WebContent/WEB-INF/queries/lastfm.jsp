@@ -6,7 +6,9 @@
    jdbcUser="dw" jdbcPassword="dw" connectionPooling="false">
 SELECT
     {[Measures].[Tagging Count]} ON COLUMNS,
-    {([Artist].[All Artists], [User].[All Users], [Tag].[All Tags])} ON ROWS
+    {([User].[All Users],
+    [Artist].[All Artists], 
+    [Tag].[All Tags])} ON ROWS
 FROM Tagging
 </jp:mondrianQuery>
 
