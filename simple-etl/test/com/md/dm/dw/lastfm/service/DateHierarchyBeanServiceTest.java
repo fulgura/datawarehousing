@@ -51,14 +51,17 @@ public class DateHierarchyBeanServiceTest {
 	public final void testCreate() throws Exception {
 		DateHierarchyBean dateHierarchyBean = new DateHierarchyBean(
 				1238536800000l);
-		Assert.assertNull(dateHierarchyBean.getId());
 		dateHierarchyBean = dateHierarchyBeanService.create(dateHierarchyBean);
-		Assert.assertNotNull(dateHierarchyBean.getId());
+		Assert.assertEquals(new Long(1238536800000l), dateHierarchyBean.getId());
 	}
 
 	@Test
-	public final void testRead() {
-		fail("Not yet implemented"); // TODO
+	public final void testRead() throws Exception {
+		DateHierarchyBean dateHierarchyBean = dateHierarchyBeanService
+				.create(new DateHierarchyBean(1238536800000l));
+		DateHierarchyBean foundedDateHierarchyBean = dateHierarchyBeanService
+				.read(dateHierarchyBean.getId());
+		Assert.assertEquals(dateHierarchyBean, foundedDateHierarchyBean);
 	}
 
 	@Test
