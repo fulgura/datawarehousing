@@ -117,11 +117,10 @@ public class Bootstrap {
 		int instances = 0;
 
 		while (userTaggedArtistTimestampCreator.hasMoreInstances()
-				/*&& instances < 3000*/) {
+				&& instances < 30) {
 			instances++;
 			UserTaggedArtistTimestamp userTaggedArtistTimestamp = userTaggedArtistTimestampCreator
 					.nextInstance();
-
 			UserBean userBean = userBeanService.read(userTaggedArtistTimestamp
 					.getUserID());
 			ArtistBean artistBean = artistBeanService
@@ -148,7 +147,7 @@ public class Bootstrap {
 			instances++;
 			UserFriend userFriend = userCreator.nextInstance();
 			UserBean userBean = userBeanService.update(new UserBean(userFriend
-					.getUserid()));
+					.getUserid(), "M", "Name", 20));
 
 			System.out.println(userBean);
 		}
