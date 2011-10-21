@@ -2,6 +2,7 @@ package com.md.dm.dw.lastfm.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "D_LISTENING")
+@Table(name = "F_LISTENING")
 @NamedQuery(name = "ListeningBean.all", query = "SELECT A FROM ListeningBean A")
 public class ListeningBean implements Serializable {
 
@@ -25,16 +26,20 @@ public class ListeningBean implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "USER_ID")
 	private UserBean userBean;
+	
 	@OneToOne
 	@JoinColumn(name = "ARTIST_ID")
 	private ArtistBean artistBean;
-	private int weight;
 
-	public ListeningBean(UserBean userBean, ArtistBean artistBean, int weight) {
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "DATE_HIERARCHY_ID")
+	private DateHierarchyBean dateHierarchyBean;
+	
+	public ListeningBean(UserBean userBean, ArtistBean artistBean, DateHierarchyBean dateHierarchyBean) {
 		super();
 		this.userBean = userBean;
 		this.artistBean = artistBean;
-		this.weight = weight;
+		this.dateHierarchyBean = dateHierarchyBean;
 	}
 
 	public UserBean getUserBean() {
@@ -45,14 +50,15 @@ public class ListeningBean implements Serializable {
 		return artistBean;
 	}
 
-	public int getWeight() {
-		return weight;
+	public DateHierarchyBean getDateHierarchyBean() {
+		return dateHierarchyBean;
 	}
 
 	@Override
 	public String toString() {
-		return "ListeningBean [userBean=" + userBean + ", artistBean="
-				+ artistBean + ", weight=" + weight + "]";
+		return "ListeningBean [listeningId=" + listeningId + ", userBean="
+				+ userBean + ", artistBean=" + artistBean
+				+ ", dateHierarchyBean=" + dateHierarchyBean + "]";
 	}
 
 	public Long getListeningId() {

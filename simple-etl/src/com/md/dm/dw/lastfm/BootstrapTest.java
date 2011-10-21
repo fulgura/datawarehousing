@@ -16,6 +16,7 @@ import org.apache.openejb.api.LocalClient;
 
 import com.md.dm.dw.lastfm.entity.ArtistBean;
 import com.md.dm.dw.lastfm.entity.DateHierarchyBean;
+import com.md.dm.dw.lastfm.entity.ListeningBean;
 import com.md.dm.dw.lastfm.entity.TagBean;
 import com.md.dm.dw.lastfm.entity.TaggingBean;
 import com.md.dm.dw.lastfm.entity.UserBean;
@@ -89,10 +90,17 @@ public class BootstrapTest {
 
 		}
 		long currentTimeMillis = System.currentTimeMillis();
+		
 		for (int i = 0; i < 10; i++) {
 			TaggingBean taggingBean = new TaggingBean(artistList.get(randomGenerator.nextInt(10)), tagList.get(randomGenerator.nextInt(10)), userList.get(randomGenerator.nextInt(10)), new DateHierarchyBean(currentTimeMillis));
 			taggingBeanService.create(taggingBean);
 		}
+		
+		for (int i = 0; i < 10; i++) {
+			ListeningBean listeningBean = new ListeningBean(userList.get(randomGenerator.nextInt(10)), artistList.get(randomGenerator.nextInt(10)), new DateHierarchyBean(currentTimeMillis));
+			listeningBeanService.create(listeningBean);
+		}
+
 	}
 
 }
