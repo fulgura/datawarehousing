@@ -143,12 +143,12 @@ You must accept the terms of that agreement to use this software.
   </welcome-file-list>
 
   <taglib>
-    <taglib-uri>http://www.tonbeller.com/wcf</taglib-uri>
+    <taglib-uri>/WEB-INF/wcf/wcf-tags.tld</taglib-uri>
     <taglib-location>/WEB-INF/wcf/wcf-tags.tld</taglib-location>
   </taglib>
 
   <taglib>
-    <taglib-uri>http://www.tonbeller.com/jpivot</taglib-uri>
+    <taglib-uri>/WEB-INF/jpivot/jpivot-tags.tld</taglib-uri>
     <taglib-location>/WEB-INF/jpivot/jpivot-tags.tld</taglib-location>
   </taglib>
 

@@ -35,11 +35,9 @@
 			<Level name="Year" column="year" uniqueMembers="true"
 				levelType="TimeYears" type="Numeric" />
 			<Level name="Quarter" column="quarter" uniqueMembers="false"
-				levelType="TimeQuarters" />
+				ordinalColumn="quarter" nameColumn="quarter_name" levelType="TimeQuarters" />
 			<Level name="Month" column="month" uniqueMembers="false"
-				levelType="TimeMonths" type="Numeric" />
-			<Level name="Week" column="weekofmonth" uniqueMembers="false"
-				levelType="TimeWeeks" />
+				ordinalColumn="month" nameColumn="month_name" levelType="TimeMonths" type="Numeric" />
 			<Level name="Day" column="dayofmonth" uniqueMembers="false"
 				levelType="TimeDays" type="Numeric" />
 		</Hierarchy>

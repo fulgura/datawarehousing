@@ -1,6 +1,6 @@
 <%@ page session="true" contentType="text/html; charset=ISO-8859-1" %>
-<%@ taglib uri="http://www.tonbeller.com/jpivot" prefix="jp" %>
-<%@ taglib uri="http://www.tonbeller.com/wcf" prefix="wcf" %>
+<%@ taglib uri="/WEB-INF/jpivot/jpivot-tags.tld" prefix="jp" %>
+<%@ taglib uri="/WEB-INF/wcf/wcf-tags.tld" prefix="wcf" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
 <%--

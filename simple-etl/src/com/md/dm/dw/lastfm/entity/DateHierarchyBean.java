@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -53,6 +54,13 @@ public class DateHierarchyBean implements Serializable {
 	private int quarter;
 	private int weekOfMonth;
 	private int dayOfMonth;
+	@Column(name = "month_name")
+	private String monthName;
+	@Column(name = "day_name")
+	private String dayName;
+	@Column(name = "quarter_name")
+	private String quarterName;
+	
 
 	DateHierarchyBean() {
 		// ORM :(
@@ -64,6 +72,11 @@ public class DateHierarchyBean implements Serializable {
 	 * @param milliseconds
 	 */
 	public DateHierarchyBean(long millisecs) {
+		String[] monthName = {"January", "February",
+				  "March", "April", "May", "June", "July",
+				  "August", "September", "October", "November",
+				  "December"
+				  };
 		this.id = new Long(millisecs);
 		this.date = new Date(millisecs);
 		this.time = new Date(millisecs);
@@ -75,6 +88,8 @@ public class DateHierarchyBean implements Serializable {
 		this.quarter = (this.month / 3) + 1;
 		this.weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH);
 		this.dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+		this.monthName = monthName[calendar.get(Calendar.MONTH)];
+		this.quarterName = "Q" + this.quarter;
 	}
 
 	public Long getId() {
@@ -115,6 +130,18 @@ public class DateHierarchyBean implements Serializable {
 
 	public int getDayOfMonth() {
 		return dayOfMonth;
+	}
+	
+	public String getQuarterName() {
+		return quarterName;
+	}
+
+	public String getMonthName() {
+		return monthName;
+	}
+
+	public String getDayName() {
+		return dayName;
 	}
 
 	@Override
