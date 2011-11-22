@@ -6,7 +6,7 @@
    jdbcUser="dw" jdbcPassword="dw" connectionPooling="false">
 SELECT {[Time].[All Periods]}
      ON COLUMNS,
-    {([User].[All Users],
+    NON EMPTY{([User].[All Users],
     [Artist].[All Artists], 
     [Tag].[All Tags])} ON ROWS
 FROM Tagging
