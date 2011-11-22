@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.openjpa.persistence.jdbc.ForeignKey;
+
 import de.umass.lastfm.Artist;
 
 /**

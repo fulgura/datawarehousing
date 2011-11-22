@@ -16,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.openjpa.persistence.jdbc.ForeignKey;
+
 /**
  * @author diego
  * 
@@ -32,18 +34,22 @@ public class TaggingBean implements Serializable {
 
 	@OneToOne
 	@JoinColumn(name = "ARTIST_ID")
+	@ForeignKey
 	private ArtistBean artistBean;
 
 	@OneToOne
 	@JoinColumn(name = "TAG_ID")
+	@ForeignKey
 	private TagBean tagBean;
 
 	@OneToOne
 	@JoinColumn(name = "USER_ID")
+	@ForeignKey
 	private UserBean userBean;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DATE_HIERARCHY_ID")
+	@ForeignKey
 	private DateHierarchyBean dateHierarchyBean;
 
 	public ArtistBean getArtistBean() {
