@@ -75,7 +75,7 @@ public class BootstrapTest {
 		Random randomGenerator = new Random();
 		
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			
 			UserBean user = new UserBean(new Long(i), ((i % 2) == 0) ? "M"
 					: "F", "User_" + i, randomGenerator.nextInt(60) - 18);
@@ -93,13 +93,13 @@ public class BootstrapTest {
 		int daysMillis = 3*24*60*60*1000;
 		long currentTimeMillis = System.currentTimeMillis();
 		
-		for (int i = 0; i < 100; i++) {
-			TaggingBean taggingBean = new TaggingBean(artistList.get(randomGenerator.nextInt(10)), tagList.get(randomGenerator.nextInt(10)), userList.get(randomGenerator.nextInt(10)), new DateHierarchyBean(currentTimeMillis - randomGenerator.nextInt(daysMillis)));
+		for (int i = 0; i < 300; i++) {
+			TaggingBean taggingBean = new TaggingBean(artistList.get(randomGenerator.nextInt(100)), tagList.get(randomGenerator.nextInt(100)), userList.get(randomGenerator.nextInt(100)), new DateHierarchyBean(currentTimeMillis - randomGenerator.nextInt(daysMillis)));
 			taggingBeanService.create(taggingBean);
 		}
 		
-		for (int i = 0; i < 100; i++) {
-			ListeningBean listeningBean = new ListeningBean(userList.get(randomGenerator.nextInt(10)), artistList.get(randomGenerator.nextInt(10)), new DateHierarchyBean(currentTimeMillis - randomGenerator.nextInt(daysMillis)));
+		for (int i = 0; i < 300; i++) {
+			ListeningBean listeningBean = new ListeningBean(userList.get(randomGenerator.nextInt(100)), artistList.get(randomGenerator.nextInt(100)), new DateHierarchyBean(currentTimeMillis - randomGenerator.nextInt(daysMillis)));
 			listeningBeanService.create(listeningBean);
 		}
 
