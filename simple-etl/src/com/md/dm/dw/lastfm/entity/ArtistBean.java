@@ -56,20 +56,6 @@ public class ArtistBean implements Serializable {
 		// Just for ORM!!!
 	}
 
-	public ArtistBean(Long artistID, String name, String url, String pictureURL) {
-		super();
-		this.artistID = artistID;
-		this.name = name;
-		this.url = url;
-		this.pictureURL = pictureURL;
-		this.creationDate = new Date();
-		this.similarArtistList = new ArrayList<ArtistBean>();
-		this.tagList = new ArrayList<TagBean>();
-		this.mbid = null;
-		this.wikiLastChanged = null;
-		this.wikiSummary = null;
-		this.wikiText = null;
-	}
 
 	public ArtistBean(Long artistID, String name, String url,
 			String pictureURL, Artist artist) {
@@ -85,6 +71,20 @@ public class ArtistBean implements Serializable {
 		this.wikiLastChanged = artist.getWikiLastChanged();
 		this.wikiSummary = artist.getWikiSummary();
 		this.wikiText = artist.getWikiText();
+	}
+	public ArtistBean(Long artistID, String name, String url, String pictureURL) {
+		this(artistID, name, url, pictureURL, null);
+//		this.artistID = artistID;
+//		this.name = name;
+//		this.url = url;
+//		this.pictureURL = pictureURL;
+//		this.creationDate = new Date();
+//		this.similarArtistList = new ArrayList<ArtistBean>();
+//		this.tagList = new ArrayList<TagBean>();
+//		this.mbid = null;
+//		this.wikiLastChanged = null;
+//		this.wikiSummary = null;
+//		this.wikiText = null;
 	}
 
 	@Override
