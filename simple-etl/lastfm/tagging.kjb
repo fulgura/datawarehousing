@@ -59,7 +59,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#47;Users&#47;Melisa&#47;Documents&#47;Datawarehouse&#47;datawarehousing&#47;simple-etl&#47;lastfm&#47;save_artists.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}&#47;save_artists.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
