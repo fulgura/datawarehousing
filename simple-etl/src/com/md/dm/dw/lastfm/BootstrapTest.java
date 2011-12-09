@@ -62,7 +62,7 @@ public class BootstrapTest {
 				"org.apache.openejb.client.LocalInitialContextFactory");
 		p.put("lastfmDatabase", "new://Resource?type=DataSource");
 		p.put("lastfmDatabase.JdbcDriver", "org.postgresql.Driver");
-		p.put("lastfmDatabase.JdbcUrl", "jdbc:postgresql://localhost/lastfm");
+		p.put("lastfmDatabase.JdbcUrl", "jdbc:postgresql://localhost/lastfm-weka");
 		p.put("lastfmDatabase.UserName", "dw");
 		p.put("lastfmDatabase.Password", "dw");
 

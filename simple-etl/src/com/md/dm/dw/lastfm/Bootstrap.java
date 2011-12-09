@@ -85,7 +85,7 @@ public class Bootstrap {
 				"org.apache.openejb.client.LocalInitialContextFactory");
 		p.put("lastfmDatabase", "new://Resource?type=DataSource");
 		p.put("lastfmDatabase.JdbcDriver", "org.postgresql.Driver");
-		p.put("lastfmDatabase.JdbcUrl", "jdbc:postgresql://localhost/lastfm");
+		p.put("lastfmDatabase.JdbcUrl", "jdbc:postgresql://localhost/lastfm-weka");
 		p.put("lastfmDatabase.UserName", "dw");
 		p.put("lastfmDatabase.Password", "dw");
 
@@ -118,7 +118,7 @@ public class Bootstrap {
 		int instances = 0;
 
 		while (userTaggedArtistTimestampCreator.hasMoreInstances()
-				/*&& instances < 30*/) {
+				&& instances < 30) {
 			instances++;
 			UserTaggedArtistTimestamp userTaggedArtistTimestamp = userTaggedArtistTimestampCreator
 					.nextInstance();

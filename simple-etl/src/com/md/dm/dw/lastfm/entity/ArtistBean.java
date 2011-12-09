@@ -67,10 +67,12 @@ public class ArtistBean implements Serializable {
 		this.creationDate = new Date();
 		this.similarArtistList = new ArrayList<ArtistBean>();
 		this.tagList = new ArrayList<TagBean>();
-		this.mbid = artist.getMbid();
-		this.wikiLastChanged = artist.getWikiLastChanged();
-		this.wikiSummary = artist.getWikiSummary();
-		this.wikiText = artist.getWikiText();
+		if(artist!= null){
+			this.mbid = artist.getMbid();
+			this.wikiLastChanged = artist.getWikiLastChanged();
+			this.wikiSummary = artist.getWikiSummary();
+			this.wikiText = artist.getWikiText();
+		}
 	}
 	public ArtistBean(Long artistID, String name, String url, String pictureURL) {
 		this(artistID, name, url, pictureURL, null);
