@@ -50,8 +50,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>126</xloc>
-      <yloc>205</yloc>
+      <xloc>148</xloc>
+      <yloc>134</yloc>
       </entry>
     <entry>
       <name>Save ratings</name>
@@ -59,7 +59,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#47;Users&#47;Melisa&#47;Documents&#47;Datawarehouse&#47;datawarehousing&#47;simple-etl&#47;lastfm&#47;save_ratings.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}&#47;save_ratings.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -82,8 +82,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>252</xloc>
-      <yloc>206</yloc>
+      <xloc>299</xloc>
+      <yloc>132</yloc>
       </entry>
     <entry>
       <name>Update Freq diff</name>
@@ -91,7 +91,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#47;Users&#47;Melisa&#47;Documents&#47;Datawarehouse&#47;datawarehousing&#47;simple-etl&#47;lastfm&#47;update_freq_diff.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}&#47;update_freq_diff.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -114,8 +114,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
-      <yloc>204</yloc>
+      <xloc>467</xloc>
+      <yloc>136</yloc>
       </entry>
   </entries>
   <hops>
