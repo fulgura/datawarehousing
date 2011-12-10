@@ -4,6 +4,7 @@
     <description/>
     <extended_description/>
     <job_version/>
+    <job_status>0</job_status>
   <directory>&#47;</directory>
   <created_user>-</created_user>
   <created_date>2011&#47;11&#47;25 17:14:57.541</created_date>
@@ -50,8 +51,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>148</xloc>
-      <yloc>134</yloc>
+      <xloc>73</xloc>
+      <yloc>164</yloc>
       </entry>
     <entry>
       <name>Save ratings</name>
@@ -82,8 +83,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>299</xloc>
-      <yloc>132</yloc>
+      <xloc>304</xloc>
+      <yloc>166</yloc>
       </entry>
     <entry>
       <name>Update Freq diff</name>
@@ -114,20 +115,11 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>467</xloc>
-      <yloc>136</yloc>
+      <xloc>524</xloc>
+      <yloc>162</yloc>
       </entry>
   </entries>
   <hops>
-    <hop>
-      <from>START</from>
-      <to>Save ratings</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
     <hop>
       <from>Save ratings</from>
       <to>Update Freq diff</to>
@@ -136,6 +128,15 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Save ratings</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
