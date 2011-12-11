@@ -90,7 +90,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>CSV file input</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2005</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2006</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2007</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2008</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2009</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2010</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2011</to><enabled>Y</enabled> </hop>  <hop> <from>Group by Artist-Tag</from><to>Table output</to><enabled>Y</enabled> </hop>  <hop> <from>Filter 2005</from><to>Sort Artist-Tag</to><enabled>Y</enabled> </hop>  <hop> <from>Sort Artist-Tag</from><to>Group by Artist-Tag</to><enabled>Y</enabled> </hop>  <hop> <from>Table output</from><to>Calculate Diff</to><enabled>N</enabled> </hop>  </order>
+  <hop> <from>CSV file input</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2005</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2006</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2007</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2008</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2009</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2010</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Filter 2011</to><enabled>Y</enabled> </hop>  <hop> <from>Group by Artist-Tag</from><to>Table output</to><enabled>Y</enabled> </hop>  <hop> <from>Filter 2005</from><to>Sort Artist-Tag</to><enabled>Y</enabled> </hop>  <hop> <from>Sort Artist-Tag</from><to>Group by Artist-Tag</to><enabled>Y</enabled> </hop>  <hop> <from>Table output</from><to>Calculate Diff</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>CSV file input</name>
     <type>CsvInput</type>
@@ -191,6 +191,47 @@
     </step>
 
   <step>
+    <name>Calculate Diff</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>lastfm</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <sql>delete from freq_diff;
+
+insert into freq_diff 
+select 
+ud1.tag_id, 
+ud2.tag_id, 
+count(*), --freq 
+(sum(ud1.rating-ud2.rating))&#47;count(*) --diff 
+from 
+ratings ud1, ratings ud2 
+where ud1.artist_id= ud2.artist_id 
+and ud1.tag_id&gt; ud2.tag_id --OJO! PQ MAYOR? 
+group by ud1.tag_id, ud2.tag_id;</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>898</xloc>
+      <yloc>25</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Filter 2005</name>
     <type>FilterRows</type>
     <description/>
@@ -214,48 +255,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>385</xloc>
       <yloc>31</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>Day</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-      <field>
-        <name>Month</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-      <field>
-        <name>Year</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>198</xloc>
-      <yloc>215</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -471,6 +470,85 @@
     </step>
 
   <step>
+    <name>Sort Artist-Tag</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>ArtistID</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>TagID</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>506</xloc>
+      <yloc>27</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>Day</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>Month</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>Year</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>198</xloc>
+      <yloc>215</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Table output</name>
     <type>TableOutput</type>
     <description/>
@@ -515,84 +593,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>789</xloc>
       <yloc>26</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Sort Artist-Tag</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>ArtistID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-      <field>
-        <name>TagID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>506</xloc>
-      <yloc>27</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Calculate Diff</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>lastfm</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <sql>delete from freq_diff;
-
-insert into freq_diff 
-select 
-ud1.tag_id, 
-ud2.tag_id, 
-count(*), --freq 
-(sum(ud1.rating-ud2.rating))&#47;count(*) --diff 
-from 
-ratings ud1, ratings ud2 
-where ud1.artist_id= ud2.artist_id 
-and ud1.tag_id&gt; ud2.tag_id --OJO! PQ MAYOR? 
-group by ud1.tag_id, ud2.tag_id;</sql>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>898</xloc>
-      <yloc>25</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
