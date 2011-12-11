@@ -11,6 +11,11 @@
   <modified_user>-</modified_user>
   <modified_date>2011&#47;11&#47;25 17:14:57.541</modified_date>
     <parameters>
+        <parameter>
+            <name>YEAR</name>
+            <default_value>2005</default_value>
+            <description>Anio seleccionado</description>
+        </parameter>
     </parameters>
     <slaveservers>
     </slaveservers>
@@ -51,8 +56,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>73</xloc>
-      <yloc>164</yloc>
+      <xloc>68</xloc>
+      <yloc>59</yloc>
       </entry>
     <entry>
       <name>Save ratings</name>
@@ -83,8 +88,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
-      <yloc>166</yloc>
+      <xloc>299</xloc>
+      <yloc>61</yloc>
       </entry>
     <entry>
       <name>Update Freq diff</name>
@@ -115,28 +120,60 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>524</xloc>
-      <yloc>162</yloc>
+      <xloc>493</xloc>
+      <yloc>145</yloc>
+      </entry>
+    <entry>
+      <name>Save ratings 2005</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}&#47;save_ratings_2005.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>282</xloc>
+      <yloc>145</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
-      <from>Save ratings</from>
+      <from>START</from>
+      <to>Save ratings 2005</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Save ratings 2005</from>
       <to>Update Freq diff</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Save ratings</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
