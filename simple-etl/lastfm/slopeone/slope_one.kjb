@@ -11,12 +11,29 @@
   <modified_user>-</modified_user>
   <modified_date>2011&#47;11&#47;25 17:14:57.541</modified_date>
     <parameters>
-        <parameter>
-            <name>YEAR</name>
-            <default_value>2005</default_value>
-            <description>Anio seleccionado</description>
-        </parameter>
     </parameters>
+  <connection>
+    <name>lastfm</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>lastfm</database>
+    <port>5432</port>
+    <username>dw</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10bef2abcd</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
     <slaveservers>
     </slaveservers>
 <job-log-table><connection/>
@@ -56,7 +73,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>68</xloc>
+      <xloc>137</xloc>
       <yloc>59</yloc>
       </entry>
     <entry>
@@ -88,8 +105,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>299</xloc>
-      <yloc>61</yloc>
+      <xloc>333</xloc>
+      <yloc>53</yloc>
       </entry>
     <entry>
       <name>Update Freq diff</name>
@@ -120,11 +137,11 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>493</xloc>
-      <yloc>145</yloc>
+      <xloc>561</xloc>
+      <yloc>164</yloc>
       </entry>
     <entry>
-      <name>Save ratings 2005</name>
+      <name>Save ratings parametrizado</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
@@ -152,14 +169,118 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>282</xloc>
-      <yloc>145</yloc>
+      <xloc>393</xloc>
+      <yloc>165</yloc>
+      </entry>
+    <entry>
+      <name>Set Year</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename/>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+        <field>
+          <variable_name>YearValue</variable_name>
+          <variable_value>2005</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>265</xloc>
+      <yloc>164</yloc>
+      </entry>
+    <entry>
+      <name>Year Loop</name>
+      <description/>
+      <type>EVAL</type>
+      <script>var actualYear = parseInt(parent_job.getVariable(&quot;YearValue&quot;))
+actualYear = actualYear + 1;
+parent_job.setVariable(&quot;YearValue&quot;, actualYear);
+
+actualYear &lt; 2012</script>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>562</xloc>
+      <yloc>299</yloc>
+      </entry>
+    <entry>
+      <name>Truncate Rating table</name>
+      <description/>
+      <type>SQL</type>
+      <sql>TRUNCATE TABLE ratings;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>lastfm</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>142</xloc>
+      <yloc>164</yloc>
+      </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>747</xloc>
+      <yloc>300</yloc>
+      </entry>
+    <entry>
+      <name>Year proceseed</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>Year processed ${YearValue}.
+
+Working with another year of data.
+</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>Processed year: ${YearValue}</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>394</xloc>
+      <yloc>299</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
+      <from>Save ratings parametrizado</from>
+      <to>Update Freq diff</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Update Freq diff</from>
+      <to>Year Loop</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set Year</from>
+      <to>Save ratings parametrizado</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>START</from>
-      <to>Save ratings 2005</to>
+      <to>Truncate Rating table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -167,8 +288,35 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Save ratings 2005</from>
-      <to>Update Freq diff</to>
+      <from>Truncate Rating table</from>
+      <to>Set Year</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Year Loop</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Year Loop</from>
+      <to>Year proceseed</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Year proceseed</from>
+      <to>Save ratings parametrizado</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
