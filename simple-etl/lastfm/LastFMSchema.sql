@@ -328,6 +328,21 @@ CREATE INDEX i_f_tggng_userbean
   (user_id );
 
 
+DROP SEQUENCE seq_tagging;
+
+CREATE SEQUENCE seq_tagging
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 566922
+  CACHE 1;
+ALTER TABLE seq_tagging
+  OWNER TO dw;
+GRANT ALL ON TABLE seq_tagging TO dw;
+GRANT ALL ON TABLE seq_tagging TO public;
+
+
+
  --creamos la tabla de opiniones
 DROP TABLE ratings;
   
