@@ -1,4 +1,4 @@
--- Table: d_artist
+﻿-- Table: d_artist
 
 DROP TABLE d_artist;
 
@@ -372,5 +372,17 @@ select
 from 
 	freq_diff;
 
+
+DROP TABLE f_recommendation;
+  
+create table f_recommendation( 
+ 	recommendation_id bigint NOT NULL,
+	artist_id bigint not null, 
+	tag_id bigint not null, 
+	rating float not null default 0, 
+ 	date_hierarchy_id bigint,
+
+	primary key(recommendation_id) 
+);
 
 
