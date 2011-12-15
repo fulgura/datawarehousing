@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>save_ratings_param</name>
+    <name>save_tagging</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>&#47;</directory>
     <parameters>
     </parameters>
@@ -62,9 +61,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2011&#47;12&#47;11 11:33:42.752</created_date>
+  <created_date>2011&#47;12&#47;13 23:10:45.314</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2011&#47;12&#47;11 11:33:42.752</modified_date>
+  <modified_date>2011&#47;12&#47;13 23:10:45.314</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -91,9 +90,97 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>CSV file input</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Filter by Year</from><to>Sort Artist-Tag</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Get Variables</to><enabled>Y</enabled> </hop>  <hop> <from>Sort Artist-Tag</from><to>Group by Artist-Tag</to><enabled>Y</enabled> </hop>  <hop> <from>Group by Artist-Tag</from><to>Insert &#47; Update</to><enabled>Y</enabled> </hop>  <hop> <from>Get Variables</from><to>Filter by Year</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Add sequence</from><to>Save tagging</to><enabled>Y</enabled> </hop>  <hop> <from>Read tagging file</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Get YearValue variable</from><to>Filter by Year</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Get YearValue variable</to><enabled>Y</enabled> </hop>  <hop> <from>Filter by Year</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>Select date hierarchy</from><to>Sort date hierarchy fields</to><enabled>Y</enabled> </hop>  <hop> <from>Sort date hierarchy fields</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>Merge Join</from><to>Add sequence</to><enabled>Y</enabled> </hop>  </order>
   <step>
-    <name>CSV file input</name>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>valuename</valuename>
+      <use_database>Y</use_database>
+      <connection>lastfm</connection>
+      <schema/>
+      <seqname>SEQ_1</seqname>
+      <use_counter>N</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>593</xloc>
+      <yloc>254</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter by Year</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>Year</leftvalue>
+ <function>=</function>
+ <rightvalue>YearParam</rightvalue>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>319</xloc>
+      <yloc>162</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get YearValue variable</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>N</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>YearParam</name>
+        <variable>${YearValue}</variable>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>198</xloc>
+      <yloc>157</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Read tagging file</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -185,117 +272,15 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>48</xloc>
-      <yloc>92</yloc>
+      <xloc>80</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Filter by Year</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to/>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>Year</leftvalue>
- <function>=</function>
- <rightvalue>YearParam</rightvalue>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>442</xloc>
-      <yloc>93</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>YearParam</name>
-        <variable>${YearValue}</variable>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>303</xloc>
-      <yloc>93</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by Artist-Tag</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>N</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>N</give_back_row>
-      <group>
-        <field>
-          <name>ArtistID</name>
-        </field>
-        <field>
-          <name>TagID</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>Count</aggregate>
-          <subject>UserID</subject>
-          <type>COUNT_ALL</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>698</xloc>
-      <yloc>93</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Insert &#47; Update</name>
-    <type>InsertUpdate</type>
+    <name>Save tagging</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -304,80 +289,48 @@
            <schema_name/>
            </partitioning>
     <connection>lastfm</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>ratings</table>
-      <key>
-        <name>ArtistID</name>
-        <field>artist_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>TagID</name>
-        <field>tag_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>artist_id</name>
-        <rename>ArtistID</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>tag_id</name>
-        <rename>TagID</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>rating</name>
-        <rename>Count</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>697</xloc>
-      <yloc>231</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Sort Artist-Tag</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
+    <schema/>
+    <table>f_tagging</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field>tagging_id</return_field>
     <fields>
-      <field>
-        <name>ArtistID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-      <field>
-        <name>TagID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
+        <field>
+          <column_name>user_id</column_name>
+          <stream_name>UserID</stream_name>
+        </field>
+        <field>
+          <column_name>artist_id</column_name>
+          <stream_name>ArtistID</stream_name>
+        </field>
+        <field>
+          <column_name>tag_id</column_name>
+          <stream_name>TagID</stream_name>
+        </field>
+        <field>
+          <column_name>date_hierarchy_id</column_name>
+          <stream_name>id</stream_name>
+        </field>
+        <field>
+          <column_name>tagging_id</column_name>
+          <stream_name>valuename</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>566</xloc>
-      <yloc>93</yloc>
+      <xloc>722</xloc>
+      <yloc>254</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -418,15 +371,15 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>188</xloc>
-      <yloc>93</yloc>
+      <xloc>198</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
+    <name>Select date hierarchy</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -435,40 +388,95 @@
            <schema_name/>
            </partitioning>
     <connection>lastfm</connection>
-    <schema/>
-    <table>ratings</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <sql>SELECT
+  id
+, dayofmonth
+, &quot;month&quot;
+, &quot;year&quot;
+FROM d_date_hierarchy
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>151</xloc>
+      <yloc>343</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>LEFT OUTER</join_type>
+<step1>Filter by Year</step1>
+<step2>Sort date hierarchy fields</step2>
+    <keys_1>
+      <key>Day</key>
+      <key>Month</key>
+      <key>Year</key>
+    </keys_1>
+    <keys_2>
+      <key>dayofmonth</key>
+      <key>month</key>
+      <key>year</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>481</xloc>
+      <yloc>253</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort date hierarchy fields</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
     <fields>
-        <field>
-          <column_name>artist_id</column_name>
-          <stream_name>ArtistID</stream_name>
-        </field>
-        <field>
-          <column_name>tag_id</column_name>
-          <stream_name>TagID</stream_name>
-        </field>
-        <field>
-          <column_name>rating</column_name>
-          <stream_name>Count</stream_name>
-        </field>
+      <field>
+        <name>dayofmonth</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>month</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>year</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>802</xloc>
-      <yloc>139</yloc>
+      <xloc>327</xloc>
+      <yloc>340</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
