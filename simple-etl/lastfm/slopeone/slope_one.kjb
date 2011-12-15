@@ -73,8 +73,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>137</xloc>
-      <yloc>59</yloc>
+      <xloc>70</xloc>
+      <yloc>86</yloc>
       </entry>
     <entry>
       <name>Save ratings</name>
@@ -102,11 +102,11 @@
       <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
+      </parameters>      <parallel>Y</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>333</xloc>
-      <yloc>53</yloc>
+      <xloc>458</xloc>
+      <yloc>172</yloc>
       </entry>
     <entry>
       <name>Update Freq diff</name>
@@ -137,16 +137,77 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>561</xloc>
-      <yloc>164</yloc>
+      <xloc>605</xloc>
+      <yloc>173</yloc>
       </entry>
     <entry>
-      <name>Save ratings parametrizado</name>
+      <name>Set Year</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename/>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+        <field>
+          <variable_name>YearValue</variable_name>
+          <variable_value>2005</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>175</yloc>
+      </entry>
+    <entry>
+      <name>Year Loop</name>
+      <description/>
+      <type>EVAL</type>
+      <script>var actualYear = parseInt(parent_job.getVariable(&quot;YearValue&quot;))
+actualYear = actualYear + 1;
+parent_job.setVariable(&quot;YearValue&quot;, actualYear);
+
+actualYear &lt; 2012</script>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>488</xloc>
+      <yloc>295</yloc>
+      </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>768</xloc>
+      <yloc>299</yloc>
+      </entry>
+    <entry>
+      <name>Year proceseed</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>Year processed ${YearValue}.
+
+Working with another year of data.
+</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>Processed year: ${YearValue}</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>310</xloc>
+      <yloc>294</yloc>
+      </entry>
+    <entry>
+      <name>Recommendation</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Job.Filename.Directory}&#47;save_ratings_2005.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}&#47;recommendation.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -169,133 +230,77 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>393</xloc>
-      <yloc>165</yloc>
+      <xloc>737</xloc>
+      <yloc>166</yloc>
       </entry>
     <entry>
-      <name>Set Year</name>
+      <name>Tagging</name>
       <description/>
-      <type>SET_VARIABLES</type>
-      <replacevars>Y</replacevars>
-      <filename/>
-      <file_variable_type>JVM</file_variable_type>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}&#47;save_tagging.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>315</xloc>
+      <yloc>173</yloc>
+      </entry>
+    <entry>
+      <name>Truncate tables</name>
+      <description/>
+      <type>TRUNCATE_TABLES</type>
+      <connection>lastfm</connection>
+      <arg_from_previous>N</arg_from_previous>
       <fields>
         <field>
-          <variable_name>YearValue</variable_name>
-          <variable_value>2005</variable_value>
-          <variable_type>CURRENT_JOB</variable_type>
+          <name>ratings</name>
+          <schemaname/>
+        </field>
+        <field>
+          <name>f_tagging</name>
+          <schemaname/>
+        </field>
+        <field>
+          <name>f_recommendation</name>
+          <schemaname/>
+        </field>
+        <field>
+          <name>freq_diff</name>
+          <schemaname/>
+        </field>
+        <field>
+          <name>f_listening</name>
+          <schemaname/>
         </field>
       </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>265</xloc>
-      <yloc>164</yloc>
-      </entry>
-    <entry>
-      <name>Year Loop</name>
-      <description/>
-      <type>EVAL</type>
-      <script>var actualYear = parseInt(parent_job.getVariable(&quot;YearValue&quot;))
-actualYear = actualYear + 1;
-parent_job.setVariable(&quot;YearValue&quot;, actualYear);
-
-actualYear &lt; 2012</script>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>562</xloc>
-      <yloc>299</yloc>
-      </entry>
-    <entry>
-      <name>Truncate Rating table</name>
-      <description/>
-      <type>SQL</type>
-      <sql>TRUNCATE TABLE ratings;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>lastfm</connection>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>142</xloc>
-      <yloc>164</yloc>
-      </entry>
-    <entry>
-      <name>Success</name>
-      <description/>
-      <type>SUCCESS</type>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>747</xloc>
-      <yloc>300</yloc>
-      </entry>
-    <entry>
-      <name>Year proceseed</name>
-      <description/>
-      <type>WRITE_TO_LOG</type>
-      <logmessage>Year processed ${YearValue}.
-
-Working with another year of data.
-</logmessage>
-      <loglevel>Basic</loglevel>
-      <logsubject>Processed year: ${YearValue}</logsubject>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>394</xloc>
-      <yloc>299</yloc>
+      <xloc>68</xloc>
+      <yloc>175</yloc>
       </entry>
   </entries>
   <hops>
-    <hop>
-      <from>Save ratings parametrizado</from>
-      <to>Update Freq diff</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Update Freq diff</from>
-      <to>Year Loop</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Set Year</from>
-      <to>Save ratings parametrizado</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>START</from>
-      <to>Truncate Rating table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Truncate Rating table</from>
-      <to>Set Year</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>Year Loop</from>
       <to>Success</to>
@@ -315,8 +320,62 @@ Working with another year of data.
       <unconditional>N</unconditional>
     </hop>
     <hop>
+      <from>START</from>
+      <to>Truncate tables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Truncate tables</from>
+      <to>Set Year</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set Year</from>
+      <to>Tagging</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Tagging</from>
+      <to>Save ratings</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Update Freq diff</from>
+      <to>Year Loop</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>Year proceseed</from>
-      <to>Save ratings parametrizado</to>
+      <to>Tagging</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Save ratings</from>
+      <to>Update Freq diff</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
