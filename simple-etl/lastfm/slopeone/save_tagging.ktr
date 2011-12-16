@@ -90,7 +90,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Add sequence</from><to>Save tagging</to><enabled>Y</enabled> </hop>  <hop> <from>Read tagging file</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Get YearValue variable</from><to>Filter by Year</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Get YearValue variable</to><enabled>Y</enabled> </hop>  <hop> <from>Filter by Year</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>Select date hierarchy</from><to>Sort date hierarchy fields</to><enabled>Y</enabled> </hop>  <hop> <from>Sort date hierarchy fields</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>Merge Join</from><to>Add sequence</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Add sequence</from><to>Save tagging</to><enabled>Y</enabled> </hop>  <hop> <from>Read tagging file</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Get YearValue variable</from><to>2005</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Get YearValue variable</to><enabled>Y</enabled> </hop>  <hop> <from>2005</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>Select date hierarchy</from><to>Sort date hierarchy fields</to><enabled>Y</enabled> </hop>  <hop> <from>Sort date hierarchy fields</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>Merge Join</from><to>Add sequence</to><enabled>Y</enabled> </hop>  <hop> <from>Save tagging</from><to>Recommendation</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Add sequence</name>
     <type>Sequence</type>
@@ -105,7 +105,7 @@
       <use_database>Y</use_database>
       <connection>lastfm</connection>
       <schema/>
-      <seqname>SEQ_1</seqname>
+      <seqname>seq_tagging</seqname>
       <use_counter>N</use_counter>
       <counter_name/>
       <start_at>1</start_at>
@@ -113,14 +113,14 @@
       <max_value>999999999</max_value>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>593</xloc>
-      <yloc>254</yloc>
+      <xloc>479</xloc>
+      <yloc>150</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Filter by Year</name>
+    <name>2005</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -175,6 +175,37 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>198</xloc>
       <yloc>157</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>LEFT OUTER</join_type>
+<step1>2005</step1>
+<step2>Sort date hierarchy fields</step2>
+    <keys_1>
+      <key>Day</key>
+      <key>Month</key>
+      <key>Year</key>
+    </keys_1>
+    <keys_2>
+      <key>dayofmonth</key>
+      <key>month</key>
+      <key>year</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>481</xloc>
+      <yloc>253</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -329,8 +360,81 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>722</xloc>
-      <yloc>254</yloc>
+      <xloc>475</xloc>
+      <yloc>60</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select date hierarchy</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>lastfm</connection>
+    <sql>SELECT
+  id
+, dayofmonth
+, &quot;month&quot;
+, &quot;year&quot;
+FROM d_date_hierarchy
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>151</xloc>
+      <yloc>343</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort date hierarchy fields</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>%%java.io.tmpdir%%</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>dayofmonth</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>month</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+      <field>
+        <name>year</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>327</xloc>
+      <yloc>340</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -378,8 +482,8 @@
     </step>
 
   <step>
-    <name>Select date hierarchy</name>
-    <type>TableInput</type>
+    <name>Recommendation</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <copies>1</copies>
@@ -388,95 +492,40 @@
            <schema_name/>
            </partitioning>
     <connection>lastfm</connection>
-    <sql>SELECT
-  id
-, dayofmonth
-, &quot;month&quot;
-, &quot;year&quot;
-FROM d_date_hierarchy
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>N</replace_variables>
+    <sql>insert into f_recommendation(recommendation_id, user_id, artist_id, tag_id, rating, date_hierarchy_id, success)
+select nextval(&apos;seq_recommendation&apos;), ?, ?, tag_id1, predicted, ?, cast(tag_id1 = ? as int) 
+from
+(select 
+       tag_id1, sum(freq* (rating + diff)) &#47; sum(freq) as predicted 
+from 
+       ratings as r, 
+       vw_freq_diff as fd
+where fd.tag_id2= r.tag_id 
+and fd.tag_id1&lt; fd.tag_id2 
+and artist_id= ?
+and tag_id1 not in (select tag_id from ratings where artist_id= ?) 
+group by tag_id1 
+order by predicted desc)a
+limit 1;</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>UserID</name></argument>
+       <argument><name>ArtistID</name></argument>
+       <argument><name>id</name></argument>
+       <argument><name>TagID</name></argument>
+       <argument><name>ArtistID</name></argument>
+       <argument><name>ArtistID</name></argument>
+    </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>151</xloc>
-      <yloc>343</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Merge Join</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<join_type>LEFT OUTER</join_type>
-<step1>Filter by Year</step1>
-<step2>Sort date hierarchy fields</step2>
-    <keys_1>
-      <key>Day</key>
-      <key>Month</key>
-      <key>Year</key>
-    </keys_1>
-    <keys_2>
-      <key>dayofmonth</key>
-      <key>month</key>
-      <key>year</key>
-    </keys_2>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>481</xloc>
-      <yloc>253</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Sort date hierarchy fields</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>%%java.io.tmpdir%%</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>dayofmonth</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-      <field>
-        <name>month</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-      <field>
-        <name>year</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>327</xloc>
-      <yloc>340</yloc>
+      <xloc>635</xloc>
+      <yloc>60</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
