@@ -23,6 +23,7 @@ analyze very large datasets stored in SQL databases without writing SQL.">
 <p>Lastfm:</p>
 <ul>
 <li><a href="testpage.jsp?query=lastfm">Tagging</a></li>
+<li><a href="testpage.jsp?query=recommendation">Recommendation</a></li>
 <li><a href="testpage.jsp?query=listening">Listening</a></li>
 </ul>
 

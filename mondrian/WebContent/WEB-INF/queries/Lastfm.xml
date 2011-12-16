@@ -62,4 +62,18 @@
 			formatString="Standard" />
 	</Cube>
 	
+	<Cube name="Recommendation">
+		<Table name="f_recommendation" />
+		<DimensionUsage name="Artist" source="Artist" foreignKey="artist_id"/>
+		<DimensionUsage name="Tag" source="Tag" foreignKey="tag_id"/>
+		<DimensionUsage name="User" source="User" foreignKey="user_id"/>
+		<DimensionUsage name="Time" source="Time" foreignKey="date_hierarchy_id"/>
+		<Measure name="Tagging Count" column="recommendation_id" aggregator="count"
+			formatString="Standard" />
+		<Measure name="Rating Sum" column="rating" aggregator="sum"
+			formatString="Standard" />
+		<Measure name="Success Sum" column="success" aggregator="sum"
+			formatString="Standard" />
+	</Cube>
+	
 </Schema>
