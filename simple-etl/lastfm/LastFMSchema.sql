@@ -400,4 +400,13 @@ create table f_recommendation(
 	primary key(recommendation_id) 
 );
 
+-- DROP SEQUENCE seq_recommendation;
+
+CREATE SEQUENCE seq_recommendation
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_recommendation OWNER TO dw;
 
