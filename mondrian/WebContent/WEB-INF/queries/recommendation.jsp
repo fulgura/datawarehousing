@@ -7,7 +7,6 @@
 
 WITH MEMBER [Measures].[Efficiency] AS
    Cast(([Measures].[Success Sum] * 1000 / [Measures].[Tagging Count]) as Numeric)
-
 SELECT 
 {[Measures].[Success Sum], 
 [Measures].[Tagging Count],

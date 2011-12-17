@@ -1,6 +1,6 @@
-﻿-- Table: d_artist
+-- Table: d_artist
 
-DROP TABLE d_artist;
+----DROP TABLE d_artist;
 
 CREATE TABLE d_artist
 (
@@ -13,6 +13,7 @@ CREATE TABLE d_artist
   wikilastchanged abstime,
   wikisummary character varying(1024),
   wikitext character varying(2048),
+  initial character,
   CONSTRAINT d_artist_pkey PRIMARY KEY (artist_id )
 )
 WITH (
@@ -24,7 +25,7 @@ ALTER TABLE d_artist
 
 -- Table: d_tag
 
-DROP TABLE d_tag;
+--DROP TABLE d_tag;
 
 CREATE TABLE d_tag
 (
@@ -45,7 +46,7 @@ ALTER TABLE d_tag
   
   -- Table: d_user
 
-DROP TABLE d_user;
+--DROP TABLE d_user;
 
 CREATE TABLE d_user
 (
@@ -65,7 +66,7 @@ ALTER TABLE d_user
   
   -- Table: d_date_hierarchy
 
-DROP TABLE d_date_hierarchy;
+--DROP TABLE d_date_hierarchy;
 
 CREATE TABLE d_date_hierarchy
 (
@@ -92,7 +93,7 @@ ALTER TABLE d_date_hierarchy
 
 -- Table: d_artist_d_artist
 
-DROP TABLE d_artist_d_artist;
+--DROP TABLE d_artist_d_artist;
 
 CREATE TABLE d_artist_d_artist
 (
@@ -107,7 +108,7 @@ ALTER TABLE d_artist_d_artist
 
 -- Index: i_d_rttst_artistbean_artist_id
 
---DROP INDEX i_d_rttst_artistbean_artist_id;
+----DROP INDEX i_d_rttst_artistbean_artist_id;
 
 CREATE INDEX i_d_rttst_artistbean_artist_id
   ON d_artist_d_artist
@@ -116,7 +117,7 @@ CREATE INDEX i_d_rttst_artistbean_artist_id
 
 -- Index: i_d_rttst_element
 
---DROP INDEX i_d_rttst_element;
+----DROP INDEX i_d_rttst_element;
 
 CREATE INDEX i_d_rttst_element
   ON d_artist_d_artist
@@ -126,7 +127,7 @@ CREATE INDEX i_d_rttst_element
   
  -- Table: d_artist_d_tag
 
-DROP TABLE d_artist_d_tag;
+--DROP TABLE d_artist_d_tag;
 
 CREATE TABLE d_artist_d_tag
 (
@@ -141,7 +142,7 @@ ALTER TABLE d_artist_d_tag
 
 -- Index: i_d_rt_tg_artistbean_artist_id
 
--- DROP INDEX i_d_rt_tg_artistbean_artist_id;
+-- --DROP INDEX i_d_rt_tg_artistbean_artist_id;
 
 CREATE INDEX i_d_rt_tg_artistbean_artist_id
   ON d_artist_d_tag
@@ -150,7 +151,7 @@ CREATE INDEX i_d_rt_tg_artistbean_artist_id
 
 -- Index: i_d_rt_tg_element
 
--- DROP INDEX i_d_rt_tg_element;
+-- --DROP INDEX i_d_rt_tg_element;
 
 CREATE INDEX i_d_rt_tg_element
   ON d_artist_d_tag
@@ -160,7 +161,7 @@ CREATE INDEX i_d_rt_tg_element
   
 -- Table: d_tag_d_tag
 
-DROP TABLE d_tag_d_tag;
+--DROP TABLE d_tag_d_tag;
 
 CREATE TABLE d_tag_d_tag
 (
@@ -175,7 +176,7 @@ ALTER TABLE d_tag_d_tag
 
 -- Index: i_d_tg_tg_element
 
--- DROP INDEX i_d_tg_tg_element;
+-- --DROP INDEX i_d_tg_tg_element;
 
 CREATE INDEX i_d_tg_tg_element
   ON d_tag_d_tag
@@ -184,7 +185,7 @@ CREATE INDEX i_d_tg_tg_element
 
 -- Index: i_d_tg_tg_tagbean_tag_id
 
--- DROP INDEX i_d_tg_tg_tagbean_tag_id;
+-- --DROP INDEX i_d_tg_tg_tagbean_tag_id;
 
 CREATE INDEX i_d_tg_tg_tagbean_tag_id
   ON d_tag_d_tag
@@ -195,7 +196,7 @@ CREATE INDEX i_d_tg_tg_tagbean_tag_id
 
 -- Table: d_user_d_user
 
-DROP TABLE d_user_d_user;
+--DROP TABLE d_user_d_user;
 
 CREATE TABLE d_user_d_user
 (
@@ -210,7 +211,7 @@ ALTER TABLE d_user_d_user
 
 -- Index: i_d_sr_sr_element
 
--- DROP INDEX i_d_sr_sr_element;
+-- --DROP INDEX i_d_sr_sr_element;
 
 CREATE INDEX i_d_sr_sr_element
   ON d_user_d_user
@@ -219,7 +220,7 @@ CREATE INDEX i_d_sr_sr_element
 
 -- Index: i_d_sr_sr_userbean_user_id
 
--- DROP INDEX i_d_sr_sr_userbean_user_id;
+-- --DROP INDEX i_d_sr_sr_userbean_user_id;
 
 CREATE INDEX i_d_sr_sr_userbean_user_id
   ON d_user_d_user
@@ -228,7 +229,7 @@ CREATE INDEX i_d_sr_sr_userbean_user_id
 
 -- Table: f_listening
 
-DROP TABLE f_listening;
+--DROP TABLE f_listening;
 
 CREATE TABLE f_listening
 (
@@ -246,7 +247,7 @@ ALTER TABLE f_listening
 
 -- Index: i_f_lsnng_artistbean
 
--- DROP INDEX i_f_lsnng_artistbean;
+-- --DROP INDEX i_f_lsnng_artistbean;
 
 CREATE INDEX i_f_lsnng_artistbean
   ON f_listening
@@ -255,7 +256,7 @@ CREATE INDEX i_f_lsnng_artistbean
 
 -- Index: i_f_lsnng_datehierarchybean
 
--- DROP INDEX i_f_lsnng_datehierarchybean;
+-- --DROP INDEX i_f_lsnng_datehierarchybean;
 
 CREATE INDEX i_f_lsnng_datehierarchybean
   ON f_listening
@@ -264,7 +265,7 @@ CREATE INDEX i_f_lsnng_datehierarchybean
 
 -- Index: i_f_lsnng_userbean
 
--- DROP INDEX i_f_lsnng_userbean;
+-- --DROP INDEX i_f_lsnng_userbean;
 
 CREATE INDEX i_f_lsnng_userbean
   ON f_listening
@@ -274,7 +275,7 @@ CREATE INDEX i_f_lsnng_userbean
 
   -- Table: f_tagging
 
-DROP TABLE f_tagging;
+--DROP TABLE f_tagging;
 
 CREATE TABLE f_tagging
 (
@@ -293,7 +294,7 @@ ALTER TABLE f_tagging
 
 -- Index: i_f_tggng_artistbean
 
--- DROP INDEX i_f_tggng_artistbean;
+-- --DROP INDEX i_f_tggng_artistbean;
 
 CREATE INDEX i_f_tggng_artistbean
   ON f_tagging
@@ -302,7 +303,7 @@ CREATE INDEX i_f_tggng_artistbean
 
 -- Index: i_f_tggng_datehierarchybean
 
--- DROP INDEX i_f_tggng_datehierarchybean;
+-- --DROP INDEX i_f_tggng_datehierarchybean;
 
 CREATE INDEX i_f_tggng_datehierarchybean
   ON f_tagging
@@ -311,7 +312,7 @@ CREATE INDEX i_f_tggng_datehierarchybean
 
 -- Index: i_f_tggng_tagbean
 
--- DROP INDEX i_f_tggng_tagbean;
+-- --DROP INDEX i_f_tggng_tagbean;
 
 CREATE INDEX i_f_tggng_tagbean
   ON f_tagging
@@ -320,7 +321,7 @@ CREATE INDEX i_f_tggng_tagbean
 
 -- Index: i_f_tggng_userbean
 
--- DROP INDEX i_f_tggng_userbean;
+-- --DROP INDEX i_f_tggng_userbean;
 
 CREATE INDEX i_f_tggng_userbean
   ON f_tagging
@@ -328,7 +329,7 @@ CREATE INDEX i_f_tggng_userbean
   (user_id );
 
 
-DROP SEQUENCE seq_tagging;
+--DROP SEQUENCE seq_tagging;
 
 CREATE SEQUENCE seq_tagging
   INCREMENT 1
@@ -344,7 +345,7 @@ GRANT ALL ON TABLE seq_tagging TO public;
 
 
  --creamos la tabla de opiniones
-DROP TABLE ratings;
+--DROP TABLE ratings;
   
 create table ratings( 
 	artist_id bigint not null, 
@@ -354,9 +355,9 @@ create table ratings(
 	primary key(artist_id, tag_id) 
 );
 
-DROP VIEW vw_freq_diff;
+--DROP VIEW vw_freq_diff;
 
-DROP TABLE freq_diff;
+--DROP TABLE freq_diff;
 create table freq_diff ( 
 tag_id1 bigint, 
 tag_id2 bigint, 
@@ -388,7 +389,7 @@ from
 	freq_diff;
 
 
-DROP TABLE f_recommendation;
+--DROP TABLE f_recommendation;
   
 create table f_recommendation( 
  	recommendation_id bigint NOT NULL,
@@ -402,7 +403,7 @@ create table f_recommendation(
 	primary key(recommendation_id) 
 );
 
-DROP SEQUENCE seq_recommendation;
+--DROP SEQUENCE seq_recommendation;
 
 CREATE SEQUENCE seq_recommendation
   INCREMENT 1
