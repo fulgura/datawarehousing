@@ -4,12 +4,18 @@
 
 <jp:mondrianQuery id="query01" jdbcDriver="org.postgresql.Driver" jdbcUrl="jdbc:postgresql://localhost/lastfm" catalogUri="/WEB-INF/queries/Lastfm.xml"
    jdbcUser="dw" jdbcPassword="dw" connectionPooling="false">
-SELECT {[Measures].[Success Sum], 
-[Measures].[Tagging Count]} 
+
+WITH MEMBER [Measures].[Efficiency] AS
+   Cast(([Measures].[Success Sum] * 1000 / [Measures].[Tagging Count]) as Numeric)
+
+SELECT 
+{[Measures].[Success Sum], 
+[Measures].[Tagging Count],
+[Measures].[Efficiency]}
      ON COLUMNS,
-    NON EMPTY{([Time].[All Periods],
-    [Artist].[All Artists], 
-    [Tag].[All Tags])} ON ROWS
+    NON EMPTY{([Time],
+    [Artist], 
+    [Tag])} ON ROWS
 FROM Recommendation 
 </jp:mondrianQuery>
 
