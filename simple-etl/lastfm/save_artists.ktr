@@ -91,7 +91,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Text file input</from><to>Formula</to><enabled>Y</enabled> </hop>  <hop> <from>Formula</from><to>Save Artists</to><enabled>Y</enabled> </hop>  </order>
+  <hop> <from>Text file input</from><to>Save Artists</to><enabled>Y</enabled> </hop>  </order>
   <step>
     <name>Save Artists</name>
     <type>TableOutput</type>
@@ -135,10 +135,6 @@
         <field>
           <column_name>pictureurl</column_name>
           <stream_name>Field4</stream_name>
-        </field>
-        <field>
-          <column_name>initial</column_name>
-          <stream_name>initial</stream_name>
         </field>
     </fields>
      <cluster_schema/>
@@ -186,7 +182,7 @@
     <encoding>UTF-8</encoding>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>&#47;Users&#47;Melisa&#47;Documents&#47;Datawarehouse&#47;datawarehousing&#47;simple-etl&#47;lastfm&#47;artists.dat</name>
+      <name>&#47;Users&#47;diego&#47;git&#47;fulgura&#47;datawarehousing&#47;simple-etl&#47;lastfm&#47;artists.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -285,33 +281,8 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>77</xloc>
+      <xloc>145</xloc>
       <yloc>103</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Formula</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>initial</field_name>
-<formula_string>LEFT([Field2];1)</formula_string>
-<value_type>String</value_type>
-<value_length>1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>185</xloc>
-      <yloc>270</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -5,7 +5,6 @@
 		<Hierarchy hasAll="true" allMemberName="All Artists"
 			primaryKey="artist_id">
 			<Table name="d_artist" />
-			<Level name="Initial" column="initial" uniqueMembers="true" />
 			<Level name="Artist" column="name" uniqueMembers="true" />
 			<Property name="Picture" column="pictureurl"
 				dependsOnLevelValue="true" />
