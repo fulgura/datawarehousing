@@ -4,11 +4,11 @@
 
 <jp:mondrianQuery id="query01" jdbcDriver="org.postgresql.Driver" jdbcUrl="jdbc:postgresql://localhost/lastfm" catalogUri="/WEB-INF/queries/Lastfm.xml"
    jdbcUser="dw" jdbcPassword="dw" connectionPooling="false">
-SELECT {[Time].[All Periods]}
+SELECT {Time.children}
      ON COLUMNS,
-    NON EMPTY{([User].[All Users],
-    [Artist].[All Artists], 
-    [Tag].[All Tags])} ON ROWS
+    NON EMPTY{(User,
+    Artist, 
+    Tag)} ON ROWS
 FROM Tagging
 WHERE {[Measures].[Tagging Count]}
 </jp:mondrianQuery>
