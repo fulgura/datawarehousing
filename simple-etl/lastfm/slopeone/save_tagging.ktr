@@ -92,34 +92,6 @@
   <order>
   <hop> <from>Add sequence</from><to>Save tagging</to><enabled>Y</enabled> </hop>  <hop> <from>Read tagging file</from><to>Sort rows</to><enabled>Y</enabled> </hop>  <hop> <from>Get YearValue variable</from><to>2005</to><enabled>Y</enabled> </hop>  <hop> <from>Sort rows</from><to>Get YearValue variable</to><enabled>Y</enabled> </hop>  <hop> <from>2005</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>Select date hierarchy</from><to>Sort date hierarchy fields</to><enabled>Y</enabled> </hop>  <hop> <from>Sort date hierarchy fields</from><to>Merge Join</to><enabled>Y</enabled> </hop>  <hop> <from>Merge Join</from><to>Add sequence</to><enabled>Y</enabled> </hop>  <hop> <from>Save tagging</from><to>Recommendation</to><enabled>Y</enabled> </hop>  </order>
   <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <valuename>valuename</valuename>
-      <use_database>Y</use_database>
-      <connection>lastfm</connection>
-      <schema/>
-      <seqname>seq_tagging</seqname>
-      <use_counter>N</use_counter>
-      <counter_name/>
-      <start_at>1</start_at>
-      <increment_by>1</increment_by>
-      <max_value>999999999</max_value>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>479</xloc>
-      <yloc>150</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>2005</name>
     <type>FilterRows</type>
     <description/>
@@ -143,6 +115,34 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>319</xloc>
       <yloc>162</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>valuename</valuename>
+      <use_database>Y</use_database>
+      <connection>lastfm</connection>
+      <schema/>
+      <seqname>seq_tagging</seqname>
+      <use_counter>N</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>479</xloc>
+      <yloc>150</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -220,7 +220,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#47;Users&#47;diego&#47;git&#47;fulgura&#47;datawarehousing&#47;simple-etl&#47;lastfm&#47;user_taggedartists.dat</filename>
+    <filename>&#47;Users&#47;Melisa&#47;Documents&#47;Datawarehouse&#47;datawarehousing&#47;simple-etl&#47;lastfm&#47;user_taggedartists.dat</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -305,6 +305,55 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>80</xloc>
       <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Recommendation</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>lastfm</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>N</replace_variables>
+    <sql>insert into f_recommendation(recommendation_id, user_id, artist_id, tag_id, rating, date_hierarchy_id, success)
+select nextval(&apos;seq_recommendation&apos;), ?, ?, tag_id1, predicted, ?, cast(tag_id1 = ? as int) 
+from
+(select 
+       tag_id1, sum(freq* (rating + diff)) &#47; sum(freq) as predicted 
+from 
+       ratings as r, 
+       vw_freq_diff as fd
+where fd.tag_id2= r.tag_id 
+and fd.tag_id1&lt; fd.tag_id2 
+and artist_id= ?
+and tag_id1 not in (select tag_id from ratings where artist_id= ?) 
+group by tag_id1 
+order by predicted desc)a
+limit 1;</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>UserID</name></argument>
+       <argument><name>ArtistID</name></argument>
+       <argument><name>id</name></argument>
+       <argument><name>TagID</name></argument>
+       <argument><name>ArtistID</name></argument>
+       <argument><name>ArtistID</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>635</xloc>
+      <yloc>60</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -477,55 +526,6 @@ FROM d_date_hierarchy
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>198</xloc>
       <yloc>48</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Recommendation</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>lastfm</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>Y</single_statement>
-    <replace_variables>N</replace_variables>
-    <sql>insert into f_recommendation(recommendation_id, user_id, artist_id, tag_id, rating, date_hierarchy_id, success)
-select nextval(&apos;seq_recommendation&apos;), ?, ?, tag_id1, predicted, ?, cast(tag_id1 = ? as int) 
-from
-(select 
-       tag_id1, sum(freq* (rating + diff)) &#47; sum(freq) as predicted 
-from 
-       ratings as r, 
-       vw_freq_diff as fd
-where fd.tag_id2= r.tag_id 
-and fd.tag_id1&lt; fd.tag_id2 
-and artist_id= ?
-and tag_id1 not in (select tag_id from ratings where artist_id= ?) 
-group by tag_id1 
-order by predicted desc)a
-limit 1;</sql>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-       <argument><name>UserID</name></argument>
-       <argument><name>ArtistID</name></argument>
-       <argument><name>id</name></argument>
-       <argument><name>TagID</name></argument>
-       <argument><name>ArtistID</name></argument>
-       <argument><name>ArtistID</name></argument>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>635</xloc>
-      <yloc>60</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

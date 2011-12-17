@@ -101,7 +101,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#47;Users&#47;diego&#47;git&#47;fulgura&#47;datawarehousing&#47;simple-etl&#47;lastfm&#47;tags.dat</filename>
+    <filename>&#47;Users&#47;Melisa&#47;Documents&#47;Datawarehouse&#47;datawarehousing&#47;simple-etl&#47;lastfm&#47;tags.dat</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
