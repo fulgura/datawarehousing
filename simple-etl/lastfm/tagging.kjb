@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>tagging</name>
+  <name>dimensions</name>
     <description/>
     <extended_description/>
     <job_version/>
+    <job_status>0</job_status>
   <directory>&#47;</directory>
   <created_user>-</created_user>
   <created_date>2011&#47;11&#47;24 14:37:42.061</created_date>
@@ -210,8 +211,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>617</xloc>
-      <yloc>130</yloc>
+      <xloc>602</xloc>
+      <yloc>32</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -263,15 +264,6 @@
     </hop>
     <hop>
       <from>Dates Hierarchy</from>
-      <to>Tagging</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Tagging</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

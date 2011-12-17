@@ -392,15 +392,17 @@ DROP TABLE f_recommendation;
   
 create table f_recommendation( 
  	recommendation_id bigint NOT NULL,
+ 	user_id bigint not null,
 	artist_id bigint not null, 
 	tag_id bigint not null, 
 	rating float not null default 0, 
  	date_hierarchy_id bigint,
+ 	success int default 0,
 
 	primary key(recommendation_id) 
 );
 
--- DROP SEQUENCE seq_recommendation;
+DROP SEQUENCE seq_recommendation;
 
 CREATE SEQUENCE seq_recommendation
   INCREMENT 1
